@@ -17,12 +17,13 @@ using System.Windows.Shapes;
 namespace Zvonko
 {
     /// <summary>
-    /// Interaction logic for Registration.xaml
+    /// Interaction logic for RegistrationWindow.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class RegistrationWindow : Window
     {
         AccountService accountService = new AccountService();
-        public Registration()
+        AuthServices authServices = new AuthServices();
+        public RegistrationWindow()
         {
             InitializeComponent();
         }
@@ -40,13 +41,21 @@ namespace Zvonko
 
         private bool RegisterNewUser()
         {
-            if (ValidateInput())
+            string username = txtUsername.Text;
+            string password = txtPassword.Password;
+            string schoolName = txtSchoolName.Text;
+            if (authServices.ValidateInput(username, password, schoolName))
             {
+                string salt = authServices.GenerateSalt();
+                string hashedPassword = authServices.HashPassword(password, salt);
+                if (string.IsNullOrEmpty(hashedPassword)) return false;
+
                 Account newAccount = new Account
                 {
-                    username = txtUsername.Text,
-                    password = txtPassword.Text,
-                    schoolName = txtSchoolName.Text
+                    username = username,
+                    password = hashedPassword,
+                    // salt = salt,
+                    schoolName = schoolName
                 };
                 bool successfullRegistration = accountService.AddAccount(newAccount);
                 return successfullRegistration;
@@ -57,14 +66,12 @@ namespace Zvonko
                 return false;
             }
         }
-        private bool ValidateInput()
-        {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-            string schoolName = txtSchoolName.Text;
 
-            if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(schoolName)) return true;
-            return false;
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            this.Close();
+            loginWindow.Show();
         }
     }
 }

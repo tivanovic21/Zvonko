@@ -19,6 +19,8 @@ namespace Zvonko {
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow : Window {
+
+        AuthServices authServices = new AuthServices();
         public LoginWindow() {
             InitializeComponent();
         }
@@ -29,14 +31,16 @@ namespace Zvonko {
             string username = txtUsername.Text;
             string password = txtPassword.Password;
 
-            if (username == "" || password == "") {
+            if (!authServices.ValidateInput(username, password)) {
                 MessageBox.Show("Please fill out all fields.");
-            } else {
-                var account = accountService.GetAccount(username, password);
+            } 
+            else {
+                string hashedPassword = authServices.HashPassword(password, "");
+                var account = accountService.GetAccount(username, hashedPassword);
                 if (account != null) {
-                    MainWindow mainWindow = new MainWindow();
+                    LoginWindow loginWindow = new LoginWindow();
                     this.Close();
-                    mainWindow.Show();
+                    loginWindow.Show();
                 } else {
                     MessageBox.Show("Invalid credentials. Please try again!");
                 }
@@ -44,7 +48,7 @@ namespace Zvonko {
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e) {
-            Registration registrationWindow = new Registration();
+            RegistrationWindow registrationWindow = new RegistrationWindow();
             this.Close();
             registrationWindow.Show();
         }

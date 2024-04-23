@@ -1,4 +1,4 @@
-﻿<Window x:Class="Zvonko.Registration"
+﻿<Window x:Class="Zvonko.RegistrationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,10 +7,29 @@
         mc:Ignorable="d"
         Title="Registration" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="223,120,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="223,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtSchoolName" HorizontalAlignment="Left" Margin="223,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="223,295,0,0" VerticalAlignment="Top" Click="btnRegister_Click"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Label Content="Username:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Name="txtUsername" Margin="0,0,5,0" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Label Content="Password:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <PasswordBox Name="txtPassword" Margin="0,0,5,0" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Label Content="School name:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Name="txtSchoolName" Margin="0,0,5,0" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <Button x:Name="btnRegister" Content="Register" Margin="5" Width="100" Height="30" Background="Black" Foreground="White" Click="btnRegister_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <TextBlock>
+                Already have an account? 
+                <Hyperlink Foreground="blue" Click="Hyperlink_Click">Login!</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
