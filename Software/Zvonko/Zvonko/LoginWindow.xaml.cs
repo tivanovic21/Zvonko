@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zvonko;
 
 namespace Zvonko {
     /// <summary>
@@ -40,6 +41,12 @@ namespace Zvonko {
                     MessageBox.Show("Invalid credentials. Please try again!");
                 }
             }
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e) {
+            Registration registrationWindow = new Registration();
+            this.Close();
+            registrationWindow.Show();
         }
     }
 }
