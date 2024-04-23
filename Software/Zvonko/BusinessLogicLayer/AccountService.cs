@@ -21,5 +21,13 @@ namespace BusinessLogicLayer
                 } else return false;
             }
         }
+
+        public Account GetAccount(string username, string password) {
+            using (var repo = new AccountRepository()) {
+                var account = repo.Get(username, password);
+                if (account != null) return account;
+                else return null;
+            }
+        }
     }
 }

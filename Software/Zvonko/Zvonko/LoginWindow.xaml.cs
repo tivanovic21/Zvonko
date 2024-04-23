@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,18 +23,23 @@ namespace Zvonko {
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e) {
-            //LoginService loginService = new LoginService();
+            AccountService accountService = new AccountService();
 
             string username = txtUsername.Text;
             string password = txtPassword.Password;
 
-            if(username == "" || password == "") {
+            if (username == "" || password == "") {
                 MessageBox.Show("Please fill out all fields.");
+            } else {
+                var account = accountService.GetAccount(username, password);
+                if (account != null) {
+                    MainWindow mainWindow = new MainWindow();
+                    this.Close();
+                    mainWindow.Show();
+                } else {
+                    MessageBox.Show("Invalid credentials. Please try again!");
+                }
             }
-
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.Show();
         }
     }
 }
