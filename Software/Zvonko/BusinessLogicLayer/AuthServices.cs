@@ -10,9 +10,11 @@ namespace BusinessLogicLayer
 {
     public class AuthServices
     {
-        public string HashPassword(string password, string salt)
-        {
+        public string HashPassword(string password, string salt) {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            if (hashedPassword.Length > 50) {
+                hashedPassword = hashedPassword.Substring(0, 50);
+            }
             return hashedPassword;
         }
 

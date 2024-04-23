@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Background="Yellow">
-    <Grid>
-        
-    </Grid>
+        Background="white">
+    <StackPanel Orientation="Vertical">
+        <TextBlock>Welcome: </TextBlock>
+    </StackPanel>
 </Window>

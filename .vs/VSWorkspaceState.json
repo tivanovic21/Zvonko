@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Software"
+    "\\Software",
+    "\\Software\\Zvonko",
+    "\\Software\\Zvonko\\Zvonko"
   ],
-  "SelectedNode": "\\Software",
+  "SelectedNode": "\\Software\\Zvonko\\Zvonko\\LoginWindow.xaml.cs",
   "PreviewInSolutionExplorer": false
 }
