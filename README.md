@@ -4,7 +4,7 @@
 Ovaj projekt se temelji na radu projekta u suradnji s nastavnicima.
 
 ## Opis projekta
-Zvonko aplikacija služi kao pomoć školama u određivanju i upravljanju zvučnim signalima i sigurnosnim obavijestima putem zvučnih signala. Tehnologije korištene za izradu projekta su Windows Presentation Foundation (WPF), C#, SQL i MS SQL. Dorada i testiranje ovog projekta je započeto na kolegiju Testiranje i kvaliteta programskih proizvoda. Problemska domena koju ovaj projekt obuhvaća jest označavanje kraja i početka školskog sata u školi. Dodavanjem rasporeda se raspoređuje točno vrijeme zvonjenja koje obavještava nastavnike i učenike.
+Zvonko aplikacija služi kao pomoć školama u određivanju i upravljanju zvučnim signalima i sigurnosnim obavijestima putem zvučnih signala. Tehnologije korištene za izradu projekta su Windows Presentation Foundation (WPF), C#, SQL, .NET. Dorada i testiranje ovog projekta je započeto na kolegiju Testiranje i kvaliteta programskih proizvoda. Problemska domena koju ovaj projekt obuhvaća jest označavanje kraja i početka školskog sata u školi. Dodavanjem rasporeda se raspoređuje točno vrijeme zvonjenja koje obavještava nastavnike i učenike.
 
 ## Projektni tim
 
@@ -24,10 +24,10 @@ F02 | Sinkronizacija s bazom podataka | Sustav će omogućiti preuzimanje svih p
 F03 | Hitna evakuacija | Sustav će omogućiti pokretanje posebnog zvuka na gumb za hitnu evakuaciju. | 
 F04 | Dodavanje zvučnog zapisa | Sustav će omogućiti dodavanje novih zvučnih zapisa u bazu. Ta će se funkcionalnost odvijati na način da se uveze spremljeni zvuk s računala ili snimanjem.  | 
 F05 | Prijenos govora uživo | Sustav će omogućiti korisniku prijenos govora uživo.  | 
-F06 | Postavljanje rasporeda sati | Sustav će omogućiti dodavanje rasporeda sati koji će označavati kada će zvono zvoniti, raspored je moguće urediti za svaki dan u tjednu.  | 
+F06 | Upravljanje rasporedom sati | Sustav će omogućiti dodavanje rasporeda sati koji će označavati kada će zvono zvoniti, raspored je moguće urediti za svaki dan u tjednu. Unutar svakog termina u danu moguće je odrediti događaj temeljem kojeg će zvoniti.  | 
 F07 | Upravljanje zapisima | Sustav će omogućiti ručno pokretanje zvona kao i pauziranje i zaustavljanje.  |
 F08 | Postavljanje loga (slike) škole| Sustav će korisniku omogućiti da postavi logo (sliku) svoje škole unutar aplikacije.  |
-F09 | Odjava | Sustav će omogućiti da se korisnik odjavi iz aplikacije.  |
+F09 | Upravljanje događajima | Sustav će omogućiti dodavanje novih zvučnih zapisa u bazu te ih pohraniti u obliku događaja; mali odmor, veliki odmor. Funkcionalnost će se odvijati na način da se uveze spremljeni zvuk, odabere vrsta događaja, vrijeme trajanja.  |
 
 
 
