@@ -6,8 +6,22 @@
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Background="Yellow">
-    <Grid>
-        
-    </Grid>
+        Background="White">
+    <StackPanel Orientation="Vertical">
+        <TextBlock>Welcome:</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <Label HorizontalAlignment="Stretch">Day you entered:</Label>
+            <TextBox Width="300px" x:Name="txtPickedDate"></TextBox>
+            <Button Width="398" Background="LightGray" BorderThickness="0px" x:Name="btnOpenCalendar" Click="btnOpenCalendar_Click">Choose date</Button>
+        </StackPanel>
+        <DataGrid Height="225px" Margin="5px"></DataGrid>
+        <StackPanel>
+            <Button Margin="5px">Add a new sound</Button>
+            <Button Margin="5px">Manage the schedule</Button>
+            <Button Margin="5px">Add an event</Button>
+            <Button Margin="5px">Live broadcast</Button>
+            <Button Margin="5px">Emergency</Button>
+
+        </StackPanel>
+    </StackPanel>
 </Window>

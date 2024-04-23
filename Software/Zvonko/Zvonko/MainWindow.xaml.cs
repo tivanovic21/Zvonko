@@ -24,5 +24,24 @@ namespace Zvonko
         {
             InitializeComponent();
         }
+
+        private void btnOpenCalendar_Click(object sender, RoutedEventArgs e) {
+            Window calendarWindow = new Window {
+                Title = "Select a Date",
+                Width = 300,
+                Height = 200,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Content = new Calendar()
+            };
+
+            calendarWindow.Closed += (s, args) =>
+            {
+                Calendar calendar = (Calendar)calendarWindow.Content;
+                DateTime? selectedDate = calendar.SelectedDate;
+                txtPickedDate.Text = selectedDate?.ToString("d") ?? "";
+            };
+
+            calendarWindow.ShowDialog();
+        }
     }
 }
