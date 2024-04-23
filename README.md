@@ -1,10 +1,10 @@
-# MindMatters
+# Zvonko
 
 ## Model rada na projektu
-(3) Rad na projektu u suradnji s industrijom.
+Ovaj projekt se temelji na radu projekta u suradnji s nastavnicima.
 
 ## Opis projekta
-MindMatters je sofisticirana aplikacija koja olakšava psiholozima upravljanje sesijama i pacijentima. Psiholozi mogu autenticirati korisnike, dodavati i upravljati sesijama te pratiti odgovore na zadatke. Aplikacija omogućuje bilješke o sesijama i pacijentima te pristup zdravstvenim podacima. Korisni materijali se dijele temeljem korisničkih glasova, a notifikacije se šalju pacijentima o nadolazećim terminima. MindMatters također nudi kalendarski prikaz i mogućnost dodavanja pacijenata, olakšavajući rad psiholozima unutar sigurnog okruženja.
+Zvonko aplikacija služi kao pomoć školama u određivanju i upravljanju zvučnim signalima i sigurnosnim obavijestima putem zvučnih signala. Tehnologije korištene za izradu projekta su Windows Presentation Foundation (WPF), C#, SQL, .NET. Dorada i testiranje ovog projekta je započeto na kolegiju Testiranje i kvaliteta programskih proizvoda. Problemska domena koju ovaj projekt obuhvaća jest označavanje kraja i početka školskog sata u školi. Dodavanjem rasporeda se raspoređuje točno vrijeme zvonjenja koje obavještava nastavnike i učenike.
 
 ## Projektni tim
 
@@ -19,18 +19,17 @@ Ovdje navedite funkcionalne i nefunkcionalne zahtjeve koje je vaš projekt do sa
 
 Oznaka | Naziv | Kratki opis | Odgovorni član tima
 ------ | ----- | ----------- | -------------------
-F01 | Registracija i prijava | Funkcionalnost obuhvaća registraciju, prijavu i odjavu korisika iz aplikacije. Prilikom registracije korisnik će unositi osnovne podatke poput emaila, lozinke, imena, prezime i slično te će postojati limitacija za registraciju korisnika, odnosno neće se bilo tko moći registrirati. Prijaviti će se moći samo registrirani korisnici. Odjaviti će se moći samo prijavljeni korisnici. | Toni Ivanović
-F02 | Pregled zahtjeva pacijenta | Psiholozi imaju mogućnost pregleda zahtjeva za sesije, te dodavanje, brisanje i ažuriranje istih, upisuju osnovne podatke poput lokacije, vremena i datuma. Prilikom pregleda zahtjeva korisnika korisnik može odgovoriti pacijentu  | Matea Klement
-F03 | Dodavanje zadataka pacijentima | Psiholozi imaju mogućnost dodavanja različitih zadataka pacijentima koji su prije toga imali sesiju kod njih, te čitanje odgovora istih. Prilikom dodavanja zadataka pacijentima pacijent će viditi sve korisnike linkove te povezane članke vezane uz trenutni zadatak | Matea Klement
-F04 | Uvid u karton pacijenata | Psiholozi imaju pristup zdravlju pacijenata koji su prije toga imali sesiju kod njih. Ova funkcionalnost obuhvaća pregled čitave povijesti tog pacijenta. | Matea Klement
-F05 | Evidencija psihoterapijske sesije| Sustav će omogućiti upis bilježaka u svaku pojedinačnu sesiju koju su držali te neke informacije o pacijentu. | Šime Braica
-F06 | Notifikacije | Ova funkcionalnost će biti zasebna komponenta koja omogućuje slanje email-ova te SMS-ova psihologu | Jakov Čivčija
-F07 | Uvid u raspored | Aplikacija će omogućiti kalendarski prikaz koji prikazuje dane koji su posebno označeni ovisno o tome je li raspored popunjen/prazan/poluprazan. | Jakov Čivčija
-F08 | Upis pacijenata | Psiholozi će biti u mogućnosti dodati svoje pacijente u sustav kako bi mogli koristiti aplikaciju. Dodavaju korisnikov email, s kojim se korisnici kasnije mogu registrirat. | Šime Braica
-F09 | Upravljanje rasporedom | Ova funkcionalnost obuhvaća rezerviranje termina pacijenta te otkazivanje istih. | Jakov Čivčija 
-F10 | Stvaranja PDF dokumenta | Ova funkcionalnost obuhvaća stvaranje PDF dokumenta prilikom pregleda zahtjeva pacijenta | Toni Ivanović
-F11 | Slanje korisnih materijala pacijentu | Ova funkcionalnost omogućuje psihologu slanje korisnih materijala da pacijent prouči  | Šime Braica
-F12 | Profil korisnika | Profil korisnika predstavljati će posebnu sekciju u aplikaciji, a korinisk će ovdje moći urediti podatke koje je unio prilikom registracije kao i dodati svoju sliku profila i lokaciju ordinacije koja će se prikazivati preko Google Maps sustava. | Toni Ivanović
+F01 | Registracija i prijava | Funkcionalnost obuhvaća registraciju, prijavu i odjavu korisika iz aplikacije. Prilikom registracije korisnik će unositi osnovne podatke poput korisničkog imena, lozinke i naziva škole. Prilikom registracije podaci korisnika biti će zaštićeni hashiranom lozinkom i solju. Postojati limitacija za registraciju korisnika, odnosno neće se bilo tko moći registrirati. Prijaviti će se moći samo registrirani korisnici. Odjaviti će se moći samo prijavljeni korisnici. | Toni Ivanović
+F02 | Sinkronizacija s bazom podataka | Sustav će omogućiti preuzimanje svih postojanih zapisa u bazi za prijavljenog korisnika. Biti će omogućena sinkronizacija Entity Framework modela i baze podataka.  | 
+F03 | Hitna evakuacija | Sustav će omogućiti pokretanje posebnog zvuka na gumb za hitnu evakuaciju. | 
+F04 | Dodavanje zvučnog zapisa | Sustav će omogućiti dodavanje novih zvučnih zapisa u bazu. Ta će se funkcionalnost odvijati na način da se uveze spremljeni zvuk s računala ili snimanjem. Sustav će omogućiti dodavanje više zvučnih oblika; WAV, MP3 | 
+F05 | Prijenos govora uživo | Sustav će omogućiti korisniku prijenos govora uživo.  | 
+F06 | Upravljanje rasporedom sati | Sustav će omogućiti dodavanje rasporeda sati koji će označavati kada će zvono zvoniti, raspored je moguće urediti za svaki dan u tjednu. Unutar svakog termina u danu moguće je odrediti događaj temeljem kojeg će zvoniti.  | 
+F07 | Upravljanje zapisima | Sustav će omogućiti ručno pokretanje zvona kao i pauziranje i zaustavljanje.  |
+F08 | Dodavanje slike | Sustav će korisniku omogućiti da postavi sliku (logo škole). Sliku će biti moguće dodavati, obrisati, zamijeniti.  |
+F09 | Upravljanje događajima | Sustav će omogućiti dodavanje novih zvučnih zapisa u bazu te ih pohraniti u obliku događaja; mali odmor, veliki odmor. Funkcionalnost će se odvijati na način da se uveze spremljeni zvuk, odabere vrsta događaja, vrijeme trajanja.  |
+
+
 
 ## Tehnologije i oprema
 Koristit ćemo .Net tehnologije, zajedno sa WPF. Prije izrade same aplikacije koristit će se figma kako bi se utvrdio dizajn za aplikaciju. Naravno za verzioniranje koda, koristit će se git i Github. Također lokalni express server sa SQL bazom podataka.
