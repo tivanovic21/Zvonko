@@ -43,5 +43,21 @@ namespace Zvonko
 
             calendarWindow.ShowDialog();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            foreach (Button button in spButtonDay.Children) {
+                button.Background = Brushes.White;
+                button.FontWeight = FontWeights.Regular;
+            }
+            Button clickedButton = sender as Button;
+            clickedButton.Background = Brushes.LightGray;
+            clickedButton.FontWeight = FontWeights.Bold;
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e) {
+            LoginWindow loginWindow = new LoginWindow();
+            this.Close();
+            loginWindow.Show();
+        }
     }
 }
