@@ -39,7 +39,7 @@
             <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Saturday</Button>
         </StackPanel>
 
-            <DataGrid Height="225px" Margin="5px"></DataGrid>
+            <DataGrid Height="225px" Margin="5px" x:Name="dgRecordings"></DataGrid>
         </StackPanel>
     </DockPanel>
 </Window>

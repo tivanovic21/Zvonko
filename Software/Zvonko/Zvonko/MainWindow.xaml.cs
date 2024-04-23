@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Zvonko
         public MainWindow()
         {
             InitializeComponent();
+            //LoadRecordings();
         }
 
         private void btnOpenCalendar_Click(object sender, RoutedEventArgs e) {
@@ -52,6 +54,9 @@ namespace Zvonko
             Button clickedButton = sender as Button;
             clickedButton.Background = Brushes.LightGray;
             clickedButton.FontWeight = FontWeights.Bold;
+
+            
+
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
@@ -59,5 +64,12 @@ namespace Zvonko
             this.Close();
             loginWindow.Show();
         }
+
+        private void LoadRecordings() {
+            RecordingService recordingService = new RecordingService();
+            dgRecordings.ItemsSource = recordingService.GetAllRecordings();
+        }
+
+
     }
 }
