@@ -28,17 +28,17 @@
         <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" x:Name="btnChooseSound" Click="btnChooseSound_Click">Choose a sound</Button>
 
         <Label Grid.Row="2" Content="Sound name:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5" x:Name="txtSoundName"/>
+        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5" x:Name="txtSoundName" IsReadOnly="True"/>
 
         <Label Grid.Row="3" Content="Sound length:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5" x:Name="txtSoundLength"/>
+        <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5" x:Name="txtSoundLength" IsReadOnly="True"/>
 
         <Label Grid.Row="4" Content="Event:" VerticalAlignment="Center" Margin="5"/>
         <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5" x:Name="txtEvent"/>
 
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-            <Button Content="Save" Width="100" Margin="5"/>
-            <Button Content="Cancel" Width="100" Margin="5" Click="Button_Click"/>
+            <Button Content="Save" Width="100" Margin="5" x:Name="btnSave" Click="btnSave_Click"/>
+            <Button Content="Cancel" Width="100" Margin="5" x:Name="btnCancel" Click="btnCancel_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

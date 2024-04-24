@@ -22,6 +22,7 @@ namespace DatabaseLayer.Repositories
                 password = newAccount.password,
                 schoolName = newAccount.schoolName
             };
+
             Entities.Add(account);
             if (saveChanges)
             {
