@@ -70,6 +70,9 @@ namespace Zvonko
             dgRecordings.ItemsSource = recordingService.GetAllRecordings();
         }
 
+        private void btnNewSound_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

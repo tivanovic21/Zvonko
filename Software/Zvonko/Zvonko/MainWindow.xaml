@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="200px" Grid.Row="0">
                 <Label FontSize="30px" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Zvonko</Label>
-                <Button Margin="5px" x:Name="btnNewSound" Width="200px" Height="40px" Background="White" BorderThickness="0px">Add a new sound</Button>
+                <Button Margin="5px" x:Name="btnNewSound" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnNewSound_Click">Add a new sound</Button>
                 <Button Margin="5px" x:Name="btnManageSchedule" Width="200px" Height="40px" Background="White" BorderThickness="0px">Manage the schedule</Button>
                 <Button Margin="5px" x:Name="btnAddEvent" Width="200px" Height="40px" Background="White" BorderThickness="0px">Add an event</Button>
                 <Button Margin="5px" x:Name="btnLiveBroadcast" Width="200px" Height="40px" Background="White" BorderThickness="0px">Live broadcast</Button>
