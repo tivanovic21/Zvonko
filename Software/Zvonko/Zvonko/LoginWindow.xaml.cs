@@ -36,11 +36,12 @@ namespace Zvonko {
             } 
             else {
                 string hashedPassword = authServices.HashPassword(password, "");
+                MessageBox.Show(hashedPassword);
                 var account = accountService.GetAccount(username, hashedPassword);
                 if (account != null) {
-                    LoginWindow loginWindow = new LoginWindow();
+                    MainWindow mainWindow = new MainWindow(); // MainWindow(account)
                     this.Close();
-                    loginWindow.Show();
+                    mainWindow.Show();
                 } else {
                     MessageBox.Show("Invalid credentials. Please try again!");
                 }

@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using EntitiesLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,12 @@ namespace Zvonko
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        // private Account _account;
+        public MainWindow() //MainWindow (Account account)
         {
             InitializeComponent();
-            //LoadRecordings();
+            // _account = account;
+            LoadRecordings();
         }
 
         private void btnOpenCalendar_Click(object sender, RoutedEventArgs e) {
@@ -67,6 +70,7 @@ namespace Zvonko
 
         private void LoadRecordings() {
             RecordingService recordingService = new RecordingService();
+            MessageBox.Show(recordingService.GetAllRecordings().ToString());
             dgRecordings.ItemsSource = recordingService.GetAllRecordings();
         }
 
