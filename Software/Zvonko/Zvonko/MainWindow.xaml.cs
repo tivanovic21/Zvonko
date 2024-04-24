@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zvonko.UserControls;
 
 namespace Zvonko
 {
@@ -24,39 +25,8 @@ namespace Zvonko
         public MainWindow()
         {
             InitializeComponent();
+            LoadMainContent();
             //LoadRecordings();
-        }
-
-        private void btnOpenCalendar_Click(object sender, RoutedEventArgs e) {
-            Window calendarWindow = new Window {
-                Title = "Select a Date",
-                Width = 300,
-                Height = 200,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Content = new Calendar()
-            };
-
-            calendarWindow.Closed += (s, args) =>
-            {
-                Calendar calendar = (Calendar)calendarWindow.Content;
-                DateTime? selectedDate = calendar.SelectedDate;
-                txtPickedDate.Text = selectedDate?.ToString("d") ?? "";
-            };
-
-            calendarWindow.ShowDialog();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            foreach (Button button in spButtonDay.Children) {
-                button.Background = Brushes.White;
-                button.FontWeight = FontWeights.Regular;
-            }
-            Button clickedButton = sender as Button;
-            clickedButton.Background = Brushes.LightGray;
-            clickedButton.FontWeight = FontWeights.Bold;
-
-            
-
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
@@ -65,14 +35,16 @@ namespace Zvonko
             loginWindow.Show();
         }
 
-        private void LoadRecordings() {
-            RecordingService recordingService = new RecordingService();
-            dgRecordings.ItemsSource = recordingService.GetAllRecordings();
+        public void LoadMainContent()
+        { 
+            UCmainContent ucMainContent = new UCmainContent();
+            contentPanel.Content = ucMainContent;
         }
 
         private void btnNewSound_Click(object sender, RoutedEventArgs e)
         {
-
+            UCaddSound ucAddSound = new UCaddSound();
+            contentPanel.Content = ucAddSound;
         }
     }
 }
