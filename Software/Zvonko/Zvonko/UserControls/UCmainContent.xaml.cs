@@ -62,7 +62,11 @@ namespace Zvonko.UserControls
         private void LoadRecordings()
         {
             RecordingService recordingService = new RecordingService();
-            dgRecordings.ItemsSource = recordingService.GetAllRecordings();
+            //dgRecordings.ItemsSource = recordingService.GetAllRecordings();
+        }
+
+        private void txtPickedDate_TextChanged(object sender, TextChangedEventArgs e) {
+
         }
     }
 }

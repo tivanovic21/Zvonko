@@ -1,6 +1,7 @@
 ﻿using EntitiesLayer;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,12 @@ namespace DatabaseLayer.Repositories {
         public RecordingRepository() : base(new ZvonkoModel()) {
 
         }
-        public List<Recording> Get() {
+        public async Task<IQueryable<Recording>> Get() {
             var query = from e in Entities
                         select e;
-            return query.ToList();
+            return (IQueryable<Recording>)await query.ToListAsync();
         }
+
 
         public override int Add(Recording newRecording, bool saveChanges = true)
         {
