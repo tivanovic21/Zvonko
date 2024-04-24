@@ -15,5 +15,24 @@ namespace DatabaseLayer.Repositories {
                         select e;
             return query.ToList();
         }
+
+        public override int Add(Recording newRecording, bool saveChanges = true)
+        {
+            var recording = new Recording
+            {
+                name = newRecording.name,
+                duration = newRecording.duration,
+                storedFile = newRecording.storedFile,
+                timeCreated = newRecording.timeCreated,
+                description = newRecording.description,
+                Account = newRecording.Account
+            };
+
+            Entities.Add(recording);
+            if (saveChanges)
+            {
+                return SaveChanges();
+            } else return 0;
+        }
     }
 }

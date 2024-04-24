@@ -1,6 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using BusinessLogicLayer;
+using DatabaseLayer;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +24,14 @@ namespace Zvonko.UserControls
     /// </summary>
     public partial class UCaddSound : UserControl
     {
+        RecordingService recordingService = new RecordingService();
+        private byte[] _storedFile;
         public UCaddSound()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);
             if (parentWindow != null && parentWindow is MainWindow)
@@ -70,8 +75,13 @@ namespace Zvonko.UserControls
         {
             txtSoundName.Text = System.IO.Path.GetFileName(filePath);
 
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                _storedFile = new byte[fs.Length];
+                fs.Read(_storedFile, 0, _storedFile.Length);
+            }
+
             MediaPlayer mediaPlayer = new MediaPlayer();
-            mediaPlayer.Open(new Uri(filePath));
             mediaPlayer.MediaOpened += (sender, e) =>
             {
                 if (mediaPlayer.NaturalDuration.HasTimeSpan)
@@ -80,6 +90,56 @@ namespace Zvonko.UserControls
                     txtSoundLength.Text = duration.ToString(@"hh\:mm\:ss");
                 }
             };
+
+            mediaPlayer.MediaFailed += (sender, e) =>
+            {
+                MessageBox.Show("Failed to open media file.");
+                mediaPlayer.Close();
+            };
+
+            mediaPlayer.MediaEnded += (sender, e) =>
+            {
+                mediaPlayer.Close();
+            };
+
+            try
+            {
+                mediaPlayer.Open(new Uri(filePath));
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error opening media file: " + ex.Message);
+            }
+        }
+
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            string soundName = txtSoundName.Text;
+            string soundDuration = txtSoundLength.Text;
+            string description = System.IO.Path.GetExtension(soundName);
+
+            AccountService accountService = new AccountService();
+            var acc = accountService.GetAccount("mkajic20", "lozinka");
+            MessageBox.Show(_storedFile.ToString());
+
+            Recording newRecording = new Recording
+            {
+                name = soundName,
+                duration = TimeSpan.Parse(soundDuration),
+                description = description,
+                timeCreated = DateTime.Now.ToString(),
+                storedFile = _storedFile,
+                Account = acc
+            };
+
+            bool isAdded = recordingService.AddRecording(newRecording);
+            if (isAdded)
+            {
+                MessageBox.Show("Sound successfully added!");
+            } else
+            {
+                MessageBox.Show("Error while adding sound. Please try again.");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DatabaseLayer;
 using DatabaseLayer.Repositories;
+using EntitiesLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,18 @@ namespace BusinessLogicLayer {
         public List<Recording> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
                 return repo.Get().ToList();
+            }
+        }
+
+        public bool AddRecording(Recording newRecording)
+        {
+            using (var repo = new RecordingRepository())
+            {
+                int affectedRows = repo.Add(newRecording, true);
+                if (affectedRows > 0)
+                {
+                    return true;
+                } else return false;
             }
         }
     }
