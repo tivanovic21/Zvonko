@@ -46,5 +46,10 @@ namespace Zvonko
             UCaddSound ucAddSound = new UCaddSound();
             contentPanel.Content = ucAddSound;
         }
+
+        private void btnAddEvent_Click(object sender, RoutedEventArgs e) {
+            UCaddEvent uCaddEvent = new UCaddEvent();
+            contentPanel.Content = uCaddEvent;
+        }
     }
 }
