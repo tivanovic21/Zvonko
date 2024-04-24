@@ -51,5 +51,10 @@ namespace Zvonko
             UCaddEvent uCaddEvent = new UCaddEvent();
             contentPanel.Content = uCaddEvent;
         }
+
+        private void btnLiveBroadcast_Click(object sender, RoutedEventArgs e) {
+            StreamingWindow streamingWindow = new StreamingWindow();
+            streamingWindow.Show();
+        }
     }
 }
