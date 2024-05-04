@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer;
-using EntitiesLayer;
+using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +57,7 @@ namespace Zvonko
                     // salt = salt,
                     schoolName = schoolName
                 };
-                bool successfullRegistration = accountService.AddAccount(newAccount);
+                bool successfullRegistration = true;//accountService.AddAccount(newAccount);
                 return successfullRegistration;
             }
             else

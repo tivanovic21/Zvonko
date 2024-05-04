@@ -1,5 +1,4 @@
 ﻿using BusinessLogicLayer;
-using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace Zvonko.UserControls {
     public partial class UCaddEvent : UserControl {
         public UCaddEvent() {
             InitializeComponent();
-            GetAllRecordings();
+           // GetAllRecordings();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {
@@ -32,11 +31,12 @@ namespace Zvonko.UserControls {
                 mainWindow.LoadMainContent();
             }
         }
-
+        /*
         private async void GetAllRecordings() {
+            
             RecordingService recordingService = new RecordingService();
             List<Recording> recordings = await  recordingService.GetAllRecordings(); dgRecordings.ItemsSource = recordings;
         }
-
+        */
     }
 }

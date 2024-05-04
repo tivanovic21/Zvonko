@@ -1,5 +1,4 @@
-﻿using EntitiesLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ namespace DatabaseLayer.Repositories
         {
             
         }
-
+        /*
         public override int Add(Account newAccount, bool saveChanges = true)
         {
             var account = new Account
@@ -29,6 +28,7 @@ namespace DatabaseLayer.Repositories
                 return SaveChanges();
             } else return 0;
         }
+        */
 
         public Account Get(string username, string password) {
             var query = from e in Entities

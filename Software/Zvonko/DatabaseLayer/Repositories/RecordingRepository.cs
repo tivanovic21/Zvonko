@@ -1,5 +1,4 @@
-﻿using EntitiesLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace DatabaseLayer.Repositories {
             return (IQueryable<Recording>)await query.ToListAsync();
         }
 
-
+        /*
         public override int Add(Recording newRecording, bool saveChanges = true)
         {
             var recording = new Recording
@@ -36,5 +35,6 @@ namespace DatabaseLayer.Repositories {
                 return SaveChanges();
             } else return 0;
         }
+        */
     }
 }

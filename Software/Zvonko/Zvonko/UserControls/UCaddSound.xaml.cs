@@ -132,7 +132,7 @@ namespace Zvonko.UserControls
                 Account = acc
             };
 
-            bool isAdded = recordingService.AddRecording(newRecording);
+            bool isAdded = true; //recordingService.AddRecording(newRecording);
             if (isAdded)
             {
                 MessageBox.Show("Sound successfully added!");

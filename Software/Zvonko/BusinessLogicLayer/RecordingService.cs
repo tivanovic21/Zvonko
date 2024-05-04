@@ -1,6 +1,5 @@
 ﻿using DatabaseLayer;
 using DatabaseLayer.Repositories;
-using EntitiesLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +12,12 @@ namespace BusinessLogicLayer {
         public async Task<List<Recording>> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
                 var queryResult = repo.Get();
-                return (List<Recording>)await queryResult;
+                return (List<Recording>) await queryResult;
             }
         }
 
 
-
+        /*
         public bool AddRecording(Recording newRecording)
         {
             using (var repo = new RecordingRepository())
@@ -30,5 +29,6 @@ namespace BusinessLogicLayer {
                 } else return false;
             }
         }
+        */
     }
 }
