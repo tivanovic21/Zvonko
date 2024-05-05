@@ -33,7 +33,7 @@ namespace Zvonko {
         }
 
         private void Timer_Countdown(object sender, EventArgs e) {
-            if (countdownSeconds >= 0) {
+            if (countdownSeconds > 0) {
                 if (countdownSeconds == 0) {
                     StartRecording();
                 }
@@ -41,6 +41,7 @@ namespace Zvonko {
                 countdownSeconds--;
             } else {
                 timer.Stop();
+                lblCountdown.Content = "";
             }
         }
 
@@ -48,6 +49,9 @@ namespace Zvonko {
             if (!isRecording) {
                 waveIn.StartRecording();
                 isRecording = true;
+                btnStartRecording.IsEnabled = false;
+                btnStopRecording.IsEnabled = true;
+                btnStream.IsEnabled = false;
             }
         }
 
@@ -59,6 +63,9 @@ namespace Zvonko {
                 waveOut.Stop();
                 isRecording = false;
             }
+            btnStartRecording.IsEnabled = true;
+            btnStopRecording.IsEnabled = false;
+            btnStream.IsEnabled = true;
         }
 
         private void btnStopRecording_Click(object sender, RoutedEventArgs e) {
@@ -70,6 +77,9 @@ namespace Zvonko {
                 waveOut = new WaveOut();
                 waveOut.Init(bufferedWaveProvider);
                 waveOut.Play();
+                btnStartRecording.IsEnabled = false;
+                btnStopRecording.IsEnabled = true;
+                btnStream.IsEnabled = false;
             }
         }
 
