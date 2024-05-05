@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer {
     public class RecordingService {
 
-        public async Task<List<Recording>> GetAllRecordings() {
+        public IEnumerable<Recording> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
-                var queryResult = repo.Get();
-                return (List<Recording>) await queryResult;
+                return repo.Get().ToList();
             }
         }
+
 
 
         /*

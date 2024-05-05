@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +15,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Zvonko.UserControls
-{
+namespace Zvonko.UserControls {
     /// <summary>
     /// Interaction logic for UCmainContent.xaml
     /// </summary>
-    public partial class UCmainContent : UserControl
-    {
-        public UCmainContent()
-        {
+    public partial class UCmainContent : UserControl {
+        public UCmainContent() {
             InitializeComponent();
+            //LoadEvents();
+            DefineDataGridColumns();
         }
 
-        private void btnOpenCalendar_Click(object sender, RoutedEventArgs e)
-        {
-            Window calendarWindow = new Window
-            {
+        private void btnOpenCalendar_Click(object sender, RoutedEventArgs e) {
+            Window calendarWindow = new Window {
                 Title = "Select a Date",
                 Width = 300,
                 Height = 200,
@@ -37,8 +35,7 @@ namespace Zvonko.UserControls
                 Content = new Calendar()
             };
 
-            calendarWindow.Closed += (s, args) =>
-            {
+            calendarWindow.Closed += (s, args) => {
                 Calendar calendar = (Calendar)calendarWindow.Content;
                 DateTime? selectedDate = calendar.SelectedDate;
                 txtPickedDate.Text = selectedDate?.ToString("d") ?? "";
@@ -47,8 +44,9 @@ namespace Zvonko.UserControls
             calendarWindow.ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            /*
             foreach (Button button in spButtonDay.Children)
             {
                 button.Background = Brushes.White;
@@ -57,15 +55,54 @@ namespace Zvonko.UserControls
             Button clickedButton = sender as Button;
             clickedButton.Background = Brushes.LightGray;
             clickedButton.FontWeight = FontWeights.Bold;
+            */
         }
 
-        private void LoadRecordings()
-        {
-            RecordingService recordingService = new RecordingService();
-            //dgRecordings.ItemsSource = recordingService.GetAllRecordings();
+        private void LoadEvents() {
+            EventService eventService = new EventService();
+            dgRecordings.ItemsSource = eventService.GetAllEvents();
         }
 
         private void txtPickedDate_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
+
+        private void btnMonday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> mondayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Monday")) {
+                    mondayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = mondayEvents;
+        }
+
+        private void btnTuesday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> tuesdayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Tuesday")) {
+                    tuesdayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = tuesdayEvents;
+        }
+
+        private void DefineDataGridColumns() {
+            dgRecordings.AutoGenerateColumns = false;
+
+            DataGridTextColumn nameColumn = new DataGridTextColumn();
+            nameColumn.Header = "Name";
+            nameColumn.Binding = new Binding("name");
+
+            DataGridTextColumn durationColumn = new DataGridTextColumn();
+            durationColumn.Header = "Starting Time";
+            durationColumn.Binding = new Binding("starting_time");
 
         }
     }

@@ -16,15 +16,20 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="spButtonDay">
-                <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Monday</Button>
-                <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Tuesday</Button>
+                <Button x:Name="btnMonday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnMonday_Click">Monday</Button>
+                <Button x:Name="btnTuesday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnTuesday_Click">Tuesday</Button>
                 <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Wednesday</Button>
                 <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Thursday</Button>
                 <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Friday</Button>
                 <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Saturday</Button>
             </StackPanel>
 
-            <DataGrid Height="225px" Margin="5px" x:Name="dgRecordings"></DataGrid>
+            <DataGrid Height="225px" Margin="5px" x:Name="dgRecordings">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding name, IsAsync=True}" />
+                    <DataGridTextColumn Header="Duration" Binding="{Binding starting_time, IsAsync=True}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>
