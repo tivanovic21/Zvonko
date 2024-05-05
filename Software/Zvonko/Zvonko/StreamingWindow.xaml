@@ -10,8 +10,8 @@
     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Height="254" Width="488">
         <Label FontSize="25" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 30 0 0">Live broadcast</Label>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="btnStartStreaming"  Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" MouseDoubleClick="btnStartStreaming_MouseDoubleClick">Start streaming</Button>
-            <Button x:Name="btnStopStreaming" Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStopStreaming_Click">Stop streaming</Button>
+            <Button x:Name="btnStartRecording"  Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStartRecording_Click">Start streaming</Button>
+            <Button x:Name="btnStopRecording" Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStopRecording_Click" >Stop streaming</Button>
             <Button x:Name="btnStream" Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStream_Click">Streaming</Button>
         </StackPanel>
         <Label x:Name="lblCountdown" FontSize="40" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>

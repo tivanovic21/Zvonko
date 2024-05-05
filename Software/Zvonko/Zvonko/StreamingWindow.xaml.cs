@@ -8,7 +8,6 @@ namespace Zvonko {
     public partial class StreamingWindow : Window {
         private DispatcherTimer timer;
         private bool isRecording = false;
-        private bool isPlaying = false;
         private int countdownSeconds;
         private WaveIn waveIn;
         private WaveOut waveOut;
@@ -17,27 +16,26 @@ namespace Zvonko {
         public StreamingWindow() {
             InitializeComponent();
             InitializeTimer();
+        }
+
+        private void btnStartRecording_Click(object sender, RoutedEventArgs e) {
+            StartCountdown();
             InitializeWaveIn();
         }
 
-        private void btnStartStreaming_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+        private void StartCountdown() {
             MessageBoxResult result = MessageBox.Show("Start streaming now?", "Start Streaming", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.Yes && !isRecording && !isPlaying) {
-                StartCountdown();
+            if (result == MessageBoxResult.Yes && !isRecording) {
+                countdownSeconds = 3;
+                timer.Start();
             }
-        }
-
-        private void StartCountdown() {
-            countdownSeconds = 3;
-            timer.Start();
         }
 
         private void Timer_Countdown(object sender, EventArgs e) {
             if (countdownSeconds >= 0) {
                 if (countdownSeconds == 0) {
-                    StartStreaming();
-                    return;
+                    StartRecording();
                 }
                 lblCountdown.Content = countdownSeconds.ToString();
                 countdownSeconds--;
@@ -46,34 +44,32 @@ namespace Zvonko {
             }
         }
 
-        private void StartStreaming() {
+        private void StartRecording() {
             if (!isRecording) {
                 waveIn.StartRecording();
                 isRecording = true;
             }
         }
 
-        private void StopStreaming() {
+        private void StopRecording() {
             if (isRecording) {
                 waveIn.StopRecording();
                 isRecording = false;
-            }
-            if (isPlaying) {
+            }else {
                 waveOut.Stop();
-                isPlaying = false;
+                isRecording = false;
             }
         }
 
-        private void btnStopStreaming_Click(object sender, RoutedEventArgs e) {
-            StopStreaming();
+        private void btnStopRecording_Click(object sender, RoutedEventArgs e) {
+            StopRecording();
         }
 
         private void btnStream_Click(object sender, RoutedEventArgs e) {
-            if (!isPlaying && !isRecording) {
+            if (!isRecording) {
                 waveOut = new WaveOut();
                 waveOut.Init(bufferedWaveProvider);
                 waveOut.Play();
-                isPlaying = true;
             }
         }
 
