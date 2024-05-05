@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
-        Title="StreamingWindow" Height="200" Width="300">
-    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Height="150px">
+        WindowStartupLocation="CenterScreen"
+        Title="StreamingWindow" Height="400" Width="600">
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Height="254" Width="488">
         <Label FontSize="25" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 30 0 0">Live broadcast</Label>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125">Start streaming</Button>
-            <Button Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125">Stop streaming</Button>
+            <Button x:Name="btnStartStreaming"  Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" MouseDoubleClick="btnStartStreaming_MouseDoubleClick">Start streaming</Button>
+            <Button x:Name="btnStopStreaming" Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125">Stop streaming</Button>
         </StackPanel>
+        <Label x:Name="lblCountdown" FontSize="40" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
     </StackPanel>
-    
 </Window>
