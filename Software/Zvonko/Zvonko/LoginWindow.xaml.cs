@@ -25,28 +25,32 @@ namespace Zvonko {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e) {
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
             AccountService accountService = new AccountService();
 
             string username = txtUsername.Text;
             string password = txtPassword.Password;
 
-            if (!authServices.ValidateInput(username, password)) {
+            if (!authServices.ValidateInput(username, password))
+            {
                 MessageBox.Show("Please fill out all fields.");
-            } 
-            else {
-                string hashedPassword = authServices.HashPassword(password, "");
-                MessageBox.Show(hashedPassword);
-                var account = accountService.GetAccount(username, hashedPassword);
-                if (account != null) {
-                    MainWindow mainWindow = new MainWindow(); // MainWindow(account)
+            } else
+            {
+                var account = accountService.GetAccount(username);
+                bool checkPass = authServices.VerifyPassword(password, account.password);
+                if (account != null && checkPass == true)
+                {
+                    MainWindow mainWindow = new MainWindow(account);
                     this.Close();
                     mainWindow.Show();
-                } else {
+                } else
+                {
                     MessageBox.Show("Invalid credentials. Please try again!");
                 }
             }
         }
+
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e) {
             RegistrationWindow registrationWindow = new RegistrationWindow();

@@ -13,33 +13,16 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="200px" Grid.Row="0">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="200px" Grid.Row="0" x:Name="menu">
                 <Label FontSize="30px" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Zvonko</Label>
-                <Button Margin="5px" x:Name="btnNewSound" Width="200px" Height="40px" Background="White" BorderThickness="0px">Add a new sound</Button>
+                <Button Margin="5px" x:Name="btnNewSound" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnNewSound_Click">Add a new sound</Button>
                 <Button Margin="5px" x:Name="btnManageSchedule" Width="200px" Height="40px" Background="White" BorderThickness="0px">Manage the schedule</Button>
-                <Button Margin="5px" x:Name="btnAddEvent" Width="200px" Height="40px" Background="White" BorderThickness="0px">Add an event</Button>
-                <Button Margin="5px" x:Name="btnLiveBroadcast" Width="200px" Height="40px" Background="White" BorderThickness="0px">Live broadcast</Button>
+                <Button Margin="5px" x:Name="btnAddEvent" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnAddEvent_Click">Add an event</Button>
+                <Button Margin="5px" x:Name="btnLiveBroadcast" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnLiveBroadcast_Click">Live broadcast</Button>
                 <Button Margin="5px" x:Name="btnEmergency" Width="200px" Height="40px" Background="White" BorderThickness="0px">Emergency</Button>
             </StackPanel>
             <Button Margin="5px" x:Name="btnLogout" Width="200px" Height="40px" Background="White" BorderThickness="0px" VerticalAlignment="Bottom" Grid.Row="1" Click="btnLogout_Click">Logout</Button>
         </Grid>
-
-        <StackPanel Orientation="Vertical" Margin="10px">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Label HorizontalAlignment="Stretch">Day you entered:</Label>
-            <TextBox Width="300px" x:Name="txtPickedDate"></TextBox>
-            <Button Width="398" Background="LightGray" BorderThickness="0px" x:Name="btnOpenCalendar" Click="btnOpenCalendar_Click">Choose date</Button>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="spButtonDay">
-            <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Monday</Button>
-            <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Tuesday</Button>
-            <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Wednesday</Button>
-            <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Thursday</Button>
-            <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Friday</Button>
-            <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Saturday</Button>
-        </StackPanel>
-
-            <DataGrid Height="225px" Margin="5px" x:Name="dgRecordings"></DataGrid>
-        </StackPanel>
+        <ContentControl x:Name="contentPanel"></ContentControl>
     </DockPanel>
 </Window>

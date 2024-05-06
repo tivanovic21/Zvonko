@@ -1,5 +1,4 @@
-﻿using EntitiesLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ namespace DatabaseLayer.Repositories
         {
             
         }
-
+        
         public override int Add(Account newAccount, bool saveChanges = true)
         {
             var account = new Account
@@ -22,6 +21,7 @@ namespace DatabaseLayer.Repositories
                 password = newAccount.password,
                 schoolName = newAccount.schoolName
             };
+
             Entities.Add(account);
             if (saveChanges)
             {
@@ -29,9 +29,9 @@ namespace DatabaseLayer.Repositories
             } else return 0;
         }
 
-        public Account Get(string username, string password) {
+        public Account Get(string username) {
             var query = from e in Entities
-                        where e.username == username && e.password == password
+                        where e.username == username
                         select e;
 
             return query.FirstOrDefault();  

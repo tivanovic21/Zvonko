@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer;
-using EntitiesLayer;
+using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,15 +46,13 @@ namespace Zvonko
             string schoolName = txtSchoolName.Text;
             if (authServices.ValidateInput(username, password, schoolName))
             {
-                string salt = authServices.GenerateSalt();
-                string hashedPassword = authServices.HashPassword(password, salt);
+                string hashedPassword = authServices.HashPassword(password);
                 if (string.IsNullOrEmpty(hashedPassword)) return false;
 
                 Account newAccount = new Account
                 {
                     username = username,
                     password = hashedPassword,
-                    // salt = salt,
                     schoolName = schoolName
                 };
                 bool successfullRegistration = accountService.AddAccount(newAccount);

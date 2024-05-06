@@ -8,18 +8,18 @@
         Title="Registration" Height="450" Width="800">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-
+            <Label FontSize="25px" FontWeight="bold" HorizontalAlignment="Center" VerticalAlignment="Center">Zvonko</Label>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Label Content="Username:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBox Name="txtUsername" Margin="0,0,5,0" Width="200"/>
+                <TextBox BorderThickness="0px 0px 0px 1px" Name="txtUsername" Margin="0,0,5,0" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Label Content="Password:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <PasswordBox Name="txtPassword" Margin="0,0,5,0" Width="200"/>
+                <PasswordBox BorderThickness="0px 0px 0px 1px" Name="txtPassword" Margin="0,0,5,0" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Label Content="School name:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBox Name="txtSchoolName" Margin="0,0,5,0" Width="200"/>
+                <TextBox BorderThickness="0px 0px 0px 1px" Name="txtSchoolName" Margin="0,0,5,0" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
                 <Button x:Name="btnRegister" Content="Register" Margin="5" Width="100" Height="30" Background="Black" Foreground="White" Click="btnRegister_Click"/>

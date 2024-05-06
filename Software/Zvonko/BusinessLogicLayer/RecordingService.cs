@@ -9,10 +9,23 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer {
     public class RecordingService {
 
-        public List<Recording> GetAllRecordings() {
+        public IEnumerable<Recording> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
                 return repo.Get().ToList();
             }
         }
+        
+        public bool AddRecording(Recording newRecording)
+        {
+            using (var repo = new RecordingRepository())
+            {
+                int affectedRows = repo.Add(newRecording, true);
+                if (affectedRows > 0)
+                {
+                    return true;
+                } else return false;
+            }
+        }
+        
     }
 }

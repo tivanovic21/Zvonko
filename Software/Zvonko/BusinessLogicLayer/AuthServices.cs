@@ -10,19 +10,15 @@ namespace BusinessLogicLayer
 {
     public class AuthServices
     {
-        public string HashPassword(string password, string salt) {
+        public string HashPassword(string password) {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            if (hashedPassword.Length > 50) {
-                hashedPassword = hashedPassword.Substring(0, 50);
-            }
             return hashedPassword;
         }
 
-        public string GenerateSalt()
+        public bool VerifyPassword(string password, string hashedPassword)
         {
-            string salt = "";
-            //string salt = BCrypt.Net.BCrypt.GenerateSalt();
-            return salt;
+            bool passwordMatch = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+            return passwordMatch;
         }
 
         public bool ValidateInput(string username, string password, string schoolName = null)

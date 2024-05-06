@@ -1,5 +1,5 @@
-﻿using DatabaseLayer.Repositories;
-using EntitiesLayer;
+﻿using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer
 {
     public class AccountService
-    {
+    {   
         public bool AddAccount(Account newAccount)
         {
             using (var repo = new AccountRepository())
@@ -22,9 +22,9 @@ namespace BusinessLogicLayer
             }
         }
 
-        public Account GetAccount(string username, string password) {
+        public Account GetAccount(string username) {
             using (var repo = new AccountRepository()) {
-                var account = repo.Get(username, password);
+                var account = repo.Get(username);
                 if (account != null) return account;
                 else return null;
             }

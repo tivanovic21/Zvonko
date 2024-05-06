@@ -1,6 +1,6 @@
-﻿using EntitiesLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +10,31 @@ namespace DatabaseLayer.Repositories {
         public RecordingRepository() : base(new ZvonkoModel()) {
 
         }
-        public List<Recording> Get() {
+        public IQueryable<Recording> Get() {
             var query = from e in Entities
                         select e;
-            return query.ToList();
+            return  query;
         }
+
+        
+        public override int Add(Recording newRecording, bool saveChanges = true)
+        {
+            var recording = new Recording
+            {
+                name = newRecording.name,
+                duration = newRecording.duration,
+                storedFile = newRecording.storedFile,
+                timeCreated = newRecording.timeCreated,
+                description = newRecording.description,
+                Account = newRecording.Account
+            };
+
+            Entities.Add(recording);
+            if (saveChanges)
+            {
+                return SaveChanges();
+            } else return 0;
+        }
+        
     }
 }

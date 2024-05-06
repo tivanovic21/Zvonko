@@ -1,23 +1,20 @@
-using EntitiesLayer;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace DatabaseLayer
-{
-    public partial class ZvonkoModel : DbContext
-    {
+namespace DatabaseLayer {
+    public partial class ZvonkoModel : DbContext {
         public ZvonkoModel()
-            : base("name=ZvonkoConnectionString")
-        {
+            : base("name=ZvonkoModel1") {
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Recording> Recordings { get; set; }
+        public virtual DbSet<TypeOfEvent> TypeOfEvents { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Entity<Account>()
                 .Property(e => e.username)
                 .IsUnicode(false);
@@ -35,8 +32,21 @@ namespace DatabaseLayer
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .HasOptional(e => e.Recording)
-                .WithRequired(e => e.Account);
+                .HasMany(e => e.Recordings)
+                .WithRequired(e => e.Account)
+                .HasForeignKey(e => e.AccountId);
+
+            modelBuilder.Entity<Event>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Event>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Event>()
+                .Property(e => e.day_of_the_week)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Recording>()
                 .Property(e => e.name)
@@ -48,6 +58,10 @@ namespace DatabaseLayer
 
             modelBuilder.Entity<Recording>()
                 .Property(e => e.timeCreated)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TypeOfEvent>()
+                .Property(e => e.typeName)
                 .IsUnicode(false);
         }
     }
