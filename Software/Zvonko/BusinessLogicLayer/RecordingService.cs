@@ -14,10 +14,7 @@ namespace BusinessLogicLayer {
                 return repo.Get().ToList();
             }
         }
-
-
-
-        /*
+        
         public bool AddRecording(Recording newRecording)
         {
             using (var repo = new RecordingRepository())
@@ -29,6 +26,6 @@ namespace BusinessLogicLayer {
                 } else return false;
             }
         }
-        */
+        
     }
 }

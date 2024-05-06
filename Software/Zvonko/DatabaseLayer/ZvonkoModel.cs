@@ -32,8 +32,9 @@ namespace DatabaseLayer {
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .HasOptional(e => e.Recording)
-                .WithRequired(e => e.Account);
+                .HasMany(e => e.Recordings)
+                .WithRequired(e => e.Account)
+                .HasForeignKey(e => e.AccountId);
 
             modelBuilder.Entity<Event>()
                 .Property(e => e.name)

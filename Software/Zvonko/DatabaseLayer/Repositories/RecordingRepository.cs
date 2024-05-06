@@ -16,7 +16,7 @@ namespace DatabaseLayer.Repositories {
             return  query;
         }
 
-        /*
+        
         public override int Add(Recording newRecording, bool saveChanges = true)
         {
             var recording = new Recording
@@ -35,6 +35,6 @@ namespace DatabaseLayer.Repositories {
                 return SaveChanges();
             } else return 0;
         }
-        */
+        
     }
 }
