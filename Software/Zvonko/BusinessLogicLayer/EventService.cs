@@ -25,6 +25,12 @@ namespace BusinessLogicLayer {
                 return repo.Get().ToList();
             }
     }
+    public bool RemoveEvent(Event eventToRemove) {
+            using (var repo = new EventRepository()) {
+                int affectedRows = repo.Remove(eventToRemove, true);
+                return affectedRows > 0;
+            }
+        }
 
     }
 }

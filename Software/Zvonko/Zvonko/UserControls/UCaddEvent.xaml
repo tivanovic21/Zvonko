@@ -37,7 +37,7 @@
                 <CheckBox Margin="5px">Thursday</CheckBox>
                 <CheckBox Margin="5px">Friday</CheckBox>
                 <CheckBox Margin="5px">Saturday</CheckBox>
-                <CheckBox Margin="5px">Select all days</CheckBox>
+                <CheckBox Margin="5px" Checked="CheckBoxSelectAll_Checked" Unchecked="CheckBoxSelectAll_Unchecked">Select all days</CheckBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="40px 0 0 0">
                 <Label FontWeight="Bold" FontSize="15px"  Margin="15px" VerticalAlignment="Center" HorizontalAlignment="Left">Is the event reoccuring</Label>

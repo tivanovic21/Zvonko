@@ -1,4 +1,5 @@
-namespace DatabaseLayer {
+namespace DatabaseLayer
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,6 @@ namespace DatabaseLayer {
         {
             Events = new HashSet<Event>();
         }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
@@ -22,7 +22,7 @@ namespace DatabaseLayer {
 
         public string description { get; set; }
 
-        public byte[] storedFile { get; set; }
+        public string storedFile { get; set; }
 
         public int AccountId { get; set; }
 

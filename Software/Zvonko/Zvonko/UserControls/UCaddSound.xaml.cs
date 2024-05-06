@@ -125,7 +125,7 @@ namespace Zvonko.UserControls
                 duration = TimeSpan.Parse(soundDuration),
                 description = description,
                 timeCreated = DateTime.Now.ToString(),
-                storedFile = _storedFile,
+                storedFile = "dwadaw"/*_storedFile*/,
                 Account = loggedUser
             };
 
