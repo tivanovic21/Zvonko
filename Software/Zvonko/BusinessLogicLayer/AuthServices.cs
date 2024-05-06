@@ -11,14 +11,12 @@ namespace BusinessLogicLayer
     public class AuthServices
     {
         public string HashPassword(string password) {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            return hashedPassword;
+            return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
         public bool VerifyPassword(string password, string hashedPassword)
         {
-            bool passwordMatch = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-            return passwordMatch;
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
 
         public bool ValidateInput(string username, string password, string schoolName = null)
