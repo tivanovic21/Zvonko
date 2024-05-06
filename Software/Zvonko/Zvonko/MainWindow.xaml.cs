@@ -23,10 +23,12 @@ namespace Zvonko
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Account LoggedUser { get; }
         public MainWindow(Account account)
         {
             InitializeComponent();
             LoadMainContent();
+            LoggedUser = account;
             //LoadRecordings();
         }
 

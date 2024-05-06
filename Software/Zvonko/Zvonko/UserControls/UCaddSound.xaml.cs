@@ -117,10 +117,7 @@ namespace Zvonko.UserControls
             string soundName = txtSoundName.Text;
             string soundDuration = txtSoundLength.Text;
             string description = System.IO.Path.GetExtension(soundName);
-
-            AccountService accountService = new AccountService();
-            var acc = accountService.GetAccount("mkajic20");
-            MessageBox.Show(_storedFile.ToString());
+            var loggedUser = ((MainWindow)Window.GetWindow(this)).LoggedUser;
 
             Recording newRecording = new Recording
             {
@@ -129,7 +126,7 @@ namespace Zvonko.UserControls
                 description = description,
                 timeCreated = DateTime.Now.ToString(),
                 storedFile = _storedFile,
-                Account = acc
+                Account = loggedUser
             };
 
             bool isAdded = recordingService.AddRecording(newRecording);
