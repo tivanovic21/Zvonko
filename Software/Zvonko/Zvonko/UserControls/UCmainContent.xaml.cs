@@ -22,7 +22,6 @@ namespace Zvonko.UserControls {
     public partial class UCmainContent : UserControl {
         public UCmainContent() {
             InitializeComponent();
-            //LoadEvents();
             DefineDataGridColumns();
         }
 
@@ -58,10 +57,7 @@ namespace Zvonko.UserControls {
             */
         }
 
-        private void LoadEvents() {
-            EventService eventService = new EventService();
-            dgRecordings.ItemsSource = eventService.GetAllEvents();
-        }
+    
 
         private void txtPickedDate_TextChanged(object sender, TextChangedEventArgs e) {
 
@@ -93,6 +89,20 @@ namespace Zvonko.UserControls {
             dgRecordings.ItemsSource = tuesdayEvents;
         }
 
+
+        private void btnWednesday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> wednesdayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Wednesday")) {
+                    wednesdayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = wednesdayEvents;
+        }
+
         private void DefineDataGridColumns() {
             dgRecordings.AutoGenerateColumns = false;
 
@@ -104,6 +114,47 @@ namespace Zvonko.UserControls {
             durationColumn.Header = "Starting Time";
             durationColumn.Binding = new Binding("starting_time");
 
+        }
+
+        private void btnThursday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> thursdayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Thursday")) {
+                    thursdayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = thursdayEvents;
+        }
+
+
+        private void btnSaturday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> saturdayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Saturday")) {
+                    saturdayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = saturdayEvents;
+        }
+
+        private void btnFriday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> fridayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Friday")) {
+                    fridayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = fridayEvents;
         }
     }
 }

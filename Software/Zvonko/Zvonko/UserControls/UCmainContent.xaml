@@ -15,21 +15,40 @@
                 <Button Width="398" Background="LightGray" BorderThickness="0px" x:Name="btnOpenCalendar" Click="btnOpenCalendar_Click">Choose date</Button>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="spButtonDay">
-                <Button x:Name="btnMonday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnMonday_Click">Monday</Button>
-                <Button x:Name="btnTuesday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnTuesday_Click">Tuesday</Button>
-                <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Wednesday</Button>
-                <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Thursday</Button>
-                <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Friday</Button>
-                <Button BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="Button_Click">Saturday</Button>
-            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="spButtonDay">
+                    <Button x:Name="btnMonday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnMonday_Click">Monday</Button>
+                    <Button x:Name="btnTuesday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnTuesday_Click">Tuesday</Button>
+                    <Button x:Name="btnWednesday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnWednesday_Click">Wednesday</Button>
+                    <Button x:Name="btnThursday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnThursday_Click">Thursday</Button>
+                    <Button x:Name="btnFriday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnFriday_Click">Friday</Button>
+                    <Button x:Name="btnSaturday" BorderThickness="0px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10px" Width="100px" Height="40px" Background="White" Click="btnSaturday_Click">Saturday</Button>
+                </StackPanel>
 
-            <DataGrid Height="225px" Margin="5px" x:Name="dgRecordings">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding name, IsAsync=True}" />
-                    <DataGridTextColumn Header="Duration" Binding="{Binding starting_time, IsAsync=True}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                <DataGrid VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="5" x:Name="dgRecordings">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Width="200" Binding="{Binding name, IsAsync=True}"/>
+                        <DataGridTextColumn Header="Duration" Width="200" Binding="{Binding starting_time, IsAsync=True}" />
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="0 5" />
+                            <Setter Property="FontSize" Value="13"></Setter>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                </DataGrid>
+            </StackPanel>
+            
+
+
         </StackPanel>
     </Grid>
 </UserControl>

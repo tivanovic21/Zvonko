@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer {
     public class RecordingService {
 
-        public IEnumerable<Recording> GetAllRecordings() {
+        public async  Task<IEnumerable<Recording>> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
-                return repo.Get().ToList();
+                return await repo.Get();
             }
         }
         

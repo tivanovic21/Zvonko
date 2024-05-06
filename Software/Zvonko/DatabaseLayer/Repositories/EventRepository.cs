@@ -10,7 +10,7 @@ namespace DatabaseLayer.Repositories {
         public IQueryable<Event> Get() {
             var query = from e in Entities
                         select e;
-            return query;
+            return query.OrderBy(sorted => sorted.starting_time);
         }
 
         public override int Add(Event newEvent, bool saveChanges = true) {
