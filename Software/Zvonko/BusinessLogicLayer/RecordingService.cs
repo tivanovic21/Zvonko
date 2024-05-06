@@ -14,6 +14,14 @@ namespace BusinessLogicLayer {
                 return repo.Get().ToList();
             }
         }
+
+        public IEnumerable<Recording> GetEmergencyRecordings()
+        {
+            using (var repo = new RecordingRepository())
+            {
+                return repo.GetEmergencyRecordings().ToList();
+            }
+        }
         
         public bool AddRecording(Recording newRecording)
         {

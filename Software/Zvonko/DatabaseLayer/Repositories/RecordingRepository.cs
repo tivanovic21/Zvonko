@@ -17,6 +17,14 @@ namespace DatabaseLayer.Repositories {
         }
 
         
+        public IQueryable<Recording> GetEmergencyRecordings()
+        {
+            var query = from e in Entities
+                        where e.description == "emergency"
+                        select e;
+            return query;
+        }
+        
         public override int Add(Recording newRecording, bool saveChanges = true)
         {
             var recording = new Recording

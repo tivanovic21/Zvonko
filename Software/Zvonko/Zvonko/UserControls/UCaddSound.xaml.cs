@@ -114,16 +114,16 @@ namespace Zvonko.UserControls
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            var loggedUser = ((MainWindow)Window.GetWindow(this)).LoggedUser;
             string soundName = txtSoundName.Text;
             string soundDuration = txtSoundLength.Text;
-            string description = System.IO.Path.GetExtension(soundName);
-            var loggedUser = ((MainWindow)Window.GetWindow(this)).LoggedUser;
+            string eventType = (radioYes.IsChecked == true) ? "emergency" : "audio";
 
             Recording newRecording = new Recording
             {
                 name = soundName,
                 duration = TimeSpan.Parse(soundDuration),
-                description = description,
+                description = eventType,
                 timeCreated = DateTime.Now.ToString(),
                 storedFile = _storedFile,
                 Account = loggedUser
