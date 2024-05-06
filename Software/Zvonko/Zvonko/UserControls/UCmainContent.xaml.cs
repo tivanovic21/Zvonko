@@ -173,5 +173,46 @@ namespace Zvonko.UserControls {
                 MessageBox.Show("Please select the event you want to remove");
             }
         }
+
+        private void btnThursday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> thursdayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Thursday")) {
+                    thursdayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = thursdayEvents;
+        }
+
+
+        private void btnSaturday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> saturdayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Saturday")) {
+                    saturdayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = saturdayEvents;
+        }
+
+        private void btnFriday_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> fridayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                if (days.Contains("Friday")) {
+                    fridayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = fridayEvents;
+        }
     }
 }
