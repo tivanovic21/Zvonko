@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace Zvonko.UserControls
 {
@@ -25,8 +26,6 @@ namespace Zvonko.UserControls
     public partial class UCemergency : UserControl
     {
         private WaveOutEvent _waveOut;
-        private WaveFileReader _waveFileReader;
-        private Mp3FileReader _mp3FileReader;
         public UCemergency()
         {
             InitializeComponent();
@@ -69,6 +68,10 @@ namespace Zvonko.UserControls
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            if (_waveOut != null)
+            {
+                StopRecording();
+            }
             Window parentWindow = Window.GetWindow(this);
             if (parentWindow != null && parentWindow is MainWindow)
             {
@@ -79,7 +82,22 @@ namespace Zvonko.UserControls
 
         private void PlayRecording(Recording recording)
         {
+            try
+            {
+                if(_waveOut != null)
+                {
+                    StopRecording();
+                }
 
+                _waveOut = new WaveOutEvent();
+                var audioFileReader = new AudioFileReader(recording.storedFile);
+                _waveOut.Init(audioFileReader);
+                _waveOut.Play();
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error in playing recording: " + ex.Message);
+            }
         }
 
 
