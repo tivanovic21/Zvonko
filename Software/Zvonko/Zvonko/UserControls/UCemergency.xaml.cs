@@ -54,7 +54,11 @@ namespace Zvonko.UserControls
             var selectedSound = cbEmergency.SelectedItem as Recording;
             if (selectedSound != null)
             {
-                PlayRecording(selectedSound);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to play an emergency sound?", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    PlayRecording(selectedSound);
+                }
             } else
             {
                 MessageBox.Show("Please select a sound.");
