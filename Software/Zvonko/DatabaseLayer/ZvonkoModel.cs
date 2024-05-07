@@ -6,7 +6,7 @@ using System.Linq;
 namespace DatabaseLayer {
     public partial class ZvonkoModel : DbContext {
         public ZvonkoModel()
-            : base("name=ZvonkoModel1") {
+            : base("name=ZvonkoModel6") {
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
@@ -54,6 +54,10 @@ namespace DatabaseLayer {
 
             modelBuilder.Entity<Recording>()
                 .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Recording>()
+                .Property(e => e.storedFile)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Recording>()

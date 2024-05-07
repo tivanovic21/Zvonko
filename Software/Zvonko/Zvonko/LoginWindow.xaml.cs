@@ -18,10 +18,12 @@ namespace Zvonko {
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window {
+    public partial class LoginWindow : Window
+    {
 
         AuthServices authServices = new AuthServices();
-        public LoginWindow() {
+        public LoginWindow()
+        {
             InitializeComponent();
         }
 
@@ -38,21 +40,29 @@ namespace Zvonko {
             } else
             {
                 var account = accountService.GetAccount(username);
-                bool checkPass = authServices.VerifyPassword(password, account.password);
-                if (account != null && checkPass == true)
+                if (account == null)
                 {
-                    MainWindow mainWindow = new MainWindow(account);
-                    this.Close();
-                    mainWindow.Show();
-                } else
+                    MessageBox.Show("Invalid credentials. Please try again!");
+                }
+
+                if (account != null)
                 {
+                    bool checkPass = authServices.VerifyPassword(password, account.password);
+                    if (checkPass == true)
+                    {
+                        MainWindow mainWindow = new MainWindow(account);
+                        this.Close();
+                        mainWindow.Show();
+                        return;
+                    }
                     MessageBox.Show("Invalid credentials. Please try again!");
                 }
             }
         }
 
 
-        private void Hyperlink_Click(object sender, RoutedEventArgs e) {
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
             RegistrationWindow registrationWindow = new RegistrationWindow();
             this.Close();
             registrationWindow.Show();

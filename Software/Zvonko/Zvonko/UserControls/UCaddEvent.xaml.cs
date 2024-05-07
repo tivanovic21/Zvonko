@@ -27,9 +27,9 @@ namespace Zvonko.UserControls {
             DefineDataGridColumns();
         }
 
-        private void GetAllRecordings() {
+        private async void GetAllRecordings() {
             RecordingService recordingService = new RecordingService();
-            dgRecordings.ItemsSource = recordingService.GetAllRecordings();
+            dgRecordings.ItemsSource = await recordingService.GetAllRecordings();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {
@@ -110,5 +110,31 @@ namespace Zvonko.UserControls {
             }
             return string.Join(", ", selectedDays);
         }
+
+        private void CheckBoxSelectAll_Checked(object sender, RoutedEventArgs e) {
+            var checkboxes = GetAllCheckBoxes(spCheckboxDays);
+            foreach (var checkbox in checkboxes) {
+                checkbox.IsChecked = true;
+            }
+        }
+
+        private void CheckBoxSelectAll_Unchecked(object sender, RoutedEventArgs e) {
+            var checkboxes = GetAllCheckBoxes(spCheckboxDays);
+            foreach (var checkbox in checkboxes) {
+                checkbox.IsChecked = false;
+            }
+        }
+
+        private IEnumerable<CheckBox> GetAllCheckBoxes(StackPanel stackPanel) {
+            var checkboxes = new List<CheckBox>();
+
+            foreach (var child in stackPanel.Children) {
+                if (child is CheckBox checkbox) {
+                    checkboxes.Add(checkbox);
+                }
+            }
+            return checkboxes;
+        }
     }
 }
+

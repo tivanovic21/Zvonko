@@ -31,21 +31,6 @@ namespace Zvonko.UserControls
         {
             InitializeComponent();
             FillComboBox();
-
-            var audioDevices = GetAudioDevices();
-        }
-
-        public static List<(string name, int deviceNumber)> GetAudioDevices()
-        {
-            var audioDevices = new List<(string name, int deviceNumber)>();
-
-            for (int deviceNumber = 0; deviceNumber < WaveOut.DeviceCount; deviceNumber++)
-            {
-                var deviceName = WaveOut.GetCapabilities(deviceNumber).ProductName;
-                audioDevices.Add((deviceName, deviceNumber));
-            }
-
-            return audioDevices;
         }
 
 
@@ -79,7 +64,7 @@ namespace Zvonko.UserControls
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            StopSound();
+            StopRecording();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -94,35 +79,11 @@ namespace Zvonko.UserControls
 
         private void PlayRecording(Recording recording)
         {
-            try
-            {
-                if (recording.name.EndsWith(".wav"))
-                {
-                    using (MemoryStream ms = new MemoryStream(recording.storedFile))
-                    {
-                        _waveFileReader = new WaveFileReader(ms);
-                        _waveOut = new WaveOutEvent();
-                        _waveOut.Init(_waveFileReader);
-                        _waveOut.Play();
-                    }
-                } else if (recording.name.EndsWith(".mp3"))
-                {
-                    using (MemoryStream ms = new MemoryStream(recording.storedFile))
-                    {
-                        _mp3FileReader = new Mp3FileReader(ms);
-                        _waveOut = new WaveOutEvent();
-                        _waveOut.Init(_mp3FileReader);
-                        _waveOut.Play();
-                    }
-                }
-            } catch (Exception ex)
-            {
-                MessageBox.Show("Error playing recording: " + ex.Message);
-            }
+
         }
 
 
-        private void StopSound()
+        private void StopRecording()
         {
             try
             {

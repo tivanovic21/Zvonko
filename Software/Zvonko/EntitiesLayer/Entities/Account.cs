@@ -1,5 +1,5 @@
-namespace DatabaseLayer {
-    
+namespace DatabaseLayer
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -30,6 +30,7 @@ namespace DatabaseLayer {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
 
+        
         public virtual ICollection<Recording> Recordings { get; set; }
     }
 }

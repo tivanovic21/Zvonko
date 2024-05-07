@@ -1,4 +1,5 @@
-namespace DatabaseLayer {
+namespace DatabaseLayer
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,7 @@ namespace DatabaseLayer {
 
         public TimeSpan? starting_time { get; set; }
 
-        [StringLength(50)]
+        [StringLength(500)]
         public string day_of_the_week { get; set; }
 
         public int? accountId { get; set; }
@@ -23,6 +24,9 @@ namespace DatabaseLayer {
         public int? recordingId { get; set; }
 
         public int? typeOfEventId { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? date { get; set; }
 
         public virtual Account Account { get; set; }
 
