@@ -1,4 +1,5 @@
-namespace DatabaseLayer {
+namespace DatabaseLayer
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

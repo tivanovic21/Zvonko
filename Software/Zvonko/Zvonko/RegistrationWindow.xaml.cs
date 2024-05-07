@@ -46,18 +46,16 @@ namespace Zvonko
             string schoolName = txtSchoolName.Text;
             if (authServices.ValidateInput(username, password, schoolName))
             {
-                string salt = authServices.GenerateSalt();
-                string hashedPassword = authServices.HashPassword(password, salt);
+                string hashedPassword = authServices.HashPassword(password);
                 if (string.IsNullOrEmpty(hashedPassword)) return false;
 
                 Account newAccount = new Account
                 {
                     username = username,
                     password = hashedPassword,
-                    // salt = salt,
                     schoolName = schoolName
                 };
-                bool successfullRegistration = true;//accountService.AddAccount(newAccount);
+                bool successfullRegistration = accountService.AddAccount(newAccount);
                 return successfullRegistration;
             }
             else

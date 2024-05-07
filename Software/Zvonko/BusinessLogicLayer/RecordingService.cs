@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer {
     public class RecordingService {
 
-        public async Task<List<Recording>> GetAllRecordings() {
+        public async  Task<IEnumerable<Recording>> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
-                var queryResult = repo.Get();
-                return (List<Recording>) await queryResult;
+                return await repo.Get();
             }
         }
 
-
-        /*
+        public IEnumerable<Recording> GetEmergencyRecordings()
+        {
+            using (var repo = new RecordingRepository())
+            {
+                return repo.GetEmergencyRecordings().ToList();
+            }
+        }
+        
         public bool AddRecording(Recording newRecording)
         {
             using (var repo = new RecordingRepository())
@@ -29,6 +34,6 @@ namespace BusinessLogicLayer {
                 } else return false;
             }
         }
-        */
+        
     }
 }

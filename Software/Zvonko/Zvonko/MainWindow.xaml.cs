@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,21 +23,24 @@ namespace Zvonko
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public Account LoggedUser { get; }
+        public MainWindow(Account account)
         {
             InitializeComponent();
             LoadMainContent();
+            LoggedUser = account;
             //LoadRecordings();
         }
 
-        private void btnLogout_Click(object sender, RoutedEventArgs e) {
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
             LoginWindow loginWindow = new LoginWindow();
             this.Close();
             loginWindow.Show();
         }
 
         public void LoadMainContent()
-        { 
+        {
             UCmainContent ucMainContent = new UCmainContent();
             contentPanel.Content = ucMainContent;
         }
@@ -47,14 +51,22 @@ namespace Zvonko
             contentPanel.Content = ucAddSound;
         }
 
-        private void btnAddEvent_Click(object sender, RoutedEventArgs e) {
+        private void btnAddEvent_Click(object sender, RoutedEventArgs e)
+        {
             UCaddEvent uCaddEvent = new UCaddEvent();
             contentPanel.Content = uCaddEvent;
         }
 
-        private void btnLiveBroadcast_Click(object sender, RoutedEventArgs e) {
+        private void btnLiveBroadcast_Click(object sender, RoutedEventArgs e)
+        {
             StreamingWindow streamingWindow = new StreamingWindow();
             streamingWindow.Show();
+        }
+
+        private void btnEmergency_Click(object sender, RoutedEventArgs e)
+        {
+            UCemergency ucEmergency = new UCemergency();
+            contentPanel.Content = ucEmergency;
         }
     }
 }

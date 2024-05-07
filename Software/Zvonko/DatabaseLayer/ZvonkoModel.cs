@@ -6,7 +6,7 @@ using System.Linq;
 namespace DatabaseLayer {
     public partial class ZvonkoModel : DbContext {
         public ZvonkoModel()
-            : base("name=ZvonkoModel1") {
+            : base("name=ZvonkoModel6") {
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
@@ -32,8 +32,9 @@ namespace DatabaseLayer {
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .HasOptional(e => e.Recording)
-                .WithRequired(e => e.Account);
+                .HasMany(e => e.Recordings)
+                .WithRequired(e => e.Account)
+                .HasForeignKey(e => e.AccountId);
 
             modelBuilder.Entity<Event>()
                 .Property(e => e.name)
@@ -53,6 +54,10 @@ namespace DatabaseLayer {
 
             modelBuilder.Entity<Recording>()
                 .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Recording>()
+                .Property(e => e.storedFile)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Recording>()

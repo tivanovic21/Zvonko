@@ -10,7 +10,6 @@ namespace BusinessLogicLayer
 {
     public class AccountService
     {   
-        /*
         public bool AddAccount(Account newAccount)
         {
             using (var repo = new AccountRepository())
@@ -22,11 +21,10 @@ namespace BusinessLogicLayer
                 } else return false;
             }
         }
-        */
 
-        public Account GetAccount(string username, string password) {
+        public Account GetAccount(string username) {
             using (var repo = new AccountRepository()) {
-                var account = repo.Get(username, password);
+                var account = repo.Get(username);
                 if (account != null) return account;
                 else return null;
             }

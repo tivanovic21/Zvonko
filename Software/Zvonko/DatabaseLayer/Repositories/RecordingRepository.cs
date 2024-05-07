@@ -10,13 +10,21 @@ namespace DatabaseLayer.Repositories {
         public RecordingRepository() : base(new ZvonkoModel()) {
 
         }
-        public async Task<IQueryable<Recording>> Get() {
+        public async Task<IEnumerable<Recording>> Get() {
             var query = from e in Entities
                         select e;
-            return (IQueryable<Recording>)await query.ToListAsync();
+            return await query.ToListAsync();
         }
 
-        /*
+        
+        public IQueryable<Recording> GetEmergencyRecordings()
+        {
+            var query = from e in Entities
+                        where e.description == "emergency"
+                        select e;
+            return query;
+        }
+        
         public override int Add(Recording newRecording, bool saveChanges = true)
         {
             var recording = new Recording
@@ -35,6 +43,6 @@ namespace DatabaseLayer.Repositories {
                 return SaveChanges();
             } else return 0;
         }
-        */
+        
     }
 }

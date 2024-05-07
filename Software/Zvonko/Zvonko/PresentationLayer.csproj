@@ -105,6 +105,9 @@
     <Compile Include="UserControls\UCaddSound.xaml.cs">
       <DependentUpon>UCaddSound.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCemergency.xaml.cs">
+      <DependentUpon>UCemergency.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCmainContent.xaml.cs">
       <DependentUpon>UCmainContent.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCaddSound.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCemergency.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
