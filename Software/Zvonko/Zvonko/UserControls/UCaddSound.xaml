@@ -15,13 +15,17 @@
                 <Label Content="Add a new sound" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10px" Height="25px"/>
                 <Label Content="Sound name:" VerticalAlignment="Center" Margin="10px"/>
                 <Label Content="Sound length:" VerticalAlignment="Center" Margin="10px"/>
-                <Label Content="Event:" VerticalAlignment="Center" Margin="10px"/>
+                <Label Content="Emergency sound:" VerticalAlignment="Center" Margin="10px"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20">
                 <Button Margin="10px" x:Name="btnChooseSound" Click="btnChooseSound_Click" Height="25px" Background="White" Width="200px" BorderThickness="0px" HorizontalAlignment="Left" VerticalAlignment="Center">Choose a sound</Button>
                 <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundName" IsReadOnly="True" Height="25"/>
                 <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundLength" Height="25" />
-                <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtEvent" Height="25" Width="200px"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20px">
+                    <RadioButton Content="Yes" x:Name="radioYes" GroupName="EventType" Margin="0, 0, 10, 0"/>
+                    <RadioButton Content="No" x:Name="radioNo" GroupName="EventType" Margin="0, 0, 0, 10"/>
+                </StackPanel>
+
             </StackPanel>
         </StackPanel>
         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">

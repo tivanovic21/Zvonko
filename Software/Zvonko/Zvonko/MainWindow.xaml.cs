@@ -62,5 +62,11 @@ namespace Zvonko
             StreamingWindow streamingWindow = new StreamingWindow();
             streamingWindow.Show();
         }
+
+        private void btnEmergency_Click(object sender, RoutedEventArgs e)
+        {
+            UCemergency ucEmergency = new UCemergency();
+            contentPanel.Content = ucEmergency;
+        }
     }
 }
