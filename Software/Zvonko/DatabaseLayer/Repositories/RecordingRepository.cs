@@ -43,6 +43,21 @@ namespace DatabaseLayer.Repositories {
                 return SaveChanges();
             } else return 0;
         }
+
+        public override int Update(Recording selectedRecording, bool saveChanges = true)
+        {
+            var recording = Entities.SingleOrDefault(s => s.id == selectedRecording.id);
+            recording.name = selectedRecording.name;
+            recording.duration = selectedRecording.duration;
+            recording.storedFile = selectedRecording.storedFile;
+            recording.timeCreated = selectedRecording.timeCreated;
+            recording.description = selectedRecording.description;
+            recording.Account = selectedRecording.Account;
+            if (saveChanges)
+            {
+                return SaveChanges();
+            } else return 0;
+        }
         
     }
 }

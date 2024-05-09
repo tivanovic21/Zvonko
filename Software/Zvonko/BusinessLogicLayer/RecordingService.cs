@@ -34,6 +34,30 @@ namespace BusinessLogicLayer {
                 } else return false;
             }
         }
+
+        public bool UpdateRecording(Recording selectedRecording)
+        {
+            using (var repo = new RecordingRepository())
+            {
+                int affectedRows = repo.Update(selectedRecording, true);
+                if (affectedRows > 0)
+                {
+                    return true;
+                } else return false;
+            }
+        }
+
+        public bool RemoveRecording(Recording selectedRecording)
+        {
+            using (var repo = new RecordingRepository())
+            {
+                int affectedRows = repo.Remove(selectedRecording, true);
+                if (affectedRows > 0)
+                {
+                    return true;
+                } else return false;
+            }
+        }
         
     }
 }

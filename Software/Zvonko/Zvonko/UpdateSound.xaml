@@ -1,0 +1,35 @@
+﻿<Window x:Class="Zvonko.UpdateSound"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zvonko"
+        mc:Ignorable="d"
+        Title="Update Sound" Height="300" Width="500">
+    <StackPanel>
+        <Label Content="Update Sound" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" Margin="20"/>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Choose a sound: " Margin="10"/>
+                <Label Content="Sound Name:" Margin="10"/>
+                <Label Content="Sound Length:" Margin="10"/>
+                <Label Content="Emergency Sound:" Margin="10"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="10">
+                <Button x:Name="btnChooseSound" Content="Choose a sound" Click="btnChooseSound_Click" Height="25" Background="White" BorderThickness="0"/>
+                <TextBox x:Name="txtSoundName" BorderThickness="0 0 0 1" Margin="0, 25, 0, 0" Width="200"/>
+                <TextBox x:Name="txtSoundLength" BorderThickness="0 0 0 1" Margin="0, 25, 0, 0" Width="200"/>
+                <StackPanel Orientation="Horizontal" Margin="0, 35, 0, 0">
+                    <RadioButton x:Name="rbYes" Content="Yes" Margin="0 0 10 0"/>
+                    <RadioButton x:Name="rbNo" Content="No"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                <Button x:Name="btnSave" Content="Save" Width="100" Margin="10, 5, 5, 5" Click="btnSave_Click"/>
+                <Button x:Name="btnUpdate" Content="Cancel" Width="100" Margin="10, 5, 5, 5" Click="btnUpdate_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>

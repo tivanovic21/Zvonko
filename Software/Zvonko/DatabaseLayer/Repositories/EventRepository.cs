@@ -42,5 +42,9 @@ namespace DatabaseLayer.Repositories {
             }
         }
 
+        public override int Update(Event entity, bool saveChanges = true)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

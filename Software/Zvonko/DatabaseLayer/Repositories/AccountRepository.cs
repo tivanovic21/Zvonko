@@ -36,5 +36,10 @@ namespace DatabaseLayer.Repositories
 
             return query.FirstOrDefault();  
         }
+
+        public override int Update(Account entity, bool saveChanges = true)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
