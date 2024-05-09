@@ -12,7 +12,8 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Label HorizontalAlignment="Stretch" VerticalAlignment="Bottom">Day you entered:</Label>
             <TextBox Margin="10 0 10 0" BorderThickness="0px 0px 0px 1px" Width="100px" x:Name="txtPickedDate" VerticalAlignment="Center" Height="15" TextChanged="txtPickedDate_TextChanged"></TextBox>
-            <Button Width="398" Background="LightGray" BorderThickness="0px" x:Name="btnOpenCalendar" Click="btnOpenCalendar_Click">Choose date</Button>
+            <Button Width="398" Margin="0 0 10 0" Background="LightGray" BorderThickness="0px" x:Name="btnOpenCalendar" Click="btnOpenCalendar_Click">Choose date</Button>
+            <Button  Background="White" Width="100px" BorderThickness="0px" x:Name="btnLoadCalendarDate" Click="btnLoadCalendarDate_Click">Load</Button>
         </StackPanel>
 
         <StackPanel Orientation="Vertical">
@@ -47,8 +48,8 @@
             </DataGrid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Update event" Width="120" Height="40" HorizontalAlignment="Left" Margin="0,5,70,0"/>
-            <Button x:Name="btnRemove" Content="Remove event" Width="120" Height="40" HorizontalAlignment="Right" Margin="70,5,0,0" Click="btnRemove_Click"/>
+            <Button Content="Update event" Background="White" Width="120" Height="40" HorizontalAlignment="Left" Margin="0,5,70,0" BorderThickness="0 0 0 0"/>
+            <Button x:Name="btnRemove" BorderThickness="0 0 0 0" Content="Remove event" Background="White" Width="120" Height="40" HorizontalAlignment="Right" Margin="70,5,0,0" Click="btnRemove_Click"/>
         </StackPanel>
     </StackPanel>
  

@@ -21,15 +21,18 @@ namespace Zvonko.UserControls {
     /// Interaction logic for UCaddEvent.xaml
     /// </summary>
     public partial class UCaddEvent : UserControl {
+        private string selectedDays = null;
+        
+        private DateTime? nonReccuringEventDate = null;
         public UCaddEvent() {
             InitializeComponent();
             GetAllRecordings();
             DefineDataGridColumns();
         }
 
-        private async void GetAllRecordings() {
+        private /*async*/ void GetAllRecordings() {
             RecordingService recordingService = new RecordingService();
-            dgRecordings.ItemsSource = await recordingService.GetAllRecordings();
+            dgRecordings.ItemsSource = /*await*/ recordingService.GetAllRecordings();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {
@@ -49,10 +52,10 @@ namespace Zvonko.UserControls {
             string description = txtDescriptionOfEvent.Text;
             int recordingId = GetSelectedRecording().id;
             int isReoccuring = 0;
-            var selectedDays = GetSelectedDays();
-            if(rbReoccuring.IsChecked == true) {
+            if (rbReoccuring.IsChecked == true) {
+                selectedDays = GetSelectedDays();
                 isReoccuring = 1;
-            } else if(rbNonReocurring.IsChecked == true) {
+            } else if (rbNonReocurring.IsChecked == true) {
                 isReoccuring = 2;
             }
             TimeSpan startingTime;
@@ -63,13 +66,14 @@ namespace Zvonko.UserControls {
                     name = name,
                     description = description,
                     starting_time = startingTime,
-                    day_of_the_week = selectedDays,
+                    day_of_the_week = string.Join(", ", selectedDays),
                     accountId = 1,
                     recordingId = recordingId,
-                    typeOfEventId = isReoccuring
+                    typeOfEventId = isReoccuring,
+                    date = nonReccuringEventDate
                 };
 
-                bool isAdded = eventService.AddEvent(newEvent); 
+                bool isAdded = eventService.AddEvent(newEvent);
                 if (isAdded) {
                     MessageBox.Show("Event successfully added!");
                 } else {
@@ -101,9 +105,8 @@ namespace Zvonko.UserControls {
         }
 
         private string GetSelectedDays() {
-            List<string> selectedDays = new List<string>();
-
-            foreach(var item in spCheckboxDays.Children) {
+            List<string> selectedDays = new List<string>(); 
+            foreach (var item in spCheckboxDays.Children) {
                 if(item is CheckBox checkBox && checkBox.IsChecked == true) {
                     selectedDays.Add(checkBox.Content.ToString());
                 }
@@ -135,6 +138,22 @@ namespace Zvonko.UserControls {
             }
             return checkboxes;
         }
+
+        private void rbReoccuring_Checked(object sender, RoutedEventArgs e) {
+            calNonReccuringEvent.Visibility = Visibility.Hidden;
+            spCheckboxDays.Visibility = Visibility.Visible;
+        }
+
+        private void rbNonReocurring_Checked(object sender, RoutedEventArgs e) {
+            calNonReccuringEvent.Visibility = Visibility.Visible;
+            spCheckboxDays.Visibility = Visibility.Hidden;
+        }
+
+        private void calNonReccuringEvent_SelectedDatesChanged(object sender, SelectionChangedEventArgs e) {
+            nonReccuringEventDate = calNonReccuringEvent.SelectedDate.Value;
+        }
+
+      
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {

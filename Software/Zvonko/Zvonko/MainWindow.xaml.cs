@@ -68,5 +68,10 @@ namespace Zvonko
             UCemergency ucEmergency = new UCemergency();
             contentPanel.Content = ucEmergency;
         }
+
+        private void btnManageSchedule_Click(object sender, RoutedEventArgs e) {
+            UCmainContent ucMainContent = new UCmainContent();
+            contentPanel.Content = ucMainContent;
+        }
     }
 }

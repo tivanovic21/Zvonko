@@ -20,6 +20,7 @@ namespace Zvonko.UserControls {
     /// Interaction logic for UCmainContent.xaml
     /// </summary>
     public partial class UCmainContent : UserControl {
+        private DateTime? selectedDate = null;
         public UCmainContent() {
             InitializeComponent();
             DefineDataGridColumns();
@@ -36,7 +37,7 @@ namespace Zvonko.UserControls {
 
             calendarWindow.Closed += (s, args) => {
                 Calendar calendar = (Calendar)calendarWindow.Content;
-                DateTime? selectedDate = calendar.SelectedDate;
+                selectedDate = calendar.SelectedDate;
                 txtPickedDate.Text = selectedDate?.ToString("d") ?? "";
             };
 
@@ -174,6 +175,23 @@ namespace Zvonko.UserControls {
             }
         }
 
-        
+        private void btnLoadCalendarDate_Click(object sender, RoutedEventArgs e) {
+            EventService eventService = new EventService();
+            List<Event> selectedDayEvents = new List<Event>();
+            var alLEvents = eventService.GetAllEvents();
+            if (string.IsNullOrEmpty(txtPickedDate.Text)){
+                MessageBox.Show("Choose a date you want to load");
+                return;
+            }
+
+            foreach (var item in alLEvents) {
+                var days = item.day_of_the_week;
+                string date = item.date.ToString(); 
+                if (days.Contains(selectedDate.Value.DayOfWeek.ToString()) || date == selectedDate?.ToString()) {
+                    selectedDayEvents.Add(item);
+                }
+            }
+            dgRecordings.ItemsSource = selectedDayEvents;
+        }
     }
 }
