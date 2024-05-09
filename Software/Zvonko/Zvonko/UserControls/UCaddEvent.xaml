@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Zvonko.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="538" d:DesignWidth="800"
              Background="White">
     <StackPanel Orientation="Vertical">
         <DockPanel>
@@ -29,7 +29,7 @@
                 <Label Grid.Column="0" Grid.Row="3" Margin="10px" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" BorderThickness="0px">Starting time:</Label>
                 <TextBox Grid.Column="1" Grid.Row="3" Margin="10px" Width="200px" Height="20px" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="txtStartingTime"></TextBox>
             </Grid>
-            <StackPanel Orientation="Vertical" Margin="40px 0 0 0" x:Name="spCheckboxDays">
+            <StackPanel Orientation="Vertical" Margin="40px 0 0 0" x:Name="spCheckboxDays" Visibility="Visible">
                 <Label  FontWeight="Bold" FontSize="15px"  Margin="15px" VerticalAlignment="Center" HorizontalAlignment="Left">Select the day</Label>
                 <CheckBox Margin="5px">Monday</CheckBox>
                 <CheckBox Margin="5px">Tuesday</CheckBox>
@@ -41,32 +41,37 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="40px 0 0 0">
                 <Label FontWeight="Bold" FontSize="15px"  Margin="15px" VerticalAlignment="Center" HorizontalAlignment="Left">Is the event reoccuring</Label>
-                <RadioButton Margin="5px" x:Name="rbReoccuring">Yes</RadioButton>
-                <RadioButton Margin="5px" x:Name="rbNonReocurring">No</RadioButton>
+                <RadioButton Margin="5px" x:Name="rbReoccuring" Checked="rbReoccuring_Checked">Yes</RadioButton>
+                <RadioButton Margin="5px" x:Name="rbNonReocurring" Checked="rbNonReocurring_Checked">No</RadioButton>
+                <Calendar Visibility="Hidden" x:Name="calNonReccuringEvent" HorizontalAlignment="Left" SelectedDatesChanged="calNonReccuringEvent_SelectedDatesChanged"></Calendar>
             </StackPanel>
         </DockPanel>
         <Label>Audio recordings currently available</Label>
         <DataGrid x:Name="dgRecordings" Height="150px">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name, IsAsync=True}" />
-                <DataGridTextColumn Header="Duration" Binding="{Binding duration, IsAsync=True}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding description, IsAsync=True}" />
-                <DataGridTextColumn Header="Time Created" Binding="{Binding timeCreated, IsAsync=True}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                <DataGridTextColumn Header="Duration" Binding="{Binding duration}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding description}" />
+                <DataGridTextColumn Header="Time Created" Binding="{Binding timeCreated}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0"></Grid>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button x:Name="btnUpdate" Width="100" Background="White" BorderThickness="0" Height="40" Content="Update" Margin="0, 0, 0, 0" Click="btnUpdate_Click"/>
-                <Button x:Name="btnRemove" Width="100" Background="White" BorderThickness="0" Height="40" Content="Remove" Margin="0, 0, 400, 0" Click="btnRemove_Click"/>
-                <Button x:Name="btnSave" Width="100px" Background="White" BorderThickness="0px" Height="40px" Click="btnSave_Click" Content="Save"/>
-                <Button Width="100px" Background="White" BorderThickness="0px" Height="40px" x:Name="btnCancel" Click="btnCancel_Click" Content="Cancel"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0" Width="800">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 0 275 0">
+                <Button x:Name="btnUpdate" Width="100" Background="White" BorderThickness="0" Height="40" Content="Update" Margin="15, 0" Click="btnUpdate_Click"/>
+                <Button x:Name="btnRemove" Width="100" Background="White" BorderThickness="0" Height="40" Content="Remove" Margin="15, 0" Click="btnRemove_Click"/>
             </StackPanel>
-        </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button x:Name="btnSave" Width="100px" Background="White" BorderThickness="0px" Height="40px" Content="Save" Margin="15, 0" Click="btnSave_Click"/>
+                <Button Width="100px" Background="White" BorderThickness="0px" Height="40px" x:Name="btnCancel" Content="Cancel" Margin="15, 0" Click="btnCancel_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+
+
+
+
 
     </StackPanel>
 </UserControl>

@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zvonko"
+        Background="White"
         mc:Ignorable="d"
-        Title="Update Sound" Height="300" Width="500">
-    <StackPanel>
+        Title="Update Sound" Height="400" Width="400">
+    <StackPanel Margin="0,0,0,-34">
         <Label Content="Update Sound" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" Margin="20"/>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
@@ -21,15 +22,16 @@
                 <Button x:Name="btnChooseSound" Content="Choose a sound" Click="btnChooseSound_Click" Height="25" Background="White" BorderThickness="0"/>
                 <TextBox x:Name="txtSoundName" BorderThickness="0 0 0 1" Margin="0, 25, 0, 0" Width="200"/>
                 <TextBox x:Name="txtSoundLength" BorderThickness="0 0 0 1" Margin="0, 25, 0, 0" Width="200"/>
-                <StackPanel Orientation="Horizontal" Margin="0, 35, 0, 0">
+                <StackPanel Orientation="Horizontal" Margin="0, 35, 0, 0" HorizontalAlignment="Center">
                     <RadioButton x:Name="rbYes" Content="Yes" Margin="0 0 10 0"/>
                     <RadioButton x:Name="rbNo" Content="No"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
-                <Button x:Name="btnSave" Content="Save" Width="100" Margin="10, 5, 5, 5" Click="btnSave_Click"/>
-                <Button x:Name="btnUpdate" Content="Cancel" Width="100" Margin="10, 5, 5, 5" Click="btnUpdate_Click"/>
-            </StackPanel>
+           
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+            <Button x:Name="btnSave" Content="Save" Width="100" Height="40" Margin="0, 0, 20,0" Click="btnSave_Click" BorderThickness="0" Background="White"/>
+            <Button x:Name="btnUpdate" Content="Cancel" Width="100" Height="40" Margin="20, 5, 5, 5" Click="btnUpdate_Click" BorderThickness="0" Background="White"/>
         </StackPanel>
     </StackPanel>
 </Window>
