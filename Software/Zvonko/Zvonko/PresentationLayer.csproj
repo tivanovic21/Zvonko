@@ -99,6 +99,9 @@
     <Compile Include="StreamingWindow.xaml.cs">
       <DependentUpon>StreamingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateSound.xaml.cs">
+      <DependentUpon>UpdateSound.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCaddEvent.xaml.cs">
       <DependentUpon>UCaddEvent.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StreamingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateSound.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

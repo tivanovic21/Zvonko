@@ -31,6 +31,18 @@ namespace DatabaseLayer.Repositories
                 return SaveChanges();
             } else return 0;
         }
+
+        public abstract int Update(T entity, bool saveChanges = true);
+
+        public virtual int Remove(T entity, bool saveChanges = true)
+        {
+            Entities.Attach(entity);
+            Entities.Remove(entity);
+            if (saveChanges)
+            {
+                return SaveChanges();
+            } else return 0;
+        }
         public void Dispose()
         {
             Context.Dispose();

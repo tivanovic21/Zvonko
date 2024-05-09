@@ -46,7 +46,7 @@
             </StackPanel>
         </DockPanel>
         <Label>Audio recordings currently available</Label>
-        <DataGrid x:Name="dgRecordings" Height="150px" Margin="10px">
+        <DataGrid x:Name="dgRecordings" Height="150px">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding name, IsAsync=True}" />
                 <DataGridTextColumn Header="Duration" Binding="{Binding duration, IsAsync=True}" />
@@ -61,11 +61,12 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0"></Grid>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button x:Name="btnSave" Width="100px" VerticalAlignment="Center" Margin="10px 10px 10px 0 " Background="White" BorderThickness="0px" Height="40px" Click="btnSave_Click">Save</Button>
-                <Button Width="100px" VerticalAlignment="Center" Margin="10px 10px 10px 0 " Background="White" BorderThickness="0px" Height="40px" x:Name="btnCancel" Click="btnCancel_Click">Cancel</Button>
-            </StackPanel>                                      
+                <Button x:Name="btnUpdate" Width="100" Background="White" BorderThickness="0" Height="40" Content="Update" Margin="0, 0, 0, 0" Click="btnUpdate_Click"/>
+                <Button x:Name="btnRemove" Width="100" Background="White" BorderThickness="0" Height="40" Content="Remove" Margin="0, 0, 400, 0" Click="btnRemove_Click"/>
+                <Button x:Name="btnSave" Width="100px" Background="White" BorderThickness="0px" Height="40px" Click="btnSave_Click" Content="Save"/>
+                <Button Width="100px" Background="White" BorderThickness="0px" Height="40px" x:Name="btnCancel" Click="btnCancel_Click" Content="Cancel"/>
+            </StackPanel>
         </Grid>
-
 
     </StackPanel>
 </UserControl>

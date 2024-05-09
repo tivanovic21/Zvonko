@@ -135,6 +135,34 @@ namespace Zvonko.UserControls {
             }
             return checkboxes;
         }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Recording selectedRecording = GetSelectedRecording();
+            if(selectedRecording != null)
+            {
+                UpdateSound updateSound = new UpdateSound(selectedRecording);
+                updateSound.ShowDialog();
+            } else
+            {
+                MessageBox.Show("You need to select a recording!");
+            }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            Recording selectedRecording = GetSelectedRecording();
+            if(selectedRecording != null)
+            {
+                RecordingService recordingService = new RecordingService();
+                bool success = recordingService.RemoveRecording(selectedRecording);
+                if (success) MessageBox.Show("Recording successfully deleted!");
+                else MessageBox.Show("There was an error in deleted selected recording!");
+            } else
+            {
+                MessageBox.Show("You need to select a recording!");
+            }
+        }
     }
 }
 
