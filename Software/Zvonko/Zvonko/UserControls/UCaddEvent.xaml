@@ -29,7 +29,7 @@
                 <Label Grid.Column="0" Grid.Row="3" Margin="10px" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" BorderThickness="0px">Starting time:</Label>
                 <TextBox Grid.Column="1" Grid.Row="3" Margin="10px" Width="200px" Height="20px" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="txtStartingTime"></TextBox>
             </Grid>
-            <StackPanel Orientation="Vertical" Margin="40px 0 0 0" x:Name="spCheckboxDays">
+            <StackPanel Orientation="Vertical" Margin="40px 0 0 0" x:Name="spCheckboxDays" Visibility="Visible">
                 <Label  FontWeight="Bold" FontSize="15px"  Margin="15px" VerticalAlignment="Center" HorizontalAlignment="Left">Select the day</Label>
                 <CheckBox Margin="5px">Monday</CheckBox>
                 <CheckBox Margin="5px">Tuesday</CheckBox>
@@ -41,17 +41,18 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="40px 0 0 0">
                 <Label FontWeight="Bold" FontSize="15px"  Margin="15px" VerticalAlignment="Center" HorizontalAlignment="Left">Is the event reoccuring</Label>
-                <RadioButton Margin="5px" x:Name="rbReoccuring">Yes</RadioButton>
-                <RadioButton Margin="5px" x:Name="rbNonReocurring">No</RadioButton>
+                <RadioButton Margin="5px" x:Name="rbReoccuring" Checked="rbReoccuring_Checked">Yes</RadioButton>
+                <RadioButton Margin="5px" x:Name="rbNonReocurring" Checked="rbNonReocurring_Checked">No</RadioButton>
+                <Calendar Visibility="Hidden" x:Name="calNonReccuringEvent" HorizontalAlignment="Left" SelectedDatesChanged="calNonReccuringEvent_SelectedDatesChanged"></Calendar>
             </StackPanel>
         </DockPanel>
         <Label>Audio recordings currently available</Label>
         <DataGrid x:Name="dgRecordings" Height="150px" Margin="10px">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name, IsAsync=True}" />
-                <DataGridTextColumn Header="Duration" Binding="{Binding duration, IsAsync=True}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding description, IsAsync=True}" />
-                <DataGridTextColumn Header="Time Created" Binding="{Binding timeCreated, IsAsync=True}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                <DataGridTextColumn Header="Duration" Binding="{Binding duration}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding description}" />
+                <DataGridTextColumn Header="Time Created" Binding="{Binding timeCreated}" />
             </DataGrid.Columns>
         </DataGrid>
         <Grid>

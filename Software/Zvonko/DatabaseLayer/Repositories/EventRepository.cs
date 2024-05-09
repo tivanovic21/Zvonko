@@ -20,6 +20,7 @@ namespace DatabaseLayer.Repositories {
                 starting_time = newEvent.starting_time,
                 day_of_the_week = newEvent.day_of_the_week,
                 accountId = newEvent.accountId,
+                date = newEvent.date,
                 recordingId = newEvent.recordingId,
                 typeOfEventId = newEvent.typeOfEventId
             };

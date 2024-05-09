@@ -10,10 +10,10 @@ namespace DatabaseLayer.Repositories {
         public RecordingRepository() : base(new ZvonkoModel()) {
 
         }
-        public async Task<IEnumerable<Recording>> Get() {
+        public /*async Task<*/IEnumerable<Recording> Get() {
             var query = from e in Entities
                         select e;
-            return await query.ToListAsync();
+            return /*await*/ query/*.ToListAsync()*/;
         }
 
         
