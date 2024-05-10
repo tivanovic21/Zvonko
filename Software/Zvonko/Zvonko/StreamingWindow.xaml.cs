@@ -16,6 +16,7 @@ namespace Zvonko {
         public StreamingWindow() {
             InitializeComponent();
             InitializeTimer();
+            Closing += StreamingWindow_Closing;
         }
 
         private void btnStartRecording_Click(object sender, RoutedEventArgs e) {
@@ -33,7 +34,7 @@ namespace Zvonko {
         }
 
         private void Timer_Countdown(object sender, EventArgs e) {
-            if (countdownSeconds > 0) {
+            if (countdownSeconds >= 0) {
                 if (countdownSeconds == 0) {
                     StartRecording();
                 }
@@ -93,7 +94,11 @@ namespace Zvonko {
             waveIn = new WaveIn();
             waveIn.WaveFormat = new WaveFormat(44100, 1);
             waveIn.DataAvailable += WaveIn_DataAvailable;
-            bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
+
+            
+            int bufferSize = 44100 * 2 * 120;
+            bufferedWaveProvider = new BufferedWaveProvider (waveIn.WaveFormat);
+            bufferedWaveProvider.BufferDuration = TimeSpan.FromSeconds (bufferSize/(double)waveIn.WaveFormat.AverageBytesPerSecond);
         }
 
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e) {
@@ -103,6 +108,19 @@ namespace Zvonko {
                 } catch (InvalidOperationException ex) {
                     Console.WriteLine("Buffer full: " + ex.Message);
                 }
+            }
+        }
+
+        private void StreamingWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            if (isRecording || (bufferedWaveProvider != null && bufferedWaveProvider.BufferedDuration.TotalSeconds > 0)) {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to stop the current action?", "Confirm Action", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.No) {
+                    e.Cancel = true;
+                } else {
+                    StopRecording();
+                }
+            } else {
+                StopRecording();
             }
         }
     }
