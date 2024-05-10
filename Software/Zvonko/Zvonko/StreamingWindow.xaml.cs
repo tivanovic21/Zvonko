@@ -53,6 +53,8 @@ namespace Zvonko {
                 btnStartRecording.IsEnabled = false;
                 btnStopRecording.IsEnabled = true;
                 btnStream.IsEnabled = false;
+
+                progressBar.Value = 0;
             }
         }
 
@@ -67,6 +69,8 @@ namespace Zvonko {
             btnStartRecording.IsEnabled = true;
             btnStopRecording.IsEnabled = false;
             btnStream.IsEnabled = true;
+
+            progressBar.Value = 0;
         }
 
         private void btnStopRecording_Click(object sender, RoutedEventArgs e) {
@@ -105,6 +109,9 @@ namespace Zvonko {
             if (isRecording) {
                 try {
                     bufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+
+                    double percentageFilled = (bufferedWaveProvider.BufferedDuration.TotalSeconds / bufferedWaveProvider.BufferDuration.TotalSeconds) * 100;
+                    progressBar.Value = percentageFilled;
                 } catch (InvalidOperationException ex) {
                     Console.WriteLine("Buffer full: " + ex.Message);
                 }
