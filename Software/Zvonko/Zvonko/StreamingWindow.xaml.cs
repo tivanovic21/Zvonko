@@ -7,19 +7,22 @@ using NAudio.Wave;
 namespace Zvonko {
     public partial class StreamingWindow : Window {
         private DispatcherTimer timer;
+        private DispatcherTimer streamingTimer;
+
         private bool isRecording = false;
         private int countdownSeconds;
         private WaveIn waveIn;
         private WaveOut waveOut;
         private BufferedWaveProvider bufferedWaveProvider;
+        private TimeSpan recordingDuration = TimeSpan.Zero;
 
         public StreamingWindow() {
             InitializeComponent();
-            InitializeTimer();
             Closing += StreamingWindow_Closing;
         }
 
         private void btnStartRecording_Click(object sender, RoutedEventArgs e) {
+            InitializeTimer();
             StartCountdown();
             InitializeWaveIn();
         }
@@ -47,6 +50,10 @@ namespace Zvonko {
         }
 
         private void StartRecording() {
+            recordingDuration = TimeSpan.Zero;
+            progressBar.Visibility = Visibility.Visible;
+            lblDuration.Visibility = Visibility.Visible;
+
             if (!isRecording) {
                 waveIn.StartRecording();
                 isRecording = true;
@@ -62,16 +69,23 @@ namespace Zvonko {
             if (isRecording) {
                 waveIn.StopRecording();
                 isRecording = false;
-            }else {
+                progressBar.Visibility = Visibility.Hidden;
+
+            } else if (waveOut != null) {
                 waveOut.Stop();
                 isRecording = false;
+
+                recordingDuration = TimeSpan.Zero;
+                lblDuration.Content = "Duration: 00:00";
             }
+
             btnStartRecording.IsEnabled = true;
             btnStopRecording.IsEnabled = false;
             btnStream.IsEnabled = true;
 
             progressBar.Value = 0;
         }
+
 
         private void btnStopRecording_Click(object sender, RoutedEventArgs e) {
             StopRecording();
@@ -85,6 +99,13 @@ namespace Zvonko {
                 btnStartRecording.IsEnabled = false;
                 btnStopRecording.IsEnabled = true;
                 btnStream.IsEnabled = false;
+
+                //progressBar
+                recordingDuration = bufferedWaveProvider.BufferedDuration;
+                streamingTimer = new DispatcherTimer();
+                streamingTimer.Interval = TimeSpan.FromSeconds(1);
+                streamingTimer.Tick += StreamingTimer_Tick;
+                streamingTimer.Start();
             }
         }
 
@@ -99,10 +120,10 @@ namespace Zvonko {
             waveIn.WaveFormat = new WaveFormat(44100, 1);
             waveIn.DataAvailable += WaveIn_DataAvailable;
 
-            
+
             int bufferSize = 44100 * 2 * 120;
-            bufferedWaveProvider = new BufferedWaveProvider (waveIn.WaveFormat);
-            bufferedWaveProvider.BufferDuration = TimeSpan.FromSeconds (bufferSize/(double)waveIn.WaveFormat.AverageBytesPerSecond);
+            bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
+            bufferedWaveProvider.BufferDuration = TimeSpan.FromSeconds(bufferSize / (double)waveIn.WaveFormat.AverageBytesPerSecond);
         }
 
         private void WaveIn_DataAvailable(object sender, WaveInEventArgs e) {
@@ -110,13 +131,30 @@ namespace Zvonko {
                 try {
                     bufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
 
+                    //progressBar
                     double percentageFilled = (bufferedWaveProvider.BufferedDuration.TotalSeconds / bufferedWaveProvider.BufferDuration.TotalSeconds) * 100;
                     progressBar.Value = percentageFilled;
+
+                    //timer
+                    recordingDuration = recordingDuration.Add(TimeSpan.FromSeconds(e.BytesRecorded / (double)waveIn.WaveFormat.AverageBytesPerSecond));
+                    lblDuration.Content = "Duration: " + recordingDuration.ToString(@"mm\:ss");
+
                 } catch (InvalidOperationException ex) {
                     Console.WriteLine("Buffer full: " + ex.Message);
                 }
             }
         }
+
+        private void StreamingTimer_Tick(object sender, EventArgs e) {
+            if (recordingDuration >= TimeSpan.Zero) {
+                lblDuration.Content = "Duration: " + recordingDuration.ToString(@"mm\:ss");
+                recordingDuration = recordingDuration.Subtract(TimeSpan.FromSeconds(1));
+            } else {
+                StopRecording();
+                streamingTimer.Stop();
+            }
+        }
+
 
         private void StreamingWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
             if (isRecording || (bufferedWaveProvider != null && bufferedWaveProvider.BufferedDuration.TotalSeconds > 0)) {
