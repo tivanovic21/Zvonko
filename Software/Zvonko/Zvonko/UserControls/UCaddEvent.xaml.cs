@@ -22,12 +22,15 @@ namespace Zvonko.UserControls {
     /// </summary>
     public partial class UCaddEvent : UserControl {
         private string selectedDays = null;
+        private Account _loggedAccount;
         
         private DateTime? nonReccuringEventDate = null;
-        public UCaddEvent() {
+        public UCaddEvent(Account loggedAccount) {
             InitializeComponent();
             GetAllRecordings();
             DefineDataGridColumns();
+
+            _loggedAccount = loggedAccount;
         }
 
         private /*async*/ void GetAllRecordings() {
@@ -160,7 +163,7 @@ namespace Zvonko.UserControls {
             Recording selectedRecording = GetSelectedRecording();
             if(selectedRecording != null)
             {
-                UpdateSound updateSound = new UpdateSound(selectedRecording);
+                UpdateSound updateSound = new UpdateSound(selectedRecording, _loggedAccount);
                 updateSound.ShowDialog();
             } else
             {
@@ -175,8 +178,12 @@ namespace Zvonko.UserControls {
             {
                 RecordingService recordingService = new RecordingService();
                 bool success = recordingService.RemoveRecording(selectedRecording);
-                if (success) MessageBox.Show("Recording successfully deleted!");
-                else MessageBox.Show("There was an error in deleted selected recording!");
+                if (success)
+                {
+                    MessageBox.Show("Recording successfully removed!");
+                    GetAllRecordings();
+                }
+                else MessageBox.Show("There was an error in removing selected recording!");
             } else
             {
                 MessageBox.Show("You need to select a recording!");

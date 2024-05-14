@@ -52,7 +52,7 @@ namespace DatabaseLayer.Repositories {
             recording.storedFile = selectedRecording.storedFile;
             recording.timeCreated = selectedRecording.timeCreated;
             recording.description = selectedRecording.description;
-            recording.Account = selectedRecording.Account;
+
             if (saveChanges)
             {
                 return SaveChanges();
