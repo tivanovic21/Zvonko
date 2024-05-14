@@ -122,15 +122,27 @@ namespace Zvonko.UserControls
                 Directory.CreateDirectory(soundsDir);
             }
 
-            string filePath = Path.Combine(soundsDir, soundName);
+            string fileName = Path.GetFileNameWithoutExtension(soundName);
+            if (!fileName.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase))
+            {
+                fileName += ".mp3";
+            }
+
+            string filePath = Path.Combine(soundsDir, fileName);
 
             try
             {
+                if (File.Exists(filePath))
+                {
+                    MessageBox.Show("A file with the same name already exists. Please choose a different name.");
+                    return;
+                }
+
                 File.WriteAllBytes(filePath, _storedFile);
 
                 Recording newRecording = new Recording
                 {
-                    name = soundName,
+                    name = fileName,
                     duration = TimeSpan.Parse(soundDuration),
                     description = eventType,
                     timeCreated = DateTime.Now.ToString(),
