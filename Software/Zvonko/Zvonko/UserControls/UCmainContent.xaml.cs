@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,17 @@ namespace Zvonko.UserControls {
         public UCmainContent() {
             InitializeComponent();
             DefineDataGridColumns();
+            StartPeriodicTask();
+        }
+        public void StartPeriodicTask() {
+            Task.Run(async () =>
+            {
+                while (true) {
+                    MessageBox.Show("Minute has passed");
+                    PlayEvent();
+                    await Task.Delay(60000); 
+                }
+            });
         }
 
         private void btnOpenCalendar_Click(object sender, RoutedEventArgs e) {
@@ -193,5 +205,27 @@ namespace Zvonko.UserControls {
             }
             dgRecordings.ItemsSource = selectedDayEvents;
         }
+        
+        private void PlayEvent() {
+            var dayOfTheWeek = DateTime.Now.DayOfWeek.ToString();
+            var startingTime = DateTime.Now.TimeOfDay;
+            var date = DateTime.Now.Date;
+            EventService eventService = new EventService();
+            RecordingService recordingService = new RecordingService();
+            var allEvents = eventService.GetAllEvents();
+            foreach( var events in allEvents) {
+                if(events.typeOfEventId == 1) {
+                    if (events.day_of_the_week == dayOfTheWeek && events.starting_time == startingTime) {
+                        recordingService.PlayRecording(events.Recording);
+                    }
+                }
+                if(events.typeOfEventId == 2) {
+                    if(events.date == date && events.starting_time == startingTime) {
+                        recordingService.PlayRecording(events.Recording);
+                    }
+                }
+            }
+        }
+        
     }
 }

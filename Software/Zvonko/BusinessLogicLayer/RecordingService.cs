@@ -1,5 +1,6 @@
 ﻿using DatabaseLayer;
 using DatabaseLayer.Repositories;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,26 @@ namespace BusinessLogicLayer {
                 } else return false;
             }
         }
-        
+
+        public void PlayRecording(Recording recording) {
+            var _waveOut = new WaveOutEvent();
+            if (_waveOut != null) {
+                    StopRecording();
+                }
+                var audioFileReader = new AudioFileReader(recording.storedFile);
+                _waveOut.Init(audioFileReader);
+                _waveOut.Play();
+        }
+
+        private void StopRecording() {
+            var _waveOut = new WaveOutEvent();
+            if (_waveOut != null && _waveOut.PlaybackState == PlaybackState.Playing) {
+                    _waveOut.Stop();
+                    _waveOut.Dispose();
+                    _waveOut = null;
+                }
+            }
+        }
+
     }
-}
+
