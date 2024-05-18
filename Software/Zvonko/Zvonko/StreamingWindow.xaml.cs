@@ -5,6 +5,7 @@ using BusinessLogicLayer;
 
 namespace Zvonko {
     public partial class StreamingWindow : Window {
+        private StreamService streamService = new StreamService();
         private bool isStreaming = false;
         private DispatcherTimer timer;
         private TimeSpan streamingDuration = TimeSpan.Zero;
@@ -24,7 +25,7 @@ namespace Zvonko {
 
         private void StartStreaming() {
             InitializeTimer();
-            StreamService.OnStartStreaming();
+            streamService.OnStartStreaming();
             btnStartStreaming.IsEnabled = false;
             btnStopStreaming.IsEnabled = true;
             isStreaming = true;
@@ -41,7 +42,7 @@ namespace Zvonko {
         }
 
         private void btnStopStreaming_Click(object sender, RoutedEventArgs e) {
-            StreamService.OnStopStreaming();
+            streamService.OnStopStreaming();
             btnStartStreaming.IsEnabled = true;
             btnStopStreaming.IsEnabled = false;
             lblDuration.Visibility = Visibility.Hidden;
@@ -55,7 +56,7 @@ namespace Zvonko {
                 if (result == MessageBoxResult.No) {
                     e.Cancel = true;
                 } else {
-                    StreamService.OnStopStreaming();
+                    streamService.OnStopStreaming();
                 }
             }
         }
