@@ -3,6 +3,8 @@ using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,8 +49,7 @@ namespace Zvonko.UserControls {
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            /*
+      /* private void ButtonResetColor(Button button) {
             foreach (Button button in spButtonDay.Children)
             {
                 button.Background = Brushes.White;
@@ -57,8 +58,9 @@ namespace Zvonko.UserControls {
             Button clickedButton = sender as Button;
             clickedButton.Background = Brushes.LightGray;
             clickedButton.FontWeight = FontWeights.Bold;
-            */
+            
         }
+      */
 
     
 
@@ -74,12 +76,8 @@ namespace Zvonko.UserControls {
                 if(item.monday == true) {
                     mondayEvents.Add(item);
                 }
-                /*
-                var days = "monday";//item.day_of_the_week;
-                if (days.Contains("Monday")) {
-                    mondayEvents.Add(item);
-                }*/
             }
+            
             dgRecordings.ItemsSource = mondayEvents;
         }
 
@@ -88,8 +86,7 @@ namespace Zvonko.UserControls {
             List<Event> tuesdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
-                var days = "monday";// item.day_of_the_week;
-                if (days.Contains("Tuesday")) {
+                if (item.tuesday == true) {
                     tuesdayEvents.Add(item);
                 }
             }
@@ -102,8 +99,7 @@ namespace Zvonko.UserControls {
             List<Event> wednesdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
-                var days = "monday";// item.day_of_the_week;
-                if (days.Contains("Wednesday")) {
+                if (item.wednesday == true) {
                     wednesdayEvents.Add(item);
                 }
             }
@@ -129,8 +125,7 @@ namespace Zvonko.UserControls {
             var alLEvents = eventService.GetAllEvents();
 
             foreach (var item in alLEvents) {
-                var days = "monday";// item.day_of_the_week;
-                if (days.Contains("Thursday")) {
+                if (item.thursday == true) {
                     thursdayEvents.Add(item);
                 }
             }
@@ -143,8 +138,7 @@ namespace Zvonko.UserControls {
             List<Event> saturdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
-                var days = "monday";// item.day_of_the_week;
-                if (days.Contains("Saturday")) {
+                if (item.saturday == true) {
                     saturdayEvents.Add(item);
                 }
             }
@@ -156,8 +150,7 @@ namespace Zvonko.UserControls {
             List<Event> fridayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
-                var days = "monday";// item.day_of_the_week;
-                if (days.Contains("Friday")) {
+                if (item.friday == true) {
                     fridayEvents.Add(item);
                 }
             }
@@ -189,9 +182,15 @@ namespace Zvonko.UserControls {
                 MessageBox.Show("Choose a date you want to load");
                 return;
             }
-
+            List<String> days = new List<String>();
             foreach (var item in alLEvents) {
-                var days = "monday";// item.day_of_the_week;
+                days.Clear();
+                if ((bool)item.monday) days.Add(DayOfWeek.Monday.ToString());
+                if ((bool)item.tuesday) days.Add(DayOfWeek.Tuesday.ToString());
+                if ((bool)item.wednesday) days.Add(DayOfWeek.Wednesday.ToString());
+                if ((bool)item.thursday) days.Add(DayOfWeek.Thursday.ToString());
+                if ((bool)item.friday) days.Add(DayOfWeek.Friday.ToString());
+                if ((bool)item.saturday) days.Add(DayOfWeek.Saturday.ToString());
                 string date = item.date.ToString(); 
                 if (days.Contains(selectedDate.Value.DayOfWeek.ToString()) || date == selectedDate?.ToString()) {
                     selectedDayEvents.Add(item);
@@ -200,26 +199,7 @@ namespace Zvonko.UserControls {
             dgRecordings.ItemsSource = selectedDayEvents;
         }
         
-        private void PlayEvent() {
-            var dayOfTheWeek = DateTime.Now.DayOfWeek.ToString();
-            var startingTime = DateTime.Now.TimeOfDay;
-            var date = DateTime.Now.Date;
-            EventService eventService = new EventService();
-            RecordingService recordingService = new RecordingService();
-            var allEvents = eventService.GetAllEvents();
-            foreach( var events in allEvents) {
-                if(events.typeOfEventId == 1) {
-                    if (/*events.day_of_the_week == dayOfTheWeek &&*/ events.starting_time == startingTime) {
-                        recordingService.PlayRecording(events.Recording);
-                    }
-                }
-                if(events.typeOfEventId == 2) {
-                    if(events.date == date && events.starting_time == startingTime) {
-                        recordingService.PlayRecording(events.Recording);
-                    }
-                }
-            }
-        }
+        
         
     }
 }

@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer {
     public class RecordingService {
 
-        public /*async  Task<*/IEnumerable<Recording> GetAllRecordings() {
+        public IEnumerable<Recording> GetAllRecordings() {
             using (var repo = new RecordingRepository()) {
-                return /*await*/ repo.Get().ToList();
+                return repo.Get().ToList();
             }
         }
+
 
         public IEnumerable<Recording> GetEmergencyRecordings()
         {

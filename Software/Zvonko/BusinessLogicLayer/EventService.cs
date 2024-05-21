@@ -25,7 +25,13 @@ namespace BusinessLogicLayer {
                 return repo.Get().ToList();
             }
     }
-    public bool RemoveEvent(Event eventToRemove) {
+
+        public IEnumerable<Event> GetAllEventsAndRecordings() {
+            using (var repo = new EventRepository()) {
+                return repo.GetRecordingsAndEvents().ToList();
+            }
+        }
+        public bool RemoveEvent(Event eventToRemove) {
             using (var repo = new EventRepository()) {
                 int affectedRows = repo.Remove(eventToRemove, true);
                 return affectedRows > 0;

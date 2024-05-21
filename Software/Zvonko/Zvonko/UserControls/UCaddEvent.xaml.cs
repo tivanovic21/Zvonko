@@ -114,17 +114,6 @@ namespace Zvonko.UserControls {
             timeCreatedColumn.Binding = new Binding("timeCreated");
         }
 
-        /*
-        private string GetSelectedDays() {
-            List<string> selectedDays = new List<string>(); 
-            foreach (var item in spCheckboxDays.Children) {
-                if(item is CheckBox checkBox && checkBox.IsChecked == true) {
-                    selectedDays.Add(checkBox.Content.ToString());
-                }
-            }
-            return string.Join(", ", selectedDays);
-        }
-        */
 
         private void CheckBoxSelectAll_Checked(object sender, RoutedEventArgs e) {
             var checkboxes = GetAllCheckBoxes(spCheckboxDays);
