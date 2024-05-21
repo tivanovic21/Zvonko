@@ -16,9 +16,6 @@ namespace DatabaseLayer
 
         public TimeSpan? starting_time { get; set; }
 
-        [StringLength(500)]
-        public string day_of_the_week { get; set; }
-
         public int? accountId { get; set; }
 
         public int? recordingId { get; set; }
@@ -27,6 +24,20 @@ namespace DatabaseLayer
 
         [Column(TypeName = "date")]
         public DateTime? date { get; set; }
+
+        public bool? monday { get; set; }
+
+        public bool? tuesday { get; set; }
+
+        public bool? wednesday { get; set; }
+
+        public bool? thursday { get; set; }
+
+        public bool? friday { get; set; }
+
+        public bool? saturday { get; set; }
+
+        public bool? sunday { get; set; }
 
         public virtual Account Account { get; set; }
 

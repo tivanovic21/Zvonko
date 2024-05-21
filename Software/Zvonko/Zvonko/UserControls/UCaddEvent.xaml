@@ -31,12 +31,12 @@
             </Grid>
             <StackPanel Orientation="Vertical" Margin="40px 0 0 0" x:Name="spCheckboxDays" Visibility="Visible">
                 <Label  FontWeight="Bold" FontSize="15px"  Margin="15px" VerticalAlignment="Center" HorizontalAlignment="Left">Select the day</Label>
-                <CheckBox Margin="5px">Monday</CheckBox>
-                <CheckBox Margin="5px">Tuesday</CheckBox>
-                <CheckBox Margin="5px">Wednesday</CheckBox>
-                <CheckBox Margin="5px">Thursday</CheckBox>
-                <CheckBox Margin="5px">Friday</CheckBox>
-                <CheckBox Margin="5px">Saturday</CheckBox>
+                <CheckBox x:Name="chkMonday" Margin="5px">Monday</CheckBox>
+                <CheckBox x:Name="chkTuesday" Margin="5px">Tuesday</CheckBox>
+                <CheckBox x:Name="chkWednesday" Margin="5px">Wednesday</CheckBox>
+                <CheckBox x:Name="chkThursday" Margin="5px">Thursday</CheckBox>
+                <CheckBox x:Name="chkFriday" Margin="5px">Friday</CheckBox>
+                <CheckBox x:Name="chkSaturday" Margin="5px">Saturday</CheckBox>
                 <CheckBox Margin="5px" Checked="CheckBoxSelectAll_Checked" Unchecked="CheckBoxSelectAll_Unchecked">Select all days</CheckBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="40px 0 0 0">

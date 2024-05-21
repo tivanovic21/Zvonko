@@ -12,7 +12,7 @@ namespace DatabaseLayer
         {
             Events = new HashSet<Event>();
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int id { get; set; }
 
         [StringLength(200)]
@@ -24,7 +24,7 @@ namespace DatabaseLayer
 
         public string storedFile { get; set; }
 
-        public int AccountId { get; set; }
+        public int? accountId { get; set; }
 
         [StringLength(50)]
         public string timeCreated { get; set; }

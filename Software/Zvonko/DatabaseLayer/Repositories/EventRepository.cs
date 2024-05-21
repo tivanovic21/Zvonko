@@ -12,7 +12,7 @@ namespace DatabaseLayer.Repositories {
                         select e;
             return query.OrderBy(sorted => sorted.starting_time);
         }
-
+        /*
         public override int Add(Event newEvent, bool saveChanges = true) {
             var eventEntity = new Event {
                 name = newEvent.name,
@@ -32,6 +32,7 @@ namespace DatabaseLayer.Repositories {
                 return 0;
             }
         }
+        */
 
         public int Remove(Event eventToRemove, bool saveChanges = true) {
             Entities.Attach(eventToRemove);

@@ -21,7 +21,6 @@ namespace Zvonko.UserControls {
     /// Interaction logic for UCaddEvent.xaml
     /// </summary>
     public partial class UCaddEvent : UserControl {
-        private string selectedDays = null;
         
         private DateTime? nonReccuringEventDate = null;
         public UCaddEvent() {
@@ -52,8 +51,14 @@ namespace Zvonko.UserControls {
             string description = txtDescriptionOfEvent.Text;
             int recordingId = GetSelectedRecording().id;
             int isReoccuring = 0;
+            var monday = chkMonday.IsChecked;
+            var tuesday = chkTuesday.IsChecked;
+            var wednesday = chkWednesday.IsChecked;
+            var thursday = chkThursday.IsChecked;
+            var friday = chkFriday.IsChecked;
+            var saturday = chkSaturday.IsChecked;
+
             if (rbReoccuring.IsChecked == true) {
-                selectedDays = GetSelectedDays();
                 isReoccuring = 1;
             } else if (rbNonReocurring.IsChecked == true) {
                 isReoccuring = 2;
@@ -66,7 +71,12 @@ namespace Zvonko.UserControls {
                     name = name,
                     description = description,
                     starting_time = startingTime,
-                    day_of_the_week = string.Join(", ", selectedDays),
+                    monday = monday,
+                    tuesday = tuesday,
+                    wednesday = wednesday,
+                    thursday = thursday,
+                    friday = friday,
+                    saturday = saturday,
                     accountId = 1,
                     recordingId = recordingId,
                     typeOfEventId = isReoccuring,
@@ -104,6 +114,7 @@ namespace Zvonko.UserControls {
             timeCreatedColumn.Binding = new Binding("timeCreated");
         }
 
+        /*
         private string GetSelectedDays() {
             List<string> selectedDays = new List<string>(); 
             foreach (var item in spCheckboxDays.Children) {
@@ -113,6 +124,7 @@ namespace Zvonko.UserControls {
             }
             return string.Join(", ", selectedDays);
         }
+        */
 
         private void CheckBoxSelectAll_Checked(object sender, RoutedEventArgs e) {
             var checkboxes = GetAllCheckBoxes(spCheckboxDays);
