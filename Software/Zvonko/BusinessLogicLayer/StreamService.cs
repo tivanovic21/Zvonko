@@ -6,6 +6,11 @@ namespace BusinessLogicLayer {
         private WaveIn recorder;
         private BufferedWaveProvider bufferedWaveProvider;
         private WaveOut player;
+        private int delayInMilliseconds;
+
+        public StreamService(TimeSpan delay) {
+            delayInMilliseconds = (int)delay.TotalMilliseconds;
+        }
 
         public void OnStartStreaming() {
             InitializeRecorder();
@@ -16,14 +21,12 @@ namespace BusinessLogicLayer {
         }
 
         private void InitializeRecorder() {
-            recorder = new WaveIn
-            {
-                WaveFormat = new WaveFormat(4800, 1),
+            recorder = new WaveIn {
+                WaveFormat = new WaveFormat(48000, 1),
                 BufferMilliseconds = 100
             };
             recorder.DataAvailable += RecorderOnDataAvailable;
-            bufferedWaveProvider = new BufferedWaveProvider(recorder.WaveFormat)
-            {
+            bufferedWaveProvider = new BufferedWaveProvider(recorder.WaveFormat) {
                 BufferDuration = TimeSpan.FromSeconds(5)
             };
         }
@@ -34,9 +37,15 @@ namespace BusinessLogicLayer {
         }
 
         private void RecorderOnDataAvailable(object sender, WaveInEventArgs waveInEventArgs) {
-            if (bufferedWaveProvider != null) {
-                bufferedWaveProvider.AddSamples(waveInEventArgs.Buffer, 0, waveInEventArgs.BytesRecorded);
+            byte[] buffer = waveInEventArgs.Buffer;
+            int bytesRecorded = waveInEventArgs.BytesRecorded;
+
+            if (bufferedWaveProvider.BufferedDuration.TotalMilliseconds < delayInMilliseconds) {
+                byte[] silence = new byte[bytesRecorded];
+                bufferedWaveProvider.AddSamples(silence, 0, silence.Length);
             }
+
+            bufferedWaveProvider.AddSamples(buffer, 0, bytesRecorded);
         }
 
         public void OnStopStreaming() {
@@ -57,6 +66,3 @@ namespace BusinessLogicLayer {
         }
     }
 }
-
-
-

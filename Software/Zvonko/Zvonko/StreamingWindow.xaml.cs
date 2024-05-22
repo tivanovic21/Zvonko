@@ -5,13 +5,15 @@ using BusinessLogicLayer;
 
 namespace Zvonko {
     public partial class StreamingWindow : Window {
-        private StreamService streamService = new StreamService();
+        private StreamService streamService;
         private bool isStreaming = false;
         private DispatcherTimer timer;
         private TimeSpan streamingDuration = TimeSpan.Zero;
+        private TimeSpan delay = TimeSpan.FromSeconds(2);
 
         public StreamingWindow() {
             InitializeComponent();
+            streamService = new StreamService(delay);
             Closing += StreamingWindow_Closing;
         }
 
