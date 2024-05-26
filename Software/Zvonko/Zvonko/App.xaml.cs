@@ -44,7 +44,6 @@ namespace Zvonko
                 if ((bool)events.thursday) days.Add(DayOfWeek.Thursday.ToString());
                 if ((bool)events.friday) days.Add(DayOfWeek.Friday.ToString());
                 if ((bool)events.saturday) days.Add(DayOfWeek.Saturday.ToString());
-                Console.WriteLine("Days for event:");
                 foreach (var day in days) {
                     if (events.typeOfEventId == 1 && day.Contains(dayOfTheWeek.ToString()) && CompareTimeSpan(events.starting_time, startingTime )) {
                         recordingService.PlayRecording(events.Recording);
