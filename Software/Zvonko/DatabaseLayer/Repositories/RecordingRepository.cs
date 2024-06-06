@@ -34,7 +34,8 @@ namespace DatabaseLayer.Repositories {
                 storedFile = newRecording.storedFile,
                 timeCreated = newRecording.timeCreated,
                 description = newRecording.description,
-                accountId = null//newRecording.Account
+                Account = newRecording.Account
+                //accountId = null//newRecording.Account
             };
 
             Entities.Add(recording);
