@@ -54,6 +54,7 @@ namespace Zvonko.UserControls
             var selectedSound = cbEmergency.SelectedItem as Recording;
             if (selectedSound != null)
             {
+                MessageBox.Show(selectedSound.name + " , " + selectedSound.storedFile.ToString());
                 MessageBoxResult result = MessageBox.Show("Are you sure you want to play an emergency sound?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -86,21 +87,20 @@ namespace Zvonko.UserControls
 
         private void PlayRecording(Recording recording)
         {
-            try
+            if(_waveOut != null)
             {
-                if(_waveOut != null)
-                {
-                    StopRecording();
-                }
+                StopRecording();
+            }
 
+            if (File.Exists(recording.storedFile))
+            {
                 _waveOut = new WaveOutEvent();
                 var audioFileReader = new AudioFileReader(recording.storedFile);
                 _waveOut.Init(audioFileReader);
                 _waveOut.Play();
-
-            } catch (Exception ex)
+            } else
             {
-                MessageBox.Show("Error in playing recording: " + ex.Message);
+                MessageBox.Show("File not found!");
             }
         }
 
