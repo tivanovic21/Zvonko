@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 
 namespace DatabaseLayer {
-    public partial class ZvonkoModel : DbContext {
-        public ZvonkoModel()
-            : base("name=ZvonkoModel5") {
+    public partial class ZvonkoModel9 : DbContext {
+        public ZvonkoModel9()
+            : base("name=ZvonkoModel9") {
         }
 
         public virtual DbSet<Account> Accounts { get; set; }

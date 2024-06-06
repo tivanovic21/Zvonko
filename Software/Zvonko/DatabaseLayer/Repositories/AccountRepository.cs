@@ -8,7 +8,7 @@ namespace DatabaseLayer.Repositories
 {
     public class AccountRepository: Repository<Account>
     {
-        public AccountRepository(): base(new ZvonkoModel())
+        public AccountRepository(): base(new ZvonkoModel9())
         {
             
         }

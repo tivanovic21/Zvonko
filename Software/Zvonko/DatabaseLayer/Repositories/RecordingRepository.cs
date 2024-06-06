@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseLayer.Repositories {
     public class RecordingRepository : Repository<Recording> {
-        public RecordingRepository() : base(new ZvonkoModel()) {
+        public RecordingRepository() : base(new ZvonkoModel9()) {
 
         }
         public /*async Task<*/IEnumerable<Recording> Get() {
@@ -27,14 +27,14 @@ namespace DatabaseLayer.Repositories {
         
         public override int Add(Recording newRecording, bool saveChanges = true)
         {
-            var recording = new Recording
-            {
+            var recording = new Recording {
+                id = newRecording.id,
                 name = newRecording.name,
                 duration = newRecording.duration,
                 storedFile = newRecording.storedFile,
                 timeCreated = newRecording.timeCreated,
                 description = newRecording.description,
-                Account = newRecording.Account
+                accountId = null//newRecording.Account
             };
 
             Entities.Add(recording);
@@ -42,6 +42,21 @@ namespace DatabaseLayer.Repositories {
             {
                 return SaveChanges();
             } else return 0;
+        }
+
+
+        public override int Remove(Recording recordingToRemove, bool saveChanges = true) {
+            var foreignKeyEvents = Context.Events.Where(e => e.recordingId == recordingToRemove.id);
+            foreach(var foreignKeyEvent in foreignKeyEvents) {
+                foreignKeyEvent.recordingId = null;
+            }
+            Entities.Attach(recordingToRemove);
+            Entities.Remove(recordingToRemove);
+            if (saveChanges) {
+                return SaveChanges();
+            } else {
+                return 0;
+            }
         }
 
         public override int Update(Recording selectedRecording, bool saveChanges = true)

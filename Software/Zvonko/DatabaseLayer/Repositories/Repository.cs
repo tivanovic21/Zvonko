@@ -9,10 +9,10 @@ namespace DatabaseLayer.Repositories
 {
     public abstract class Repository<T> : IDisposable where T : class
     {
-        public ZvonkoModel Context { get; set; }
+        public ZvonkoModel9 Context { get; set; }
         public DbSet<T> Entities { get; set; }
 
-        public Repository(ZvonkoModel context)
+        public Repository(ZvonkoModel9 context)
         {
             Context = context;
             Entities = Context.Set<T>();

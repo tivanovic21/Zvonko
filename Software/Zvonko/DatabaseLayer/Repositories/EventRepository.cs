@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DatabaseLayer.Repositories {
     public class EventRepository : Repository<Event> {
-        public EventRepository() : base(new ZvonkoModel()) {
+        public EventRepository() : base(new ZvonkoModel9()) {
 
         }
 
