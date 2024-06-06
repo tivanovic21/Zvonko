@@ -21,7 +21,9 @@ namespace Zvonko.UserControls {
     /// Interaction logic for UCaddEvent.xaml
     /// </summary>
     public partial class UCaddEvent : UserControl {
-        
+
+        private Account _loggedAccount;
+
         private DateTime? nonReccuringEventDate = null;
         public UCaddEvent(Account loggedAccount) {
             InitializeComponent();
