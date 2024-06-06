@@ -147,7 +147,7 @@ namespace Zvonko.UserControls
                     description = eventType,
                     timeCreated = DateTime.Now.ToString(),
                     storedFile = filePath,
-                    Account = loggedUser
+                    AccountId = loggedUser.id
                 };
 
                 bool isAdded = recordingService.AddRecording(newRecording);
