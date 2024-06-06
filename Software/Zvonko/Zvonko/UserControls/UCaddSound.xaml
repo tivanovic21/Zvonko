@@ -19,8 +19,8 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20">
                 <Button Margin="10px" x:Name="btnChooseSound" Click="btnChooseSound_Click" Height="25px" Background="White" Width="200px" BorderThickness="0px" HorizontalAlignment="Left" VerticalAlignment="Center">Choose a sound</Button>
-                <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundName" IsReadOnly="True" Height="25"/>
-                <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundLength" Height="25" />
+                <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundName" IsReadOnly="False" Height="25"/>
+                <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundLength" Height="25" IsReadOnly="True" />
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20px">
                     <RadioButton Content="Yes" x:Name="radioYes" GroupName="EventType" Margin="0, 0, 10, 10"/>
                     <RadioButton Content="No" x:Name="radioNo" GroupName="EventType" Margin="10, 0, 0, 10"/>

@@ -53,7 +53,7 @@ namespace Zvonko
 
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
-            UCaddEvent uCaddEvent = new UCaddEvent();
+            UCaddEvent uCaddEvent = new UCaddEvent(LoggedUser);
             contentPanel.Content = uCaddEvent;
         }
 
