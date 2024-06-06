@@ -54,7 +54,6 @@ namespace Zvonko.UserControls
             var selectedSound = cbEmergency.SelectedItem as Recording;
             if (selectedSound != null)
             {
-                MessageBox.Show(selectedSound.name + " , " + selectedSound.storedFile.ToString());
                 MessageBoxResult result = MessageBox.Show("Are you sure you want to play an emergency sound?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -92,10 +91,12 @@ namespace Zvonko.UserControls
                 StopRecording();
             }
 
-            if (File.Exists(recording.storedFile))
+            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, recording.storedFile.TrimStart('\\'));
+            MessageBox.Show($"Fullpath to file: {fullPath}");
+            if (File.Exists(fullPath))
             {
                 _waveOut = new WaveOutEvent();
-                var audioFileReader = new AudioFileReader(recording.storedFile);
+                var audioFileReader = new AudioFileReader(fullPath);
                 _waveOut.Init(audioFileReader);
                 _waveOut.Play();
             } else
