@@ -1,7 +1,16 @@
 using AcceptanceTests.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Interfaces;
+using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
+using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Automation;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTests.StepDefinitions
@@ -71,6 +80,54 @@ namespace AcceptanceTests.StepDefinitions
             var driver = GuiDriver.GetDriver();
             var lblMainContent = driver.FindElementByName("Day you entered:");
             Assert.IsNotNull(lblMainContent, "Main content is not displayed");
+        }
+
+        [When(@"I click the Choose a sound button")]
+        public void WhenIClickTheChooseASoundButton()
+        {
+            var driver = GuiDriver.GetDriver();
+            var btnChooseSound = driver.FindElementByAccessibilityId("btnChooseSound");
+            btnChooseSound.Click();
+        }
+
+        [When(@"The file dialog is open")]
+        public void TheFileDialogIsOpen()
+        {
+            var driver = GuiDriver.GetDriver();
+            bool isFileDialogOpened = driver.FindElementByName("Otvori") != null;
+            Assert.IsTrue(isFileDialogOpened);
+        }
+
+        [When(@"I choose a sound with name (.*)")]
+        public void WhenIChooseASoundFromFileDialog(string soundName)
+        {
+            var driver = GuiDriver.GetDriver();
+            var file = driver.FindElementByName(soundName.Replace(".mp3", ""));
+            file.Click();
+        }
+
+        [When(@"I click the Open button")]  
+        public void WhenIClickTheOpenButton()
+        {
+            var driver = GuiDriver.GetDriver();
+            var fileDialog = driver.FindElementByName("Otvori");
+            if (fileDialog != null)
+            {
+                // Press Enter because Open button has the same name as fileDialog
+                Actions action = new Actions(driver);
+                action.SendKeys(fileDialog, OpenQA.Selenium.Keys.Enter).Perform();
+            }
+        }
+
+        [Then(@"I should see the selected file information on my screen")]
+        public void ThenIShouldSeeTheSelectedFileInformationOnMyScreen()
+        {
+            var driver = GuiDriver.GetDriver();
+            var txtSoundName = driver.FindElementByAccessibilityId("txtSoundName");
+            var txtSoundLength = driver.FindElementByAccessibilityId("txtSoundLength");
+
+            Assert.IsFalse(string.IsNullOrEmpty(txtSoundName.Text), "Sound name is not displayed");
+            Assert.IsFalse(string.IsNullOrEmpty(txtSoundLength.Text), "Sound length is not displayed");
         }
 
     }

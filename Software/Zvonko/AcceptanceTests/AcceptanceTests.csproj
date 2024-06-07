@@ -19,4 +19,16 @@
     <Folder Include="Features\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\DatabaseLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\EntitiesLayer\EntitiesLayer.csproj" />
+    <ProjectReference Include="..\Zvonko\PresentationLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="UIAutomationClient" />
+  </ItemGroup>
+
 </Project>

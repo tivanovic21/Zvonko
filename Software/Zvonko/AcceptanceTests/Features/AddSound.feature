@@ -13,3 +13,16 @@ Scenario: Cancel Adding A Sound
 	Given I am logged in and on a Add New Sound screen
 	When I click the Cancel button
 	Then I should see the main window
+
+Scenario: Load Sound File
+	Given I am logged in and on a Add New Sound screen
+	When I click the Choose a sound button
+	And The file dialog is open
+	And I choose a sound with name <soundName>
+	And I click the Open button
+	Then I should see the selected file information on my screen
+
+	Examples: 
+	| soundName               |
+	| Intro Sound effects.mp3 |
+
