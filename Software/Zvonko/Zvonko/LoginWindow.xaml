@@ -11,20 +11,23 @@
             <Label FontSize="25px" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 25">Zvonko</Label>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Label Content="Username:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBox BorderThickness="0px 0px 0px 1px" Name="txtUsername" Margin="0,0,5,0" Width="200"/>
+                <TextBox BorderThickness="0px 0px 0px 1px" Name="txtUsername" Margin="0,0,5,0" Width="200" AutomationProperties.AutomationId="txtUsername"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Label Content="Password:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <PasswordBox BorderThickness="0px 0px 0px 1px" Name="txtPassword" Margin="0,0,5,0" Width="200"/>
+                <PasswordBox BorderThickness="0px 0px 0px 1px" Name="txtPassword" Margin="0,0,5,0" Width="200" AutomationProperties.AutomationId="txtPassword"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                <Button x:Name="btnLogin" Content="LOGIN" Margin="5" Width="100" Height="30" Background="Black" Foreground="White" Click="btnLogin_Click"/>
+                <Button x:Name="btnLogin" Content="LOGIN" Margin="5" Width="100" Height="30" Background="Black" Foreground="White" Click="btnLogin_Click" AutomationProperties.AutomationId="btnLogin"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
                 <TextBlock>
                     Don't have an account? 
                     <Hyperlink Foreground="blue" Click="Hyperlink_Click">Register here!</Hyperlink>
                 </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Name="txtErrorMessage" Foreground="Red" Visibility="Collapsed" AutomationProperties.AutomationId="lblErrorMessage"/>
             </StackPanel>
         </StackPanel>
     </Grid>

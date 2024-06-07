@@ -31,5 +31,51 @@ namespace AcceptanceTests.StepDefinitions
             bool isCorrentTitle = driver.Title == "Zvonko - Login";
             Assert.IsTrue(isWindowOpened && isCorrentTitle);
         }
+
+        [Given(@"I am on the login form")]
+        public void GivenIAmOnTheLoginForm()
+        {
+            var driver = GuiDriver.GetOrCreateDriver();
+        }
+
+        [When(@"I enter username (.*) and password (.*)")]
+        public void WhenIEnterUsernameAndPassword(string username, string password)
+        {
+            var driver = GuiDriver.GetDriver();
+            var txtUsername = driver.FindElementByAccessibilityId("txtUsername");
+            var txtPassword = driver.FindElementByAccessibilityId("txtPassword");
+
+            txtUsername.SendKeys(username);
+            txtPassword.SendKeys(password);
+        }
+
+        [When(@"I click on the Login button")]
+        public void WhenIClickOnTheLoginButton()
+        {
+            var driver = GuiDriver.GetDriver();
+            var btnLogin = driver.FindElementByAccessibilityId("btnLogin");
+            btnLogin.Click();
+        }
+
+        [Then(@"I should see (.*) error message")]
+        public void ThenIShouldSeeErrorMessage(string expectedMessage)
+        {
+            var driver = GuiDriver.GetDriver();
+            var lblErrorMessage = driver.FindElementByAccessibilityId("lblErrorMessage");
+            var actualMessage = lblErrorMessage.Text;
+            Assert.AreEqual(actualMessage, expectedMessage);
+        }
+
+        [Then(@"I should be redirected to main window")]
+        public void ThenIShouldBeRedirectedToMainWindow()
+        {
+            var driver = GuiDriver.GetDriver();
+            driver.SwitchTo().Window(driver.WindowHandles.First());
+            bool isWindowOpened = driver.FindElementByName("Zvonko - Main") != null;
+            bool isCorrentTitle = driver.Title == "Zvonko - Main";
+            Assert.IsTrue(isWindowOpened && isCorrentTitle);
+        }
+
+
     }
 }
