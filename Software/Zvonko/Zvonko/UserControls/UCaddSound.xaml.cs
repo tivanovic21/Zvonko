@@ -134,6 +134,7 @@ namespace Zvonko.UserControls
             {
                 if (File.Exists(filePath))
                 {
+                    ClearSuccess();
                     MessageBox.Show("A file with the same name already exists. Please choose a different name.");
                     return;
                 }
@@ -153,15 +154,29 @@ namespace Zvonko.UserControls
                 bool isAdded = recordingService.AddRecording(newRecording);
                 if (isAdded)
                 {
-                    MessageBox.Show("Sound successfully added!");
+                    SetSuccess("Success!");
+                    //MessageBox.Show("Sound successfully added!", "Success");
                 } else
                 {
+                    ClearSuccess();
                     MessageBox.Show("Error while adding sound. Please try again.");
                 }
             } catch (Exception ex)
             {
+                ClearSuccess();
                 MessageBox.Show("Error while saving sound: " + ex.Message);
             }
+        }
+        private void SetSuccess(string errMessage)
+        {
+            txtSuccessMessage.Text = errMessage;
+            txtSuccessMessage.Visibility = Visibility.Visible;
+        }
+
+        private void ClearSuccess()
+        {
+            txtSuccessMessage.Text = "";
+            txtSuccessMessage.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -22,15 +22,18 @@
                 <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundName" IsReadOnly="False" Height="25" AutomationProperties.AutomationId="txtSoundName"/>
                 <TextBox BorderThickness="0px 0px 0px 1px" VerticalAlignment="Bottom" Margin="10px" x:Name="txtSoundLength" Height="25" IsReadOnly="True" AutomationProperties.AutomationId="txtSoundLength"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20px">
-                    <RadioButton Content="Yes" x:Name="radioYes" GroupName="EventType" Margin="0, 0, 10, 10"/>
-                    <RadioButton Content="No" x:Name="radioNo" GroupName="EventType" Margin="10, 0, 0, 10"/>
+                    <RadioButton Content="Yes" x:Name="radioYes" GroupName="EventType" Margin="0, 0, 10, 10" AutomationProperties.AutomationId="rbYes"/>
+                    <RadioButton Content="No" x:Name="radioNo" GroupName="EventType" Margin="10, 0, 0, 10" AutomationProperties.AutomationId="rbNo"/>
                 </StackPanel>
 
             </StackPanel>
         </StackPanel>
         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-            <Button Content="Save" Width="100" Margin="25" x:Name="btnSave" Click="btnSave_Click" Background="White" BorderThickness="0px" Height="40px"/>
+            <Button Content="Save" Width="100" Margin="25" x:Name="btnSave" Click="btnSave_Click" Background="White" BorderThickness="0px" Height="40px" AutomationProperties.AutomationId="btnSave"/>
             <Button Content="Cancel" Width="100" Margin="25" x:Name="btnCancel" Click="btnCancel_Click" Background="White" BorderThickness="0px" AutomationProperties.AutomationId="btnCancel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+            <TextBlock Name="txtSuccessMessage" Foreground="Green" Visibility="Collapsed" AutomationProperties.AutomationId="lblSuccessMessage"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
