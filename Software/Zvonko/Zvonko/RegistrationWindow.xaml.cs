@@ -32,7 +32,6 @@ namespace Zvonko
         {
             if (RegisterNewUser())
             {
-                MessageBox.Show("Registration successfull! Please log in.");
                 LoginWindow loginWindow = new LoginWindow();
                 this.Close();
                 loginWindow.Show();

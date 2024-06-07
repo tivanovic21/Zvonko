@@ -1,5 +1,7 @@
 using AcceptanceTests.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -80,6 +82,17 @@ namespace AcceptanceTests.StepDefinitions
             var actualMessage = lblErrorMessage.Text;
             Assert.AreEqual(actualMessage, expectedMessage);
         }
+
+        [Then(@"I should be redirected to the login screen")]
+        public void ThenIShouldBeRedirectedToTheLoginScreen()
+        {
+            var driver = GuiDriver.GetDriver();
+            driver.SwitchTo().Window(driver.WindowHandles.First());
+            bool isWindowOpened = driver.FindElementByName("Zvonko - Login") != null;
+            bool isCorrentTitle = driver.Title == "Zvonko - Login";
+            Assert.IsTrue(isWindowOpened && isCorrentTitle);
+        }
+
 
     }
 }

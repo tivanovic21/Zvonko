@@ -25,3 +25,13 @@ Scenario Outline: Invalid Registration
 	| dev      | dev      |            | Fill out all fields! |
 	| dev      |          | dev        | Fill out all fields! |
 	|          | dev      | dev        | Fill out all fields! |
+
+Scenario: Valid Registration
+	Given I am on the Registration screen
+	When I enter registration details username <username>, password <password> and school name <schoolName>
+	And I click on the Register button
+	Then I should be redirected to the login screen
+
+	Examples:
+	| username | password | schoolName |
+	| testUser | testPass | testSchool |  
