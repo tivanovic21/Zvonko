@@ -28,10 +28,58 @@ namespace AcceptanceTests.StepDefinitions
         public void ThenIShouldSeeTheRegistrationWindow()
         {
             var driver = GuiDriver.GetDriver();
+            if (driver == null) GuiDriver.GetOrCreateDriver();
+
             driver.SwitchTo().Window(driver.WindowHandles.First());
             bool isWindowOpened = driver.FindElementByName("Zvonko - Register") != null;
             bool isCorrentTitle = driver.Title == "Zvonko - Register";
             Assert.IsTrue(isWindowOpened && isCorrentTitle);
         }
+
+        [Given(@"I am on the Registration screen")]
+        public void GivenIAmOnTheRegistrationScreen()
+        {
+            var driver = GuiDriver.GetOrCreateDriver();
+            driver.SwitchTo().Window(driver.WindowHandles.First());
+            if(driver.Title != "Zvonko - Register")
+            {
+                GivenIAmOnTheLoginScreen();
+                GivenIPressTheRegisterHereHyperLink();
+                ThenIShouldSeeTheRegistrationWindow();
+            }
+        }
+
+        [When(@"I enter registration details username (.*), password (.*) and school name (.*)")]
+        public void WhenIEnterUsernameAndPasswordAndSchoolName(string username, string password, string schoolName)
+        {
+            var driver = GuiDriver.GetDriver();
+            if(driver == null) driver = GuiDriver.GetOrCreateDriver();
+
+            var txtUsername = driver.FindElementByAccessibilityId("txtUsername");
+            var txtPassword = driver.FindElementByAccessibilityId("txtPassword");
+            var txtSchoolName = driver.FindElementByAccessibilityId("txtSchoolName");
+
+            txtUsername.SendKeys(username);
+            txtPassword.SendKeys(password);
+            txtSchoolName.SendKeys(schoolName);
+        }
+
+        [When(@"I click on the Register button")]
+        public void WhenIClickOnTheRegisterButton()
+        {
+            var driver = GuiDriver.GetDriver();
+            var btnRegister = driver.FindElementByAccessibilityId("btnRegister");
+            btnRegister.Click();
+        }
+
+        [Then(@"I should see (.*) error message in registration")]
+        public void ThenIShouldSeeFillOutAllFieldsErrorMessageForRegistration(string expectedMessage)
+        {
+            var driver = GuiDriver.GetDriver();
+            var lblErrorMessage = driver.FindElementByAccessibilityId("lblErrorMessage");
+            var actualMessage = lblErrorMessage.Text;
+            Assert.AreEqual(actualMessage, expectedMessage);
+        }
+
     }
 }

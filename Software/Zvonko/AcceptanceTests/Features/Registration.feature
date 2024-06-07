@@ -9,3 +9,19 @@ Scenario: Register From Display
 	Given I am on the Login screen
 	And I press the Register here hyper link
 	Then I should see the registration window
+
+Scenario Outline: Invalid Registration
+	Given I am on the Registration screen
+	When I enter registration details username <username>, password <password> and school name <schoolName>
+	And I click on the Register button
+	Then I should see <message> error message in registration
+
+	Examples:
+	| username | password | schoolName | message              |
+	|          |          |            | Fill out all fields! |
+	| dev      |          |            | Fill out all fields! |
+	|          | dev      |            | Fill out all fields! |
+	|          |          | dev        | Fill out all fields! |
+	| dev      | dev      |            | Fill out all fields! |
+	| dev      |          | dev        | Fill out all fields! |
+	|          | dev      | dev        | Fill out all fields! |
