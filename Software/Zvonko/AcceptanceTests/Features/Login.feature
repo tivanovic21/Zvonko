@@ -19,5 +19,11 @@ Scenario Outline: Invalid Credentials
 	|             |             | Fill out all fields! |
 	| invalidUser | invalidPass | User not found!      |
 	| invalidUser |             | User not found!      |
-	|             | invalidPass | User not found!      |
+	|             | dev         | User not found!      |
 	| dev         |             | Invalid credentials! |
+
+Scenario: Valid Credentials
+	Given I am on the login form
+	When I enter username dev and password dev
+	And I click on the Login button
+	Then I should be redirected to main window

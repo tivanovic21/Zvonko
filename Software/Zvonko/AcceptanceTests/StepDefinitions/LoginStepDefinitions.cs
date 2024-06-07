@@ -66,5 +66,16 @@ namespace AcceptanceTests.StepDefinitions
             Assert.AreEqual(actualMessage, expectedMessage);
         }
 
+        [Then(@"I should be redirected to main window")]
+        public void ThenIShouldBeRedirectedToMainWindow()
+        {
+            var driver = GuiDriver.GetDriver();
+            driver.SwitchTo().Window(driver.WindowHandles.First());
+            bool isWindowOpened = driver.FindElementByName("Zvonko - Main") != null;
+            bool isCorrentTitle = driver.Title == "Zvonko - Main";
+            Assert.IsTrue(isWindowOpened && isCorrentTitle);
+        }
+
+
     }
 }
