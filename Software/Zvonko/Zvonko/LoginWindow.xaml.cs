@@ -36,17 +36,21 @@ namespace Zvonko {
 
             if (!authServices.ValidateInput(username, password))
             {
-                MessageBox.Show("Please fill out all fields.");
+                SetError("Fill out all fields!");
+                //MessageBox.Show("Please fill out all fields.");
             } else
             {
+                ClearError();
                 var account = accountService.GetAccount(username);
                 if (account == null)
                 {
-                    MessageBox.Show("Invalid credentials. Please try again!");
+                    SetError("User not found!");
+                    //MessageBox.Show("User not found!", "User not found!");
                 }
 
                 if (account != null)
                 {
+                    ClearError();
                     bool checkPass = authServices.VerifyPassword(password, account.password);
                     if (checkPass == true)
                     {
@@ -55,7 +59,8 @@ namespace Zvonko {
                         mainWindow.Show();
                         return;
                     }
-                    MessageBox.Show("Invalid credentials. Please try again!");
+                    SetError("Invalid credentials!");
+                    //MessageBox.Show("Invalid credentials. Please try again!");
                 }
             }
         }
@@ -66,6 +71,18 @@ namespace Zvonko {
             RegistrationWindow registrationWindow = new RegistrationWindow();
             this.Close();
             registrationWindow.Show();
+        }
+
+        private void SetError(string errMessage)
+        {
+            txtErrorMessage.Text = errMessage;
+            txtErrorMessage.Visibility = Visibility.Visible;
+        }
+
+        private void ClearError()
+        {
+            txtErrorMessage.Text = "";
+            txtErrorMessage.Visibility = Visibility.Collapsed;
         }
     }
 }
