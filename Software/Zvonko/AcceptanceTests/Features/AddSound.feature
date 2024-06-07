@@ -36,9 +36,9 @@ Scenario: Add Sound To System
 	And I loaded the sound with name <soundName>
 	When I choose Emergency value
 	And I press the Save button
-	Then I should get a <success> message
+	Then I should get a success message
 
 	Examples: 
-	| soundName               | success |
-	| Intro Sound effects.mp3 | Success |
+	| soundName               |
+	| Intro Sound effects.mp3 |
 

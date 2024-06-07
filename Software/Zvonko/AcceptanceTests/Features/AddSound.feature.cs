@@ -234,14 +234,13 @@ this.LoadSoundFile("Intro Sound effects.mp3", ((string[])(null)));
 #line hidden
         }
         
-        public virtual void AddSoundToSystem(string soundName, string success, string[] exampleTags)
+        public virtual void AddSoundToSystem(string soundName, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("soundName", soundName);
-            argumentsOfScenario.Add("success", success);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Sound To System", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 35
+#line 34
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -261,20 +260,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 36
+#line 35
  testRunner.Given("I am logged in and on a Add New Sound screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 37
+#line 36
  testRunner.And(string.Format("I loaded the sound with name {0}", soundName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 38
+#line 37
  testRunner.When("I choose Emergency value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 39
+#line 38
  testRunner.And("I press the Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 40
- testRunner.Then(string.Format("I should get a {0} message", success), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 39
+ testRunner.Then("I should get a success message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -285,11 +284,10 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "AddSound")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Intro Sound effects.mp3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:soundName", "Intro Sound effects.mp3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:success", "Success")]
         public virtual void AddSoundToSystem_IntroSoundEffects_Mp3()
         {
-#line 35
-this.AddSoundToSystem("Intro Sound effects.mp3", "Success", ((string[])(null)));
+#line 34
+this.AddSoundToSystem("Intro Sound effects.mp3", ((string[])(null)));
 #line hidden
         }
     }
