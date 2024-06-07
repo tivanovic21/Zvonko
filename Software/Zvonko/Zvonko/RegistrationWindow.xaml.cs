@@ -32,7 +32,6 @@ namespace Zvonko
         {
             if (RegisterNewUser())
             {
-                MessageBox.Show("Registration successfull! Please log in.");
                 LoginWindow loginWindow = new LoginWindow();
                 this.Close();
                 loginWindow.Show();
@@ -44,8 +43,10 @@ namespace Zvonko
             string username = txtUsername.Text;
             string password = txtPassword.Password;
             string schoolName = txtSchoolName.Text;
-            if (authServices.ValidateInput(username, password, schoolName))
+
+            if (authServices.ValidateRegistrationInput(username, password, schoolName))
             {
+                ClearError();
                 string hashedPassword = authServices.HashPassword(password);
                 if (string.IsNullOrEmpty(hashedPassword)) return false;
 
@@ -60,7 +61,8 @@ namespace Zvonko
             }
             else
             {
-                MessageBox.Show("Please fill out all the fields!");
+                SetError("Fill out all fields!");
+                //MessageBox.Show("Please fill out all the fields!");
                 return false;
             }
         }
@@ -70,6 +72,18 @@ namespace Zvonko
             LoginWindow loginWindow = new LoginWindow();
             this.Close();
             loginWindow.Show();
+        }
+
+        private void SetError(string errMessage)
+        {
+            txtErrorMessage.Text = errMessage;
+            txtErrorMessage.Visibility = Visibility.Visible;
+        }
+
+        private void ClearError()
+        {
+            txtErrorMessage.Text = "";
+            txtErrorMessage.Visibility = Visibility.Collapsed;
         }
     }
 }

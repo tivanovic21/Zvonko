@@ -23,7 +23,7 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
                 <TextBlock>
                     Don't have an account? 
-                    <Hyperlink Foreground="blue" Click="Hyperlink_Click">Register here!</Hyperlink>
+                    <Hyperlink Foreground="blue" Click="Hyperlink_Click" AutomationProperties.AutomationId="txtRegisterLink">Register here!</Hyperlink>
                 </TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">

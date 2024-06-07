@@ -30,5 +30,15 @@ namespace BusinessLogicLayer
             }
             return false;
         }
+
+        public bool ValidateRegistrationInput(string username, string password, string schoolName)
+        {
+            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(schoolName))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
