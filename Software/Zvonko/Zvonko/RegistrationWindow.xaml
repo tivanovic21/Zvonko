@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
-        Title="Registration" Height="450" Width="800">
+        Title="Zvonko - Register" Height="450" Width="800">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="373*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="244,0,0,0">
             <Label FontSize="25px" FontWeight="bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 25">Zvonko</Label>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Label Content="Username:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
@@ -29,6 +33,9 @@
                 Already have an account? 
                 <Hyperlink Foreground="blue" Click="Hyperlink_Click">Login!</Hyperlink>
                 </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Name="txtErrorMessage" Foreground="Red" Visibility="Collapsed" AutomationProperties.AutomationId="lblErrorMessage"/>
             </StackPanel>
         </StackPanel>
     </Grid>
