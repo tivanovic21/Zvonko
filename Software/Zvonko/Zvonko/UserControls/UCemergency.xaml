@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Zvonko.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="White">
+             Background="White"
+             xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore">
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Label Content="EMERGENCY" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="50px" Margin="20px"/>
         <StackPanel Orientation="Horizontal">
