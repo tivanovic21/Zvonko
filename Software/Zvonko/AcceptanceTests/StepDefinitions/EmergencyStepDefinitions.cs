@@ -11,12 +11,28 @@ namespace AcceptanceTests.StepDefinitions
     [Binding]
     public class EmergencyStepDefinitions
     {
-        [Given(@"I am logged in")]
+        [Given(@"I am logged in for emergency testing")]
         public void GivenIAmLoggedIn()
         {
             var driver = GuiDriver.GetOrCreateDriver();
-            AddSoundStepDefinitions addSoundStepDefinitions = new AddSoundStepDefinitions();
-            addSoundStepDefinitions.GivenIAmLoggedIn();
+            bool isWindowOpened = driver.FindElementByName("Zvonko - Login") != null;
+            bool isCorrentTitle = driver.Title == "Zvonko - Login";
+            if (isWindowOpened && isCorrentTitle)
+            {
+                var txtUsername = driver.FindElementByAccessibilityId("txtUsername");
+                var txtPassword = driver.FindElementByAccessibilityId("txtPassword");
+
+                txtUsername.SendKeys("dev");
+                txtPassword.SendKeys("dev");
+
+                var btnLogin = driver.FindElementByAccessibilityId("btnLogin");
+                btnLogin.Click();
+
+                driver.SwitchTo().Window(driver.WindowHandles.First());
+                bool isMainWindowOpened = driver.FindElementByName("Zvonko - Main") != null;
+                bool isMainTitleCorrect = driver.Title == "Zvonko - Main";
+                Assert.IsTrue(isMainWindowOpened && isMainTitleCorrect);
+            }
         }
 
         [When(@"I click the Emergency button")]
