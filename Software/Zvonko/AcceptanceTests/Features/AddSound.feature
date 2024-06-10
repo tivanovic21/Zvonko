@@ -28,6 +28,16 @@ Scenario: Load Sound File
 	| soundName               |
 	| Intro Sound effects.mp3 |  
 
+Scenario: Cancel Adding A Sound After File Is Loaded
+	Given I am logged in and on a Add New Sound screen
+	And I have loaded the Sound File with file name <soundName>
+	When I click the Cancel button
+	Then I should see the main window
+
+	Examples: 
+	| soundName               |
+	| Intro Sound effects.mp3 |
+
 
 # Files don't get actually saved to the db, thus 
 # the success message step is set always to true

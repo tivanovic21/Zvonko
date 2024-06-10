@@ -165,6 +165,17 @@ namespace AcceptanceTests.StepDefinitions
             Assert.IsTrue(true);
         }
 
+        [Given(@"I have loaded the Sound File with file name (.*)")]
+        public void GivenIHaveLoadedTheSoundFileWithFileName(string soundName)
+        {
+            WhenIClickTheChooseASoundButton();
+            TheFileDialogIsOpen();
+            WhenIChooseASoundFromFileDialog(soundName);
+            WhenIClickTheOpenButton();
+            ThenIShouldSeeTheSelectedFileInformationOnMyScreen();
+        }
+
+
 
     }
 }
