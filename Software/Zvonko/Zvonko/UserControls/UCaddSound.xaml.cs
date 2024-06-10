@@ -70,16 +70,16 @@ namespace Zvonko.UserControls
                    extension.Equals(".wav", StringComparison.OrdinalIgnoreCase);
         }
 
-        private bool ValidateCharsInName(string soundName)
+        private bool FindNonEnglishChars(string soundName)
         {
-            string pattern = @"^[a-zA-Z0-9\s!?*_\-]+$";
+            string pattern = @"[^\x00-\x7F]";
             return System.Text.RegularExpressions.Regex.IsMatch(soundName, pattern);
         }
 
         private void LoadData(string filePath)
         {
             string soundName = Path.GetFileName(filePath);
-            if (ValidateCharsInName(soundName))
+            if (!FindNonEnglishChars(soundName))
             {
                 txtSoundName.Text = soundName;
             } else
