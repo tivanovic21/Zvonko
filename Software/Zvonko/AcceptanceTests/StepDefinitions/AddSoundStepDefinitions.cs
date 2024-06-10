@@ -175,6 +175,14 @@ namespace AcceptanceTests.StepDefinitions
             ThenIShouldSeeTheSelectedFileInformationOnMyScreen();
         }
 
+        [Then(@"I should see an error message (.*)")]
+        public void ThenIShouldSeeAnErrorMessage(string errorMessage)
+        {
+            var driver = GuiDriver.GetDriver();
+            var lblErrorMessage = driver.FindElementByAccessibilityId("lblErrorMessage");
+            var actualMessage = lblErrorMessage.Text;
+            Assert.AreEqual(actualMessage, errorMessage);
+        }
 
 
     }

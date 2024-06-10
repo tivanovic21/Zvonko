@@ -47,7 +47,15 @@ namespace Zvonko.UserControls
 
                 if (IsAudioFile(filePath))
                 {
-                    LoadData(filePath);
+                    try
+                    {
+                        LoadData(filePath);
+                    } catch (ArgumentException exception)
+                    {
+                        ClearSuccess();
+                        SetError(exception.Message);
+                    }
+
                 } else
                 {
                     MessageBox.Show("Please select an audio file.");
@@ -62,9 +70,22 @@ namespace Zvonko.UserControls
                    extension.Equals(".wav", StringComparison.OrdinalIgnoreCase);
         }
 
+        private bool ValidateCharsInName(string soundName)
+        {
+            string pattern = @"^[a-zA-Z0-9\s!?*_\-]+$";
+            return System.Text.RegularExpressions.Regex.IsMatch(soundName, pattern);
+        }
+
         private void LoadData(string filePath)
         {
-            txtSoundName.Text = Path.GetFileName(filePath);
+            string soundName = Path.GetFileName(filePath);
+            if (ValidateCharsInName(soundName))
+            {
+                txtSoundName.Text = soundName;
+            } else
+            {
+                throw new ArgumentException("Sound name contains invalid characters!");
+            }
 
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
@@ -154,6 +175,7 @@ namespace Zvonko.UserControls
                 bool isAdded = recordingService.AddRecording(newRecording);
                 if (isAdded)
                 {
+                    ClearError();
                     SetSuccess("Success!");
                     //MessageBox.Show("Sound successfully added!", "Success");
                 } else
@@ -177,6 +199,18 @@ namespace Zvonko.UserControls
         {
             txtSuccessMessage.Text = "";
             txtSuccessMessage.Visibility = Visibility.Collapsed;
+        }
+
+        private void SetError(string errMessage)
+        {
+            txtErrorMessage.Text = errMessage;
+            txtErrorMessage.Visibility = Visibility.Visible;
+        }
+
+        private void ClearError()
+        {
+            txtErrorMessage.Text = "";
+            txtErrorMessage.Visibility = Visibility.Collapsed;
         }
     }
 }

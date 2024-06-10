@@ -38,6 +38,18 @@ Scenario: Cancel Adding A Sound After File Is Loaded
 	| soundName               |
 	| Intro Sound effects.mp3 |
 
+Scenario: Load Sound File With Invalid Characters
+	Given I am logged in and on a Add New Sound screen
+	When I click the Choose a sound button
+	And The file dialog is open
+	And I choose a sound with name <soundName>
+	And I click the Open button
+	Then I should see an error message <error>
+
+	Examples: 
+	| soundName          | error                                   |
+	| A Šta Da Radim.mp3 | Sound name contains invalid characters! |
+
 
 # Files don't get actually saved to the db, thus 
 # the success message step is set always to true
