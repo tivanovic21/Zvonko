@@ -4,8 +4,8 @@ As a school schedule manager
 I want to be able to play emergency sound
 In case of emergency
 
-Scenario: Emergency From Screen
-	Given I am logged in
+Scenario: Emergency Screen
+	Given I am logged in for emergency testing
 	When I click the Emergency button
 	Then I should see the Emergency screen
 

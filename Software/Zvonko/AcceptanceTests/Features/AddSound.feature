@@ -4,7 +4,7 @@ As a school administrator
 I want to be able to add sounds to the system
 So that I can play them as bell sounds
 
-Scenario: Add A Sound From Display
+Scenario: Add A Sound Display
 	Given I am logged in
 	When I click the Add New Sound button
 	Then I should see the Add Sound user control

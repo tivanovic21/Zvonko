@@ -11,7 +11,7 @@ namespace AcceptanceTests.StepDefinitions
     [Binding]
     public class EmergencyStepDefinitions
     {
-        [Given(@"I am logged in")]
+        [Given(@"I am logged in for emergency testing")]
         public void GivenIAmLoggedIn()
         {
             var driver = GuiDriver.GetOrCreateDriver();

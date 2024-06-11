@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="StreamingWindow" Height="450" Width="600">
+        Title="Zvonko - Live Broadcast" Height="450" Width="600" AutomationProperties.AutomationId="screenLiveBroadcast">
     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Label FontSize="25" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 30 0 0">Live broadcast</Label>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
