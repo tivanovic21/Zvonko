@@ -7,6 +7,7 @@ using System.IO;
 using BusinessLogicLayer;
 using DatabaseLayer.Repositories;
 using DatabaseLayer;
+using System.Security.Policy;
 
 namespace UnitTests {
     public class RecordingService_Tests {
@@ -54,6 +55,83 @@ namespace UnitTests {
 
             // Assert
             Assert.True(result);
+        }
+
+        [Fact]
+        public void RemoveRecording_BrisanjeOdabranogZvucnogZapisa_RemovedRecording() {
+            // Arrange
+            var recordingService = new RecordingService();
+
+            var existingRecordingId = 1046;
+
+            // Act
+            var existingRecording = GetRecordingById(existingRecordingId);
+            if (existingRecording != null) {
+                var result = recordingService.RemoveRecording(existingRecording);
+
+                // Assert
+                Assert.True(result);
+            } else {
+                Assert.True(false, $"Recording with ID : {existingRecordingId} not found.");
+            }
+        }
+
+        [Fact]
+        public void UpdateRecording_AzuriranjePodatakaZvucnogZapisa_UpdatedRecording() {
+            // Arrange
+            var recordingService = new RecordingService();
+            var existingRecordingId = 1051;
+            var updatedRecording = new Recording {
+                id = existingRecordingId,
+                name = "Updated Recording Name",
+                duration = TimeSpan.FromMinutes(10),
+                description = "Updated description",
+                storedFile = "updated_file.mp3",
+                AccountId = 1,
+                timeCreated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            };
+
+            // Act
+            var result = recordingService.UpdateRecording(updatedRecording);
+
+            // Assert
+            var retrievedRecording = GetRecordingById(existingRecordingId);
+            Assert.True(result);
+            
+            Assert.NotNull(retrievedRecording);
+            Assert.Equal(updatedRecording.name, retrievedRecording.name);
+            Assert.Equal(updatedRecording.duration, retrievedRecording.duration);
+            Assert.Equal(updatedRecording.description, retrievedRecording.description);
+            Assert.Equal(updatedRecording.storedFile, retrievedRecording.storedFile);
+            Assert.Equal(updatedRecording.AccountId, retrievedRecording.AccountId);
+        }
+
+        [Fact]
+        public void PlayRecording_PokretanjeZvucnogZapisaZvona_StartsPlayingRecording() {
+            // Arrange
+            var recordingService = new RecordingService();
+            string relativePath = @"..\..\..\TestSounds\Cool Ringtone.mp3";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string absolutePath = Path.GetFullPath(Path.Combine(basePath, relativePath));
+
+            // Assert
+            Assert.True(File.Exists(absolutePath), $"File '{absolutePath}' does not exist.");
+
+            var recording = new Recording {
+                storedFile = absolutePath
+            };
+
+            // Act
+            recordingService.PlayRecording(recording);
+
+            // Assert
+            Assert.True(recordingService.IsPlaying(), "Recording should be playing.");
+        }
+
+        private Recording GetRecordingById(int id) {
+            using (var dbContext = new ZvonkoModel9()) {
+                return dbContext.Recordings.FirstOrDefault(r => r.id == id);
+            }
         }
     }
 }
