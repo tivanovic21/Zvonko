@@ -11,7 +11,7 @@ using DatabaseLayer;
 namespace UnitTests {
     public class RecordingService_Tests {
         [Fact]
-        public void GetAllRecordings_UpravljanjeDogadajima_ReturnsAllRecordings() {
+        public void GetAllRecordings_UcitavanjeSvihZvucnihZapisa_ReturnsAllRecordings() {
             // Arrange
             var recordingService = new RecordingService();
 
@@ -24,7 +24,7 @@ namespace UnitTests {
         }
 
         [Fact]
-        public void GetEmergencyRecordings_HitnaEvakuacija_ReturnsAllRecordings() {
+        public void GetEmergencyRecordings_DohvacanjeZvucnihZapisaHitneEvakuacije_ReturnsAllRecordings() {
             // Arrange
             var recordingService = new RecordingService();
 
@@ -37,7 +37,7 @@ namespace UnitTests {
         }
 
         [Fact]
-        public void AddRecording_DodavanjeZvucnogZapisa_DodajeNoviZapis() {
+        public void AddRecording_UvozZvucnogZapisaOdgovarajucegFormata_DodajeNoviZapis() {
             // Arrange
             var recordingService = new RecordingService();
             var newRecording = new Recording {
