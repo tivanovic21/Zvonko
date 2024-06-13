@@ -62,7 +62,7 @@ namespace UnitTests {
             // Arrange
             var recordingService = new RecordingService();
 
-            var existingRecordingId = 1046;
+            var existingRecordingId = 1053;
 
             // Act
             var existingRecording = GetRecordingById(existingRecordingId);
@@ -80,7 +80,7 @@ namespace UnitTests {
         public void UpdateRecording_AzuriranjePodatakaZvucnogZapisa_UpdatedRecording() {
             // Arrange
             var recordingService = new RecordingService();
-            var existingRecordingId = 1051;
+            var existingRecordingId = 1052;
             var updatedRecording = new Recording {
                 id = existingRecordingId,
                 name = "Updated Recording Name",
