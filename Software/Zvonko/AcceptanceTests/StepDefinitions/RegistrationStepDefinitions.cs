@@ -11,7 +11,6 @@ namespace AcceptanceTests.StepDefinitions
     [Binding]
     public class RegistrationStepDefinitions
     {
-
         [Given(@"I am on the Login screen")]
         public void GivenIAmOnTheLoginScreen()
         {

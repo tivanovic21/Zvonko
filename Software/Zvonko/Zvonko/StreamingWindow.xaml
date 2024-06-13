@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="StreamingWindow" Height="450" Width="600">
+        Title="Zvonko - Live Broadcast" Height="450" Width="600" AutomationProperties.AutomationId="screenLiveBroadcast">
     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Label FontSize="25" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 30 0 0">Live broadcast</Label>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="btnStartStreaming"  Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStartStreaming_Click" IsEnabled="True" >Start streaming</Button>
-            <Button x:Name="btnStopStreaming" Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStopStreaming_Click" IsEnabled="False">Stop streaming</Button>
+            <Button x:Name="btnStartStreaming"  Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStartStreaming_Click" IsEnabled="True" AutomationProperties.AutomationId="btnStartStreaming">Start streaming</Button>
+            <Button x:Name="btnStopStreaming" Margin="10px" Background="White" BorderThickness="0px" Height="40" Width="125" Click="btnStopStreaming_Click" IsEnabled="False" AutomationProperties.AutomationId="btnStopStreaming">Stop streaming</Button>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="50" Width="100">
-            <Label x:Name="lblDuration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Content="Duration: 00:00" Visibility="Hidden"/>
+            <Label x:Name="lblDuration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Content="Duration: 00:00" Visibility="Hidden" AutomationProperties.AutomationId="lblDuration"/>
         </StackPanel>
     </StackPanel>
 </Window>
