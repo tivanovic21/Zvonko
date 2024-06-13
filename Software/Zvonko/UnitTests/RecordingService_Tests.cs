@@ -7,6 +7,7 @@ using System.IO;
 using BusinessLogicLayer;
 using DatabaseLayer.Repositories;
 using DatabaseLayer;
+using System.Security.Policy;
 
 namespace UnitTests {
     public class RecordingService_Tests {
@@ -105,6 +106,27 @@ namespace UnitTests {
             Assert.Equal(updatedRecording.AccountId, retrievedRecording.AccountId);
         }
 
+        [Fact]
+        public void PlayRecording_PokretanjeZvucnogZapisaZvona_StartsPlayingRecording() {
+            // Arrange
+            var recordingService = new RecordingService();
+            string relativePath = @"..\..\..\TestSounds\Cool Ringtone.mp3";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string absolutePath = Path.GetFullPath(Path.Combine(basePath, relativePath));
+
+            // Assert
+            Assert.True(File.Exists(absolutePath), $"File '{absolutePath}' does not exist.");
+
+            var recording = new Recording {
+                storedFile = absolutePath
+            };
+
+            // Act
+            recordingService.PlayRecording(recording);
+
+            // Assert
+            Assert.True(recordingService.IsPlaying(), "Recording should be playing.");
+        }
 
         private Recording GetRecordingById(int id) {
             using (var dbContext = new ZvonkoModel9()) {
