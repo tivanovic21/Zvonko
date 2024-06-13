@@ -66,6 +66,59 @@ namespace AcceptanceTests.StepDefinitions
             Assert.IsTrue(isWindowOpened && isCorrectTitle);
         }
 
+        [When(@"I press the Start Streaming button")]
+        public void WhenIPressTheStartStreamingButton()
+        {
+            var driver = GuiDriver.GetDriver();
+            var btnStartStreaming = driver.FindElementByAccessibilityId("btnStartStreaming");
+            btnStartStreaming.Click();
+        }
+
+        [When(@"I confirm the start streaming action")]
+        public void WhenIConfirmTheStartStreamingAction()
+        {
+            var driver = GuiDriver.GetDriver();
+            bool isWindowOpened = driver.FindElementByName("Start Streaming") != null;
+            if (isWindowOpened)
+            {
+                // if system is in English use "Yes"
+                var btnYes = driver.FindElementByName("Da");
+                btnYes.Click();
+            }
+        }
+
+
+        [Then(@"the Live Broadcast should start")]
+        public void ThenTheLiveBroadcastShouldStart()
+        {
+            var driver = GuiDriver.GetDriver();
+            var lblDuration = driver.FindElementByAccessibilityId("lblDuration");
+            Assert.IsTrue(!string.IsNullOrEmpty(lblDuration.Text));
+        }
+
+        [Given(@"The broadcast has started")]
+        public void GivenTheBroadcastHasStarted()
+        {
+            WhenIPressTheStartStreamingButton();
+            WhenIConfirmTheStartStreamingAction();
+            ThenTheLiveBroadcastShouldStart();
+        }
+
+        [When(@"I press the Stop Streaming button")]
+        public void WhenIPressTheStopStreamingButton()
+        {
+            var driver = GuiDriver.GetDriver();
+            var btnStopStreaming = driver.FindElementByAccessibilityId("btnStopStreaming");
+            btnStopStreaming.Click();
+        }
+
+        [Then(@"the Live Broadcast should stop")]
+        public void ThenTheLiveBroadcastShouldStop()
+        {
+            var driver = GuiDriver.GetDriver();
+            var lblDuration = driver.FindElementByAccessibilityId("lblDuration");
+            Assert.IsTrue(string.IsNullOrEmpty(lblDuration.Text));
+        }
 
     }
 }
