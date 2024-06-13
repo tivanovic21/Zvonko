@@ -24,7 +24,7 @@ namespace UnitTests
                 date = DateTime.Now,
                 monday = true,
                 accountId = 1,
-                recordingId = 1048
+                recordingId = 1051 // must exist in the db
             };
 
             // Act
@@ -80,7 +80,7 @@ namespace UnitTests
             var eventService = new EventService();
             var selectedEvent = new Event
             {
-                id = 19, // must match existing id in db
+                id = 15, // must match existing id in db
                 name = "testEvent",
                 description = "testEvent",
                 starting_time = DateTime.Now.TimeOfDay,

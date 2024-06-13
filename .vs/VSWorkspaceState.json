@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Software",
+    "\\Software\\Zvonko"
   ],
-  "SelectedNode": "\\Zvonko.sln",
+  "SelectedNode": "\\Software\\Zvonko\\Zvonko.sln",
   "PreviewInSolutionExplorer": false
 }
