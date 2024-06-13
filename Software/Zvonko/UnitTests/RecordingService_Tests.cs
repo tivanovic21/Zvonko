@@ -75,6 +75,37 @@ namespace UnitTests {
             }
         }
 
+        [Fact]
+        public void UpdateRecording_AzuriranjePodatakaZvucnogZapisa_UpdatedRecording() {
+            // Arrange
+            var recordingService = new RecordingService();
+            var existingRecordingId = 1051;
+            var updatedRecording = new Recording {
+                id = existingRecordingId,
+                name = "Updated Recording Name",
+                duration = TimeSpan.FromMinutes(10),
+                description = "Updated description",
+                storedFile = "updated_file.mp3",
+                AccountId = 1,
+                timeCreated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            };
+
+            // Act
+            var result = recordingService.UpdateRecording(updatedRecording);
+
+            // Assert
+            var retrievedRecording = GetRecordingById(existingRecordingId);
+            Assert.True(result);
+            
+            Assert.NotNull(retrievedRecording);
+            Assert.Equal(updatedRecording.name, retrievedRecording.name);
+            Assert.Equal(updatedRecording.duration, retrievedRecording.duration);
+            Assert.Equal(updatedRecording.description, retrievedRecording.description);
+            Assert.Equal(updatedRecording.storedFile, retrievedRecording.storedFile);
+            Assert.Equal(updatedRecording.AccountId, retrievedRecording.AccountId);
+        }
+
+
         private Recording GetRecordingById(int id) {
             using (var dbContext = new ZvonkoModel9()) {
                 return dbContext.Recordings.FirstOrDefault(r => r.id == id);
