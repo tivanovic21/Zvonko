@@ -12,6 +12,9 @@ namespace BusinessLogicLayer
     {   
         public bool AddAccount(Account newAccount)
         {
+            if (newAccount == null) return false;
+            else if (newAccount.username == null || newAccount.password == null || newAccount.schoolName == null) return false;
+
             using (var repo = new AccountRepository())
             {
                 int affectedRows = repo.Add(newAccount, true);
