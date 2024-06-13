@@ -22,5 +22,18 @@ namespace UnitTests {
             Assert.NotNull(result); 
             Assert.IsAssignableFrom<IEnumerable<Recording>>(result); 
         }
+
+        [Fact]
+        public void GetEmergencyRecordings_HitnaEvakuacija_ReturnsAllRecordings() {
+            // Arrange
+            var recordingService = new RecordingService();
+
+            // Act
+            var result = recordingService.GetEmergencyRecordings();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<IEnumerable<Recording>>(result);
+        }
     }
 }
