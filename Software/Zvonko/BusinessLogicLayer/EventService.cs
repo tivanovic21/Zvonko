@@ -11,6 +11,7 @@ namespace BusinessLogicLayer {
         
     public bool AddEvent(Event newEvent)
     {
+        if (newEvent == null) return false;
         using (var repo = new EventRepository())
         {
             int affectedRows = repo.Add(newEvent, true);
@@ -32,6 +33,7 @@ namespace BusinessLogicLayer {
             }
         }
         public bool RemoveEvent(Event eventToRemove) {
+            if (eventToRemove == null) return false;
             using (var repo = new EventRepository()) {
                 int affectedRows = repo.Remove(eventToRemove, true);
                 return affectedRows > 0;
