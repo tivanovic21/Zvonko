@@ -19,16 +19,10 @@ namespace BusinessLogicLayer
             return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
 
-        public bool ValidateInput(string username, string password, string schoolName = null)
+        public bool ValidateInput(string username, string password)
         {
-            if (schoolName == null)
-            {
-                if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(schoolName)) return true;
-            }else
-            {
-                if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password)) return true;
-            }
-            return false;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return false;
+            else return true;
         }
 
         public bool ValidateRegistrationInput(string username, string password, string schoolName)

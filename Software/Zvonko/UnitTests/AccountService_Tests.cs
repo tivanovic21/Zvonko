@@ -38,6 +38,19 @@ namespace UnitTests
         }
 
         [Fact]
+        public void GetAccount_GivenEmptyString_ReturnsNull()
+        {
+            // Arrange
+            var accountService = new AccountService();
+
+            // Act
+            var result = accountService.GetAccount("");
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
         public void AddAccount_GivenValidAccount_ReturnsTrue()
         {
             // Arrange
