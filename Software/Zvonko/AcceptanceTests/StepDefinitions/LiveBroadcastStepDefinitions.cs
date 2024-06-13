@@ -1,8 +1,10 @@
 using AcceptanceTests.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
+using System.Windows;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTests.StepDefinitions

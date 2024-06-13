@@ -47,7 +47,8 @@ namespace Zvonko {
             streamService.OnStopStreaming();
             btnStartStreaming.IsEnabled = true;
             btnStopStreaming.IsEnabled = false;
-            lblDuration.Visibility = Visibility.Hidden;
+            lblDuration.Content = "";
+            //lblDuration.Visibility = Visibility.Collapsed;
             isStreaming = false;
             timer.Stop();
         }
