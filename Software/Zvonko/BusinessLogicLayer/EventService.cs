@@ -27,18 +27,18 @@ namespace BusinessLogicLayer {
             }
     }
 
-        public IEnumerable<Event> GetAllEventsAndRecordings() {
-            using (var repo = new EventRepository()) {
-                return repo.GetRecordingsAndEvents().ToList();
-            }
+    public IEnumerable<Event> GetAllEventsAndRecordings() {
+        using (var repo = new EventRepository()) {
+            return repo.GetRecordingsAndEvents().ToList();
         }
-        public bool RemoveEvent(Event eventToRemove) {
-            if (eventToRemove == null) return false;
-            using (var repo = new EventRepository()) {
-                int affectedRows = repo.Remove(eventToRemove, true);
-                return affectedRows > 0;
-            }
+    }
+    public bool RemoveEvent(Event eventToRemove) {
+        if (eventToRemove == null) return false;
+        using (var repo = new EventRepository()) {
+            int affectedRows = repo.Remove(eventToRemove, true);
+            return affectedRows > 0;
         }
+    }
 
     }
 }
