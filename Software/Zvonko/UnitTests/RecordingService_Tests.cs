@@ -55,5 +55,30 @@ namespace UnitTests {
             // Assert
             Assert.True(result);
         }
+
+        [Fact]
+        public void RemoveRecording_BrisanjeOdabranogZvucnogZapisa_RemovedRecording() {
+            // Arrange
+            var recordingService = new RecordingService();
+
+            var existingRecordingId = 1046;
+
+            // Act
+            var existingRecording = GetRecordingById(existingRecordingId);
+            if (existingRecording != null) {
+                var result = recordingService.RemoveRecording(existingRecording);
+
+                // Assert
+                Assert.True(result);
+            } else {
+                Assert.True(false, $"Recording with ID : {existingRecordingId} not found.");
+            }
+        }
+
+        private Recording GetRecordingById(int id) {
+            using (var dbContext = new ZvonkoModel9()) {
+                return dbContext.Recordings.FirstOrDefault(r => r.id == id);
+            }
+        }
     }
 }
