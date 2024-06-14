@@ -91,11 +91,10 @@ namespace AcceptanceTests.Features
         {
             testRunner.CollectScenarioErrors();
         }
-        
+
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add A Sound Display")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "AddSound")]
-        public void AddASoundFromDisplay()
         public virtual void AddASoundDisplay()
         {
             string[] tagsOfScenario = ((string[])(null));
