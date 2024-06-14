@@ -9,7 +9,8 @@ using DatabaseLayer.Repositories;
 using DatabaseLayer;
 using System.Security.Policy;
 
-namespace UnitTests {
+namespace IntegrationTests
+{
     public class RecordingService_Tests {
         [Fact]
         public void GetAllRecordings_UcitavanjeSvihZvucnihZapisa_ReturnsAllRecordings() {
