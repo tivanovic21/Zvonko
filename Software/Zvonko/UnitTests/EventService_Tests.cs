@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests
+namespace IntegrationTests
 {
     public class EventService_Tests
     {
