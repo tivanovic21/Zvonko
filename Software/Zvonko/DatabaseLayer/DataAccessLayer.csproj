@@ -59,6 +59,8 @@
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\RecordingRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="TestRepositories\FakeAccountRepository.cs" />
+    <Compile Include="TestRepositories\IAccountRepository.cs" />
     <Compile Include="ZvonkoModel9.cs" />
   </ItemGroup>
   <ItemGroup>

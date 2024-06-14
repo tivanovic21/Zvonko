@@ -1,5 +1,7 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.TestRepositories;
+using FakeItEasy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,97 +9,47 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace IntegrationTests
+namespace UnitTests
 {
     public class AccountService_Tests
     {
         [Fact]
-        public void GetAccount_GivenCorrectUsername_ReturnsAccount()
+        public void Get_GivenValidAccount_ReturnsNotNull()
         {
             // Arrange
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.GetAccount("dev");
-
-            // Assert
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        public void GetAccount_GivenIncorrectUsername_RetrunsNull()
-        {
-            // Arrange
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.GetAccount("incorrectUsername");
-
-            // Assert
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public void GetAccount_GivenEmptyString_ReturnsNull()
-        {
-            // Arrange
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.GetAccount("");
-
-            // Assert
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public void AddAccount_GivenValidAccount_ReturnsTrue()
-        {
-            // Arrange
-            var accountService = new AccountService();
-            var newAccount = new Account
+            var repo = A.Fake<IAccountRepository>();
+            var account = new Account
             {
-                username = "newTestUser",
-                password = "newTestUser",
-                schoolName = "new test school",
+                id = 1,
+                username = "fakeAcc",
+                password = "fakePass",
+                schoolName = "fakeSchool"
             };
-
-            // Act 
-            var result = accountService.AddAccount(newAccount);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void AddAccount_GivenNullAccount_ReturnsFalse()
-        {
-            // Arrange
-            var accountService = new AccountService();
+            A.CallTo(() => repo.Get("fakeAcc")).Returns(account);
+            var accountService = new AccountService(repo);
 
             // Act
-            var result = accountService.AddAccount(null);
+            var getAccount = accountService.GetAccount("fakeAcc");
 
             // Assert
-            Assert.False(result);
+            Assert.NotNull(getAccount);
+            Assert.Equal("fakeAcc", getAccount.username);
         }
 
         [Fact]
-        public void AddAccount_GivenInvalidAccount_ReturnsFalse()
+        public void Get_GivenNullAccount_ReturnsNull()
         {
             // Arrange
-            var accountService = new AccountService();
-            var newAccount = new Account
-            {
-                username = "newTestUserNoSchool",
-                password = "newTestUserNoSchool",
-            };
+            var repo = A.Fake<IAccountRepository>();
+            var account = null as Account;
+            A.CallTo(() => repo.Get("fakeAcc")).Returns(account);
+            var accountService = new AccountService(repo);
 
-            // Act 
-            var result = accountService.AddAccount(newAccount);
+            // Act
+            var getAccount = accountService.GetAccount("fakeAcc");
 
             // Assert
-            Assert.False(result);
+            Assert.Null(getAccount);
         }
     }
 }
