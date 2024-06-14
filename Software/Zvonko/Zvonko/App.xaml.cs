@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Zvonko
-{
-    public partial class App : Application
-    {
-        protected override void OnStartup(StartupEventArgs e)
-        {
+namespace Zvonko {
+    public partial class App : Application {
+        protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
             StartPeriodicTask();
         }
@@ -45,11 +42,11 @@ namespace Zvonko
                 if ((bool)events.friday) days.Add(DayOfWeek.Friday.ToString());
                 if ((bool)events.saturday) days.Add(DayOfWeek.Saturday.ToString());
                 foreach (var day in days) {
-                    if (events.typeOfEventId == 1 && day.Contains(dayOfTheWeek.ToString()) && CompareTimeSpan(events.starting_time, startingTime )) {
+                    if (events.typeOfEventId == 1 && day.Contains(dayOfTheWeek.ToString()) && CompareTimeSpan(events.starting_time, startingTime)) {
                         recordingService.PlayRecording(events.Recording);
                     }
                 }
-               
+
 
                 if (events.typeOfEventId == 2 && events.date == date && events.starting_time == startingTime) {
                     recordingService.PlayRecording(events.Recording);
