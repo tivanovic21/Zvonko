@@ -58,6 +58,9 @@ namespace AcceptanceTests.StepDefinitions
             Assert.IsNotNull(lblAddSound, "Add Sound UserControl is not displayed");
         }
 
+
+
+
         [Given(@"I am logged in and on a Add New Sound screen")]
         public void GivenIAmLoggedInAndOnAAddNewSoundScreen()
         {

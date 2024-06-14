@@ -47,11 +47,11 @@
             </StackPanel>
         </DockPanel>
         <Label>Audio recordings currently available</Label>
-        <DataGrid x:Name="dgRecordings" Height="150px">
+        <DataGrid x:Name="dgRecordings" Height="150px" SelectionChanged="dgRecordings_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                <DataGridTextColumn Header="Duration" Binding="{Binding duration}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding description}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="200" />
+                <DataGridTextColumn Header="Duration" Binding="{Binding duration}" Width="150" />
+                <DataGridTextColumn Header="Description" Binding="{Binding description}" Width="300" />
                 <DataGridTextColumn Header="Time Created" Binding="{Binding timeCreated}" />
             </DataGrid.Columns>
         </DataGrid>

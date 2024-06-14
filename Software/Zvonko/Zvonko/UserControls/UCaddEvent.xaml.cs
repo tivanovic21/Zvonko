@@ -62,6 +62,11 @@ namespace Zvonko.UserControls {
             var friday = chkFriday.IsChecked;
             var saturday = chkSaturday.IsChecked;
 
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description) || string.IsNullOrWhiteSpace(txtStartingTime.Text)) {
+                MessageBox.Show("Fill out all fields!");
+                return;
+            }
+
             if (rbReoccuring.IsChecked == true) {
                 isReoccuring = 1;
             } else if (rbNonReocurring.IsChecked == true) {
@@ -188,11 +193,13 @@ namespace Zvonko.UserControls {
                 else MessageBox.Show("There was an error in removing selected recording!");
             } else
             {
-                MessageBox.Show("You need to select a recording!");
+                MessageBox.Show("You need to select a recording!", "Error");
             }
         }
 
-      
+        private void dgRecordings_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+        }
     }
 }
 

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zvonko"
         mc:Ignorable="d"
-        Title="Zvonko - Login" Height="450" Width="800">
+        Title="Zvonko - Login" Height="450" Width="800"
+        xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label FontSize="25px" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 25">Zvonko</Label>
