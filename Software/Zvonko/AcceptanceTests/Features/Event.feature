@@ -1,6 +1,8 @@
 ﻿Feature: Event
 
-A short summary of the feature
+As a school manager
+I should be able to define events
+that simbolize type of events
 
 Scenario: Go to Add events UC
 	Given I'm logged in and on main screen
