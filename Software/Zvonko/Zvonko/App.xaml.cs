@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,7 +28,8 @@ namespace Zvonko {
             var startingTime = DateTime.Now.TimeOfDay;
             var date = DateTime.Now.Date;
 
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             RecordingService recordingService = new RecordingService();
 
             var allEvents = eventService.GetAllEventsAndRecordings();

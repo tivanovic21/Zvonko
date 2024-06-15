@@ -13,9 +13,9 @@ namespace BusinessLogicLayer
     {
         private readonly IAccountRepository _accountRepository;
 
-        public AccountService(IAccountRepository fakeAccountRepository)
+        public AccountService(IAccountRepository accountRepository)
         {
-            _accountRepository = fakeAccountRepository;
+            _accountRepository = accountRepository;
         }
         public bool AddAccount(Account newAccount)
         {
