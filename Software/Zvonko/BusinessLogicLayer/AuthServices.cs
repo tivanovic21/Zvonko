@@ -11,6 +11,7 @@ namespace BusinessLogicLayer
     public class AuthServices
     {
         public string HashPassword(string password) {
+            if (string.IsNullOrEmpty(password)) return "";
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
