@@ -21,13 +21,13 @@ jobs:
         uses: microsoft/setup-msbuild@v1.3.1
       
       - name: Navigate to root folder
-        run: cd $GITHUB_WORKSPACE
+        run: cd Software\Zvonko
         
       - name: Restore NuGet Packages
-        run: nuget restore
+        run: nuget restore Zvonko.sln
         
       - name: Build Solution
-        run: msbuild /p:platform="Any CPU" /p:configuration=Release
+        run: msbuild Zvonko.sln /p:platform="Any CPU" /p:configuration=Release
         
       - name: Run Unit tests
         run: dotnet test --configuration Release --filter UnitTests
