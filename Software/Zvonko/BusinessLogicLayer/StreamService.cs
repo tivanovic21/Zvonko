@@ -64,5 +64,17 @@ namespace BusinessLogicLayer {
         public void Dispose() {
             OnStopStreaming();
         }
+
+        public bool RecorderStatus()
+        {
+            if (recorder != null) return true;
+            return false;
+        }
+
+        public bool PlayerStatus()
+        {
+            if (player != null) return true;
+            return false;
+        }
     }
 }
