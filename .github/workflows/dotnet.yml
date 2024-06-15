@@ -1,15 +1,12 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: Build solution on push
 
 on:
   push:
     branches: 
-    - master
+      - master
   pull_request:
     branches: 
-    - master
+      - master
   workflow_dispatch:
 
 jobs:
@@ -21,14 +18,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4.1.6
       
-    - name: Install project
-      uses: microsoft/setup-msbuild@v2
-      
-    - name: Install Nuget
-      uses: nuget/setup-nuget@v2
-      
-    - name: Dependencies
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restore NuGet packages
       run: nuget restore Software\Zvonko\Zvonko.sln
 
-    - name: Build
-      run: nuget restore Software\Zvonko\Zvonko.sln /p:configuration="Debug"
+    - name: Build with MSBuild
+      run: msbuild /p:configuration=Debug /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
