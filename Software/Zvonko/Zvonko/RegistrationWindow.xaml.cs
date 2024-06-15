@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace Zvonko
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        AccountService accountService = new AccountService();
+        private static AccountRepository accRepo = new AccountRepository();
+        private AccountService accountService = new AccountService(accRepo);
         AuthServices authServices = new AuthServices();
         public RegistrationWindow()
         {

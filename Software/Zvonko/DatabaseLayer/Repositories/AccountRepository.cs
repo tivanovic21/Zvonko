@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseLayer.TestRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseLayer.Repositories
 {
-    public class AccountRepository: Repository<Account>
+    public class AccountRepository: Repository<Account>, IAccountRepository
     {
         public AccountRepository(): base(new ZvonkoModel9())
         {
