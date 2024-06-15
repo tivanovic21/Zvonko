@@ -61,6 +61,7 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="TestRepositories\IAccountRepository.cs" />
     <Compile Include="TestRepositories\IEventRepository.cs" />
+    <Compile Include="TestRepositories\IRecordingRepository.cs" />
     <Compile Include="ZvonkoModel9.cs" />
   </ItemGroup>
   <ItemGroup>

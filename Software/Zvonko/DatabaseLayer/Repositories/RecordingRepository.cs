@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseLayer.TestRepositories;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -6,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DatabaseLayer.Repositories {
-    public class RecordingRepository : Repository<Recording> {
+    public class RecordingRepository : Repository<Recording>, IRecordingRepository
+    {
         public RecordingRepository() : base(new ZvonkoModel9()) {
 
         }

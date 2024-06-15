@@ -1,5 +1,6 @@
 ﻿using DatabaseLayer;
 using DatabaseLayer.Repositories;
+using DatabaseLayer.TestRepositories;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
@@ -8,50 +9,51 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer {
-    public class RecordingService {
+    public class RecordingService
+    {
+        private readonly IRecordingRepository _recordingRepository;
         private bool isPlaying = false;
 
+        public RecordingService(IRecordingRepository recordingRepository)
+        {
+            _recordingRepository = recordingRepository;
+        }
+
         public IEnumerable<Recording> GetAllRecordings() {
-            using (var repo = new RecordingRepository()) {
-                return repo.Get().ToList();
-            }
+            return _recordingRepository.Get().ToList();
         }
 
 
         public IEnumerable<Recording> GetEmergencyRecordings() {
-            using (var repo = new RecordingRepository()) {
-                return repo.GetEmergencyRecordings().ToList();
-            }
+            return _recordingRepository.GetEmergencyRecordings().ToList();
         }
 
         public bool AddRecording(Recording newRecording) {
-            using (var repo = new RecordingRepository()) {
-                int affectedRows = repo.Add(newRecording, true);
-                if (affectedRows > 0) {
-                    return true;
-                } else return false;
-            }
+            if (newRecording == null) return false;
+            int affectedRows = _recordingRepository.Add(newRecording, true);
+            if (affectedRows > 0) {
+                return true;
+            } else return false;
         }
 
         public bool UpdateRecording(Recording selectedRecording) {
-            using (var repo = new RecordingRepository()) {
-                int affectedRows = repo.Update(selectedRecording, true);
-                if (affectedRows > 0) {
-                    return true;
-                } else return false;
-            }
+            if (selectedRecording == null) return false;
+            int affectedRows = _recordingRepository.Update(selectedRecording, true);
+            if (affectedRows > 0) {
+                return true;
+            } else return false;
         }
 
         public bool RemoveRecording(Recording selectedRecording) {
-            using (var repo = new RecordingRepository()) {
-                int affectedRows = repo.Remove(selectedRecording, true);
-                if (affectedRows > 0) {
-                    return true;
-                } else return false;
-            }
+            if (selectedRecording == null) return false;
+            int affectedRows = _recordingRepository.Remove(selectedRecording, true);
+            if (affectedRows > 0) {
+                return true;
+            } else return false;
         }
 
         public void PlayRecording(Recording recording) {
+            if (recording == null) return;
             var _waveOut = new WaveOutEvent();
             if (_waveOut != null) {
                 StopRecording();
