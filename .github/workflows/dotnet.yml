@@ -31,4 +31,4 @@ jobs:
       run: nuget restore Software\Zvonko\Zvonko.sln
 
     - name: Build
-      run: nuget restore Software\Zvonko\Zvonko.sln /p:platform="Any CPU" /p:configuration="Debug"
+      run: nuget restore Software\Zvonko\Zvonko.sln /p:configuration="Debug"
