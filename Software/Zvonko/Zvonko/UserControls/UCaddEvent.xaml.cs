@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,8 @@ namespace Zvonko.UserControls {
         }
 
         private /*async*/ void GetAllRecordings() {
-            RecordingService recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
             dgRecordings.ItemsSource = /*await*/ recordingService.GetAllRecordings();
         }
 
@@ -74,7 +76,8 @@ namespace Zvonko.UserControls {
             }
             TimeSpan startingTime;
             if (TimeSpan.TryParse(txtStartingTime.Text, out startingTime)) {
-                EventService eventService = new EventService();
+                EventRepository eventRepository = new EventRepository();
+                EventService eventService = new EventService(eventRepository);
 
                 Event newEvent = new Event {
                     name = name,
@@ -183,7 +186,8 @@ namespace Zvonko.UserControls {
             Recording selectedRecording = GetSelectedRecording();
             if(selectedRecording != null)
             {
-                RecordingService recordingService = new RecordingService();
+                RecordingRepository recRepository = new RecordingRepository();
+                RecordingService recordingService = new RecordingService(recRepository);
                 bool success = recordingService.RemoveRecording(selectedRecording);
                 if (success)
                 {

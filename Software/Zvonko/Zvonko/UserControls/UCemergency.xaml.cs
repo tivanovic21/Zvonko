@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,8 @@ namespace Zvonko.UserControls
 
         private void FillComboBox()
         {
-            RecordingService recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
             var emergencySounds = recordingService.GetEmergencyRecordings();
 
             if (emergencySounds != null && emergencySounds.Any())

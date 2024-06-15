@@ -29,7 +29,6 @@ namespace Zvonko
             InitializeComponent();
             LoadMainContent();
             LoggedUser = account;
-            //LoadRecordings();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)

@@ -6,146 +6,189 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace IntegrationTests
+namespace UnitTests
 {
     public class AuthService_Tests
     {
         [Fact]
-        public void HashPassword_GivenValidPassword_ReturnsHashedPassword()
+        public void HashPassword_GivenPassword_ReturnsHashedPassword()
         {
-            // Arrange
-            var authServices = new AuthServices();
-            var password = "testPassword";
+            var authService = new AuthServices();
+            var password = "password";
 
-            // Act
-            var result = authServices.HashPassword(password);
-
-            // Assert
-            Assert.NotEmpty(result);
-            Assert.NotEqual(password, result);
+            var hashedPassword = authService.HashPassword(password);
+            
+            Assert.NotNull(hashedPassword);
+            Assert.NotEqual(password, hashedPassword);
         }
 
         [Fact]
-        public void VerifyPassword_GivenCorrectPassword_ReturnsTrue()
+        public void HashPassword_GivenEmptyString_ReturnsEmpty()
         {
-            // Arrange
-            var authServices = new AuthServices();
-            var password = "testPassword";
-            var hashedPassword = authServices.HashPassword(password);
-
-            // Act
-            var result = authServices.VerifyPassword(password, hashedPassword);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void VerifyPassword_GivenIncorrectPassword_ReturnsFalse()
-        {
-            // Arrange
-            var authServices = new AuthServices();
-            var password = "testPassword";
-            var hashedPassword = authServices.HashPassword(password);
-
-            // Act
-            var result = authServices.VerifyPassword("incorrectPassword", hashedPassword);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void ValidateInput_GivenValidInput_ReturnsTrue()
-        {
-            // Arrange
-            var authServices = new AuthServices();
-            var username = "testUser";
-            var password = "testPassword";
-
-            // Act
-            var result = authServices.ValidateInput(username, password);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void ValidateInput_GivenInvalidInput_ReturnsFalse()
-        {
-            // Arrange
-            var authServices = new AuthServices();
-            string username = "";
-            string password = "test";
-
-            // Act
-            var result = authServices.ValidateInput(username, password);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void ValidateRegistrationInput_GivenValidInput_ReturnsTrue()
-        {
-            // Arrange
-            var authServices = new AuthServices();
-            var username = "testUser";
-            var password = "testPassword";
-            var schoolName = "testSchool";
-
-            // Act
-            var result = authServices.ValidateRegistrationInput(username, password, schoolName);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void ValidateRegistrationInput_GivenEmptyUsername_ReturnsFalse()
-        {
-            // Arrange
-            var authServices = new AuthServices();
-            var username = "";
-            var password = "testPassword";
-            var schoolName = "testSchool";
-
-            // Act
-            var result = authServices.ValidateRegistrationInput(username, password, schoolName);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void ValidateRegistrationInput_GivenEmptyPassword_ReturnsFalse()
-        {
-            // Arrange
-            var authServices = new AuthServices();
-            var username = "testUsername";
+            var authService = new AuthServices();
             var password = "";
-            var schoolName = "testSchool";
 
-            // Act
-            var result = authServices.ValidateRegistrationInput(username, password, schoolName);
+            var hashedPassword = authService.HashPassword(password);
 
-            // Assert
+            Assert.Empty(hashedPassword);
+        }
+
+        [Fact]
+        public void HashPassword_GivenNull_ReturnsEmpty()
+        {
+            var authService = new AuthServices();
+
+            var hashedPassword = authService.HashPassword(null);
+
+            Assert.Empty(hashedPassword);
+        }
+
+        [Fact]
+        public void VerifyPassword_GivenPasswordAndHashedPassword_ReturnsTrue()
+        {
+            var authService = new AuthServices();
+            var password = "password";
+            var hashedPassword = authService.HashPassword(password);
+
+            var result = authService.VerifyPassword(password, hashedPassword);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void VerfiyPassword_GivenEmptyPasswordAndValidHashedPassword_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var password = "password";
+            var hashedPassword = authService.HashPassword(password);
+
+            var result = authService.VerifyPassword("", hashedPassword);
+
             Assert.False(result);
         }
 
         [Fact]
-        public void ValidateRegistrationInput_GivenEmptySchoolName_ReturnsFalse()
+        public void VerfiyPassword_GivenIncorrectPassword_ReturnsFalse()
         {
-            // Arrange
-            var authServices = new AuthServices();
-            var username = "testUsername";
-            var password = "testPassword";
+            var authService = new AuthServices();
+            var password = "password";
+            var hashedPassword = authService.HashPassword(password);
+
+            var result = authService.VerifyPassword("incorrectPass", hashedPassword);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateInput_GivenUsernameAndPassword_ReturnsTrue()
+        {
+            var authService = new AuthServices();
+            var username = "username";
+            var password = "password";
+
+            var result = authService.ValidateInput(username, password);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void ValidateInput_GivenEmptyUsernameAndCorrectPassword_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "";
+            var password = "password";
+
+            var result = authService.ValidateInput(username, password);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateInput_GivenUsernameAndEmptyPassword_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "username";
+            var password = "";
+
+            var result = authService.ValidateInput(username, password);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateInput_GivenEmptyUsernameAndEmptyPassword_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "";
+            var password = "";
+
+            var result = authService.ValidateInput(username, password);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateRegistrationInput_GivenUsernamePasswordAndSchoolName_ReturnsTrue()
+        {
+            var authService = new AuthServices();
+            var username = "username";
+            var password = "password";
+            var schoolName = "schoolName";
+
+            var result = authService.ValidateRegistrationInput(username, password, schoolName);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void ValidateRegistrationInput_GivenEmptyUsernamePasswordAndSchoolName_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "";
+            var password = "";
             var schoolName = "";
 
-            // Act
-            var result = authServices.ValidateRegistrationInput(username, password, schoolName);
+            var result = authService.ValidateRegistrationInput(username, password, schoolName);
 
-            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateRegistrationInput_GivenEmptyUsernameAndEmptyPasswordAndSchoolName_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "";
+            var password = "";
+            var schoolName = "schoolName";
+
+            var result = authService.ValidateRegistrationInput(username, password, schoolName);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateRegistrationInput_GivenEmptyUsernameAndPasswordAndEmptySchoolName_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "";
+            var password = "password";
+            var schoolName = "";
+
+            var result = authService.ValidateRegistrationInput(username, password, schoolName);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ValidateRegistrationInput_GivenUsernameAndPasswordAndEmptySchoolName_ReturnsFalse()
+        {
+            var authService = new AuthServices();
+            var username = "username";
+            var password = "password";
+            var schoolName = "";
+
+            var result = authService.ValidateRegistrationInput(username, password, schoolName);
+
             Assert.False(result);
         }
     }
