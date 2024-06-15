@@ -1,46 +1,34 @@
 ﻿using BusinessLogicLayer;
+using DatabaseLayer;
 using DatabaseLayer.TestRepositories;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FakeItEasy;
 using Xunit;
-using DatabaseLayer;
 
-namespace UnitTests
-{
-    public class AccountService_Tests
-    {
-        private IAccountRepository _fakeRepo;
-        private AccountService _accountService;
+namespace UnitTests {
+    public class AccountService_Tests {
+        private readonly IAccountRepository _fakeRepo;
+        private readonly AccountService _accountService;
 
-        public AccountService_Tests()
-        {
+        public AccountService_Tests() {
             _fakeRepo = A.Fake<IAccountRepository>();
             _accountService = new AccountService(_fakeRepo);
         }
 
         [Fact]
-        public void AddAccount_NullAccount_ReturnsFalse()
-        {
+        public void AddAccount_NullAccount_ReturnsFalse() {
             var result = _accountService.AddAccount(null);
             Assert.False(result);
         }
 
         [Fact]
-        public void AddAccount_InvalidAccount_ReturnsFalse()
-        {
+        public void AddAccount_InvalidAccount_ReturnsFalse() {
             var account = new Account { username = null, password = "pass", schoolName = "school" };
             var result = _accountService.AddAccount(account);
             Assert.False(result);
         }
 
         [Fact]
-        public void AddAccount_ValidAccount_ReturnsTrue()
-        {
+        public void AddAccount_ValidAccount_ReturnsTrue() {
             var account = new Account { username = "user", password = "pass", schoolName = "school" };
             A.CallTo(() => _fakeRepo.Add(account, true)).Returns(1);
 
@@ -50,8 +38,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void GetAccount_ValidAccount_ReturnsAccoutn()
-        {
+        public void GetAccount_ValidAccount_ReturnsAccount() {
             var account = new Account { username = "user", password = "pass", schoolName = "school" };
             A.CallTo(() => _fakeRepo.Get("user")).Returns(account);
 
@@ -61,8 +48,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void GetAccount_InvalidUsername_ReturnsNull()
-        {
+        public void GetAccount_InvalidUsername_ReturnsNull() {
             A.CallTo(() => _fakeRepo.Get("userDoesNotExist")).Returns(null);
 
             var result = _accountService.GetAccount("userDoesNotExist");

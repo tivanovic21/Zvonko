@@ -48,7 +48,8 @@ namespace AcceptanceTests.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Event", "A short summary of the feature", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Event", "As a school manager\r\nI should be able to define events\r\nthat simbolize type of ev" +
+                    "ents", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -99,7 +100,7 @@ namespace AcceptanceTests.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Go to Add events UC", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 5
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -109,13 +110,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
+#line 8
  testRunner.Given("I\'m logged in and on main screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 7
+#line 9
  testRunner.When("I click Add event button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 8
+#line 10
  testRunner.Then("I should see the Add event screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -130,7 +131,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Leave Add events UC", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 11
+#line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -140,16 +141,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 12
+#line 14
  testRunner.Given("I\'m logged in succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
+#line 15
  testRunner.When("I click Add event button on the main screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 14
+#line 16
  testRunner.And("I click the Cancel button on Add event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 15
+#line 17
  testRunner.Then("I should see the main window after i click cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -165,7 +166,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("startingTime", startingTime);
             argumentsOfScenario.Add("message", message);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid Addition of an Event", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 18
+#line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -175,22 +176,22 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 19
+#line 21
     testRunner.Given("I am logged in on the main screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 20
+#line 22
     testRunner.When("I go to event addition screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 21
+#line 23
     testRunner.And(string.Format("I enter new event details: name {0}, description {1} and starting time {2}", name, description, startingTime), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 22
+#line 24
     testRunner.And("I select the recording", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 23
+#line 25
     testRunner.And("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 24
+#line 26
     testRunner.Then(string.Format("I should see {0} error message in add event screen", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -207,7 +208,7 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant0()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("", "", "", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -222,7 +223,7 @@ this.InvalidAdditionOfAnEvent("", "", "", "Fill out all fields!", ((string[])(nu
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant1()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("newEvent", "", "", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -237,7 +238,7 @@ this.InvalidAdditionOfAnEvent("newEvent", "", "", "Fill out all fields!", ((stri
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant2()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("", "someDesc", "", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -252,7 +253,7 @@ this.InvalidAdditionOfAnEvent("", "someDesc", "", "Fill out all fields!", ((stri
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant3()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("", "", "", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -267,7 +268,7 @@ this.InvalidAdditionOfAnEvent("", "", "", "Fill out all fields!", ((string[])(nu
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant4()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("", "", "12:00:00", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -282,7 +283,7 @@ this.InvalidAdditionOfAnEvent("", "", "12:00:00", "Fill out all fields!", ((stri
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant5()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("newEvent", "someDesc", "", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -297,7 +298,7 @@ this.InvalidAdditionOfAnEvent("newEvent", "someDesc", "", "Fill out all fields!"
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant6()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("newEvent", "", "12:00:00", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -312,7 +313,7 @@ this.InvalidAdditionOfAnEvent("newEvent", "", "12:00:00", "Fill out all fields!"
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "Fill out all fields!")]
         public void InvalidAdditionOfAnEvent_Variant7()
         {
-#line 18
+#line 20
 this.InvalidAdditionOfAnEvent("", "someDesc", "12:00:00", "Fill out all fields!", ((string[])(null)));
 #line hidden
         }
@@ -325,7 +326,7 @@ this.InvalidAdditionOfAnEvent("", "someDesc", "12:00:00", "Fill out all fields!"
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Click reoccurring on the Add events UC", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 38
+#line 40
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -335,16 +336,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 39
+#line 41
     testRunner.Given("I\'m logged in successfully into main", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 40
+#line 42
     testRunner.When("I click Add event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 43
     testRunner.And("I check is not recurring checkbox on Add event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 42
+#line 44
     testRunner.Then("I should see the calendar picker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -359,7 +360,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove an recording without selecting the recording", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 44
+#line 46
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -369,16 +370,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 45
+#line 47
  testRunner.Given("Log in succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 46
+#line 48
  testRunner.When("I click Add event button on main", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 47
+#line 49
  testRunner.And("I click remove event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 48
+#line 50
     testRunner.Then("I should see not allowed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -393,7 +394,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove a selected recording", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 51
+#line 53
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -403,19 +404,19 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 52
+#line 54
     testRunner.Given("Logged in succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 53
+#line 55
     testRunner.When("I click Add event in nav", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 54
+#line 56
     testRunner.And("I select a recording i want to remove", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 55
+#line 57
     testRunner.And("I Click remove selected recording", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 56
+#line 58
  testRunner.Then("I should see the popup saying succesfully deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -430,7 +431,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open update dialog", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 58
+#line 60
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -440,19 +441,19 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 59
+#line 61
     testRunner.Given("Succesfull login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 60
+#line 62
     testRunner.When("I click Add event using navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 61
+#line 63
     testRunner.And("I select an recording to update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 62
+#line 64
     testRunner.And("I Click update selected recording", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 63
+#line 65
  testRunner.Then("I should see the popup where i can edit a recording", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
