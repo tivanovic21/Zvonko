@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,8 @@ namespace Zvonko.UserControls {
             }
             TimeSpan startingTime;
             if (TimeSpan.TryParse(txtStartingTime.Text, out startingTime)) {
-                EventService eventService = new EventService();
+                EventRepository eventRepository = new EventRepository();
+                EventService eventService = new EventService(eventRepository);
 
                 Event newEvent = new Event {
                     name = name,

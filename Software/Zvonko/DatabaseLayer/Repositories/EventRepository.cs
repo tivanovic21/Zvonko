@@ -1,9 +1,11 @@
-﻿using System;
+﻿using DatabaseLayer.TestRepositories;
+using System;
 using System.Data.Entity;
 using System.Linq;
 
 namespace DatabaseLayer.Repositories {
-    public class EventRepository : Repository<Event> {
+    public class EventRepository : Repository<Event>, IEventRepository
+    {
         public EventRepository() : base(new ZvonkoModel9()) {
 
         }
@@ -19,8 +21,17 @@ namespace DatabaseLayer.Repositories {
                         select e;
             return query.OrderBy(sorted => sorted.starting_time);
         }
+
+        public override int Add(Event newEvent, bool saveChanges = true)
+        {
+            Entities.Add(newEvent);
+            if (saveChanges)
+            {
+                return SaveChanges();
+            } else return 0;
+        }
         
-        public int Remove(Event eventToRemove, bool saveChanges = true) {
+        public override int Remove(Event eventToRemove, bool saveChanges = true) {
             Entities.Attach(eventToRemove);
             Entities.Remove(eventToRemove);
             if (saveChanges) {

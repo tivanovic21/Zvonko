@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace IntegrationTests
         public void AddEvent_GivenValidEvent_ReturnsTrue()
         {
             // Arrange
-            var eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             var newEvent = new Event
             {
                 name = "testEvent",
@@ -38,7 +40,8 @@ namespace IntegrationTests
         public void AddEvent_GivenNullEvent_ReturnsFalse()
         {
             // Arrange
-            var eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
 
             // Act
             var result = eventService.AddEvent(null);
@@ -51,7 +54,8 @@ namespace IntegrationTests
         public void GetAllEvents_ReturnsListOfEvents()
         {
             // Arrange
-            var eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
 
             // Act
             var result = eventService.GetAllEvents();
@@ -64,7 +68,8 @@ namespace IntegrationTests
         public void GetAllEventsAndRecordings_ReturnsListOfEventsAndRecordings()
         {
             // Arrange
-            var eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
 
             // Act
             var result = eventService.GetAllEventsAndRecordings();
@@ -77,7 +82,8 @@ namespace IntegrationTests
         public void RemoveEvent_GivenValidEvent_ReturnsTrue()
         {
             // Arrange
-            var eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             var selectedEvent = new Event
             {
                 id = 32, // must match existing id in db
@@ -101,7 +107,8 @@ namespace IntegrationTests
         public void RemoveEvent_GivenNullEvent_ReturnsFalse()
         {
             // Arrange
-            var eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
 
             // Act
             var result = eventService.RemoveEvent(null);

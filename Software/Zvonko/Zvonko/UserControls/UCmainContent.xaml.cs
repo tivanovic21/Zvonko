@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,8 @@ namespace Zvonko.UserControls {
         }
 
         private void btnMonday_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> mondayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) { 
@@ -82,7 +84,8 @@ namespace Zvonko.UserControls {
         }
 
         private void btnTuesday_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> tuesdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
@@ -95,7 +98,8 @@ namespace Zvonko.UserControls {
 
 
         private void btnWednesday_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> wednesdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
@@ -120,7 +124,8 @@ namespace Zvonko.UserControls {
         }
 
         private void btnThursday_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> thursdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
 
@@ -134,7 +139,8 @@ namespace Zvonko.UserControls {
 
 
         private void btnSaturday_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> saturdayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
@@ -146,7 +152,8 @@ namespace Zvonko.UserControls {
         }
 
         private void btnFriday_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> fridayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             foreach (var item in alLEvents) {
@@ -163,7 +170,8 @@ namespace Zvonko.UserControls {
 
         private void btnRemove_Click(object sender, RoutedEventArgs e) {
             Event selectedEvent = GetSelectedEvent();
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             if (selectedEvent != null) {
                 bool removed = eventService.RemoveEvent(selectedEvent);
                 if (removed) {
@@ -175,7 +183,8 @@ namespace Zvonko.UserControls {
         }
 
         private void btnLoadCalendarDate_Click(object sender, RoutedEventArgs e) {
-            EventService eventService = new EventService();
+            EventRepository eventRepository = new EventRepository();
+            EventService eventService = new EventService(eventRepository);
             List<Event> selectedDayEvents = new List<Event>();
             var alLEvents = eventService.GetAllEvents();
             if (string.IsNullOrEmpty(txtPickedDate.Text)){

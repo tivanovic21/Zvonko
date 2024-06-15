@@ -1,44 +1,41 @@
 ﻿using DatabaseLayer;
 using DatabaseLayer.Repositories;
+using DatabaseLayer.TestRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer {
-    public class EventService {
-        
-    public bool AddEvent(Event newEvent)
+    public class EventService
     {
-        if (newEvent == null) return false;
-        using (var repo = new EventRepository())
-        {
-            int affectedRows = repo.Add(newEvent, true);
-            if (affectedRows > 0)
-            {
-                return true;
-            } else return false;
-        }
-    }
-    public IEnumerable<Event> GetAllEvents() {
-            using (var repo = new EventRepository()) {
-                return repo.Get().ToList();
-            }
-    }
+        private readonly IEventRepository _eventRepository;
 
-    public IEnumerable<Event> GetAllEventsAndRecordings() {
-        using (var repo = new EventRepository()) {
-            return repo.GetRecordingsAndEvents().ToList();
+        public EventService(IEventRepository eventRepository)
+        {
+            _eventRepository = eventRepository;
         }
-    }
-    public bool RemoveEvent(Event eventToRemove) {
-        if (eventToRemove == null) return false;
-        using (var repo = new EventRepository()) {
-            int affectedRows = repo.Remove(eventToRemove, true);
+
+        public bool AddEvent(Event newEvent)
+        {
+            if (newEvent == null) return false;
+            int affectedRows = _eventRepository.Add(newEvent, true);
             return affectedRows > 0;
         }
-    }
+        public IEnumerable<Event> GetAllEvents() {
+            return _eventRepository.Get().ToList();
+        }
+
+        public IEnumerable<Event> GetAllEventsAndRecordings() {
+            return _eventRepository.GetRecordingsAndEvents().ToList();
+        }
+        public bool RemoveEvent(Event eventToRemove) {
+            if (eventToRemove == null) return false;
+            int affectedRows = _eventRepository.Remove(eventToRemove, true);
+            return affectedRows > 0;
+        }
 
     }
 }
