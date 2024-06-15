@@ -30,7 +30,8 @@ namespace Zvonko {
 
             EventRepository eventRepository = new EventRepository();
             EventService eventService = new EventService(eventRepository);
-            RecordingService recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
 
             var allEvents = eventService.GetAllEventsAndRecordings();
             List<String> days = new List<String>();

@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -14,7 +15,8 @@ namespace Zvonko.UserControls
     /// </summary>
     public partial class UCaddSound : UserControl
     {
-        private readonly RecordingService recordingService = new RecordingService();
+        private static RecordingRepository recordingRepository = new RecordingRepository();
+        private readonly RecordingService recordingService = new RecordingService(recordingRepository);
         private byte[] _storedFile;
 
         public UCaddSound()

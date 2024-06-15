@@ -4,6 +4,7 @@ using DatabaseLayer.TestRepositories;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,20 +53,34 @@ namespace BusinessLogicLayer {
             } else return false;
         }
 
+        private WaveOutEvent _waveOut;
         public void PlayRecording(Recording recording) {
             if (recording == null) return;
-            var _waveOut = new WaveOutEvent();
-            if (_waveOut != null) {
-                StopRecording();
+
+            try
+            {
+                if (_waveOut != null)
+                {
+                    StopRecording();
+                }
+
+                _waveOut = new WaveOutEvent();
+                var audioFileReader = new AudioFileReader(recording.storedFile);
+                _waveOut.Init(audioFileReader);
+                _waveOut.Play();
+                isPlaying = true;
+            } catch (FileNotFoundException ex)
+            {
+                Console.WriteLine($"File not found: {ex.Message}");
+                isPlaying = false;
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"Error playing recording: {ex.Message}");
+                isPlaying = false;
             }
-            var audioFileReader = new AudioFileReader(recording.storedFile);
-            _waveOut.Init(audioFileReader);
-            _waveOut.Play();
-            isPlaying = true;
         }
 
-        private void StopRecording() {
-            var _waveOut = new WaveOutEvent();
+        public void StopRecording() {
             if (_waveOut != null && _waveOut.PlaybackState == PlaybackState.Playing) {
                 _waveOut.Stop();
                 _waveOut.Dispose();

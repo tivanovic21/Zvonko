@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using Microsoft.Win32;
 using NAudio.Wave;
 using System;
@@ -47,7 +48,8 @@ namespace Zvonko
                     return;
             }
 
-            RecordingService recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
 
             Recording recording = new Recording
             {
