@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DatabaseLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace IntegrationTests
         public void GetAccount_GivenCorrectUsername_ReturnsAccount()
         {
             // Arrange
-            var accountService = new AccountService();
+            var accountRepository = new AccountRepository();
+            var accountService = new AccountService(accountRepository);
 
             // Act
             var result = accountService.GetAccount("dev");
@@ -28,7 +30,8 @@ namespace IntegrationTests
         public void GetAccount_GivenIncorrectUsername_RetrunsNull()
         {
             // Arrange
-            var accountService = new AccountService();
+            var accountRepository = new AccountRepository();
+            var accountService = new AccountService(accountRepository);
 
             // Act
             var result = accountService.GetAccount("incorrectUsername");
@@ -41,7 +44,8 @@ namespace IntegrationTests
         public void GetAccount_GivenEmptyString_ReturnsNull()
         {
             // Arrange
-            var accountService = new AccountService();
+            var accountRepository = new AccountRepository();
+            var accountService = new AccountService(accountRepository);
 
             // Act
             var result = accountService.GetAccount("");
@@ -54,7 +58,8 @@ namespace IntegrationTests
         public void AddAccount_GivenValidAccount_ReturnsTrue()
         {
             // Arrange
-            var accountService = new AccountService();
+            var accountRepository = new AccountRepository();
+            var accountService = new AccountService(accountRepository);
             var newAccount = new Account
             {
                 username = "newTestUser",
@@ -73,7 +78,8 @@ namespace IntegrationTests
         public void AddAccount_GivenNullAccount_ReturnsFalse()
         {
             // Arrange
-            var accountService = new AccountService();
+            var accountRepository = new AccountRepository();
+            var accountService = new AccountService(accountRepository);
 
             // Act
             var result = accountService.AddAccount(null);
@@ -86,7 +92,8 @@ namespace IntegrationTests
         public void AddAccount_GivenInvalidAccount_ReturnsFalse()
         {
             // Arrange
-            var accountService = new AccountService();
+            var accountRepository = new AccountRepository();
+            var accountService = new AccountService(accountRepository);
             var newAccount = new Account
             {
                 username = "newTestUserNoSchool",

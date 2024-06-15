@@ -8,8 +8,8 @@ namespace DatabaseLayer.TestRepositories
 {
     public interface IAccountRepository
     {
+        int Add(Account account, bool saveChanges);
         Account Get(string username);
-
-        void Dispose();
+        int Update(Account entity, bool saveChanges = true);
     }
 }
