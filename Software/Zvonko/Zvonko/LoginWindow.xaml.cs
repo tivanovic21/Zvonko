@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using DatabaseLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,8 @@ namespace Zvonko {
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            AccountService accountService = new AccountService();
+            AccountRepository accRepo = new AccountRepository();
+            AccountService accountService = new AccountService(accRepo);
 
             string username = txtUsername.Text;
             string password = txtPassword.Password;

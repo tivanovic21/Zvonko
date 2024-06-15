@@ -63,7 +63,7 @@ namespace IntegrationTests
             // Arrange
             var recordingService = new RecordingService();
 
-            var existingRecordingId = 1053;
+            var existingRecordingId = 1055;
 
             // Act
             var existingRecording = GetRecordingById(existingRecordingId);
@@ -81,7 +81,7 @@ namespace IntegrationTests
         public void UpdateRecording_AzuriranjePodatakaZvucnogZapisa_UpdatedRecording() {
             // Arrange
             var recordingService = new RecordingService();
-            var existingRecordingId = 1052;
+            var existingRecordingId = 1055;
             var updatedRecording = new Recording {
                 id = existingRecordingId,
                 name = "Updated Recording Name",

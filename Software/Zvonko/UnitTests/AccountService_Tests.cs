@@ -1,103 +1,73 @@
 ﻿using BusinessLogicLayer;
-using DatabaseLayer;
+using DatabaseLayer.TestRepositories;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FakeItEasy;
 using Xunit;
+using DatabaseLayer;
 
-namespace IntegrationTests
+namespace UnitTests
 {
     public class AccountService_Tests
     {
-        [Fact]
-        public void GetAccount_GivenCorrectUsername_ReturnsAccount()
+        private IAccountRepository _fakeRepo;
+        private AccountService _accountService;
+
+        public AccountService_Tests()
         {
-            // Arrange
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.GetAccount("dev");
-
-            // Assert
-            Assert.NotNull(result);
+            _fakeRepo = A.Fake<IAccountRepository>();
+            _accountService = new AccountService(_fakeRepo);
         }
 
         [Fact]
-        public void GetAccount_GivenIncorrectUsername_RetrunsNull()
+        public void AddAccount_NullAccount_ReturnsFalse()
         {
-            // Arrange
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.GetAccount("incorrectUsername");
-
-            // Assert
-            Assert.Null(result);
+            var result = _accountService.AddAccount(null);
+            Assert.False(result);
         }
 
         [Fact]
-        public void GetAccount_GivenEmptyString_ReturnsNull()
+        public void AddAccount_InvalidAccount_ReturnsFalse()
         {
-            // Arrange
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.GetAccount("");
-
-            // Assert
-            Assert.Null(result);
+            var account = new Account { username = null, password = "pass", schoolName = "school" };
+            var result = _accountService.AddAccount(account);
+            Assert.False(result);
         }
 
         [Fact]
-        public void AddAccount_GivenValidAccount_ReturnsTrue()
+        public void AddAccount_ValidAccount_ReturnsTrue()
         {
-            // Arrange
-            var accountService = new AccountService();
-            var newAccount = new Account
-            {
-                username = "newTestUser",
-                password = "newTestUser",
-                schoolName = "new test school",
-            };
+            var account = new Account { username = "user", password = "pass", schoolName = "school" };
+            A.CallTo(() => _fakeRepo.Add(account, true)).Returns(1);
 
-            // Act 
-            var result = accountService.AddAccount(newAccount);
+            var result = _accountService.AddAccount(account);
 
-            // Assert
             Assert.True(result);
         }
 
         [Fact]
-        public void AddAccount_GivenNullAccount_ReturnsFalse()
+        public void GetAccount_ValidAccount_ReturnsAccoutn()
         {
-            // Arrange
-            var accountService = new AccountService();
+            var account = new Account { username = "user", password = "pass", schoolName = "school" };
+            A.CallTo(() => _fakeRepo.Get("user")).Returns(account);
 
-            // Act
-            var result = accountService.AddAccount(null);
+            var result = _accountService.GetAccount("user");
 
-            // Assert
-            Assert.False(result);
+            Assert.Equal(account, result);
         }
 
         [Fact]
-        public void AddAccount_GivenInvalidAccount_ReturnsFalse()
+        public void GetAccount_InvalidUsername_ReturnsNull()
         {
-            // Arrange
-            var accountService = new AccountService();
-            var newAccount = new Account
-            {
-                username = "newTestUserNoSchool",
-                password = "newTestUserNoSchool",
-            };
+            A.CallTo(() => _fakeRepo.Get("userDoesNotExist")).Returns(null);
 
-            // Act 
-            var result = accountService.AddAccount(newAccount);
+            var result = _accountService.GetAccount("userDoesNotExist");
 
-            // Assert
-            Assert.False(result);
+            Assert.Null(result);
         }
     }
 }
