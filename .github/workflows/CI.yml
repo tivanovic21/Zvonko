@@ -1,4 +1,4 @@
-name: Zvonko CI
+name: Build and Test CI Workflow
 
 on:
   push:
@@ -7,60 +7,42 @@ on:
     branches: [master]
 
 jobs:
-
   build:
-
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
-
     runs-on: windows-latest
-
-    env:
-      Solution_Name: Software\Zvonko\Zvonko.sln
-      IntegrationTests_Project_Path: Software\Zvonko\IntegrationTests\IntegrationTests.csproj
-      UnitTests_Project_Path: Software\Zvonko\UnitTests\UnitTests.csproj
-      Artifact_Directory: Software\Zvonko\Zvonko\bin\Release  # Adjust this path to your actual output directory
-
+    
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install .NET Core SDK
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 4.8.x
-
-    - name: Navigate to root folder
-      run: cd $GITHUB_WORKSPACE
-
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v2
-
-    # Restore NuGet packages and build solution
-    - name: Restore and Build
-      run: |
-        msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-        msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform="Any CPU"
-
-    # Execute unit tests
-    - name: Run Unit Tests
-      run: dotnet test $env:UnitTests_Project_Path --configuration $env:Configuration
-
-    # Execute integration tests
-    - name: Run Integration Tests
-      run: dotnet test $env:IntegrationTests_Project_Path --configuration $env:Configuration
-
-    # Publish WPF application
-    - name: Publish WPF Application
-      run: |
-        msbuild $env:Solution_Name /t:Publish /p:Configuration=$env:Configuration /p:Platform="Any CPU"
-
-    # Upload built artifacts
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: WPF-Application
-        path: $env:Artifact_Directory
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.2.0
+        
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
+      
+      - name: Navigate to root folder
+        run: cd $GITHUB_WORKSPACE
+        
+      - name: Restore NuGet Packages
+        run: nuget restore
+        
+      - name: Build Solution
+        run: msbuild /p:platform="Any CPU" /p:configuration=Release
+        
+      - name: Run Unit tests
+        run: dotnet test --configuration Release --filter UnitTests
+        
+      - name: Run Integration tests
+        run: dotnet test --configuration Release --filter IntegrationTests
+      
+      - name: Navigate to startup project
+        run: cd PresentationLayer
+        
+      - name: Publish applications
+        run: msbuild /t:publish /p:configuration=Release /p:PublishDir=publish/
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: ZvonkoSetup
+          path: PresentationLayer/publish/
