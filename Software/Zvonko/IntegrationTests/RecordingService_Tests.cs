@@ -15,7 +15,8 @@ namespace IntegrationTests
         [Fact]
         public void GetAllRecordings_UcitavanjeSvihZvucnihZapisa_ReturnsAllRecordings() {
             // Arrange
-            var recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
 
             // Act
             var result = recordingService.GetAllRecordings();
@@ -28,7 +29,8 @@ namespace IntegrationTests
         [Fact]
         public void GetEmergencyRecordings_DohvacanjeZvucnihZapisaHitneEvakuacije_ReturnsAllRecordings() {
             // Arrange
-            var recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
 
             // Act
             var result = recordingService.GetEmergencyRecordings();
@@ -41,7 +43,8 @@ namespace IntegrationTests
         [Fact]
         public void AddRecording_UvozZvucnogZapisaOdgovarajucegFormata_DodajeNoviZapis() {
             // Arrange
-            var recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
             var newRecording = new Recording {
                 name = "Recording Add New Test",
                 duration = TimeSpan.FromMinutes(5),
@@ -61,7 +64,8 @@ namespace IntegrationTests
         [Fact]
         public void RemoveRecording_BrisanjeOdabranogZvucnogZapisa_RemovedRecording() {
             // Arrange
-            var recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
 
             var existingRecordingId = 1055;
 
@@ -80,7 +84,8 @@ namespace IntegrationTests
         [Fact]
         public void UpdateRecording_AzuriranjePodatakaZvucnogZapisa_UpdatedRecording() {
             // Arrange
-            var recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
             var existingRecordingId = 1055;
             var updatedRecording = new Recording {
                 id = existingRecordingId,
@@ -110,7 +115,8 @@ namespace IntegrationTests
         [Fact]
         public void PlayRecording_PokretanjeZvucnogZapisaZvona_StartsPlayingRecording() {
             // Arrange
-            var recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
             string relativePath = @"..\..\..\TestSounds\Cool Ringtone.mp3";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string absolutePath = Path.GetFullPath(Path.Combine(basePath, relativePath));

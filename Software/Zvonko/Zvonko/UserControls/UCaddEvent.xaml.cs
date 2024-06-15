@@ -35,7 +35,8 @@ namespace Zvonko.UserControls {
         }
 
         private /*async*/ void GetAllRecordings() {
-            RecordingService recordingService = new RecordingService();
+            RecordingRepository recRepository = new RecordingRepository();
+            RecordingService recordingService = new RecordingService(recRepository);
             dgRecordings.ItemsSource = /*await*/ recordingService.GetAllRecordings();
         }
 
@@ -185,7 +186,8 @@ namespace Zvonko.UserControls {
             Recording selectedRecording = GetSelectedRecording();
             if(selectedRecording != null)
             {
-                RecordingService recordingService = new RecordingService();
+                RecordingRepository recRepository = new RecordingRepository();
+                RecordingService recordingService = new RecordingService(recRepository);
                 bool success = recordingService.RemoveRecording(selectedRecording);
                 if (success)
                 {
