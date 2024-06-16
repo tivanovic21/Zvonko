@@ -43,7 +43,7 @@ namespace AcceptanceTests.StepDefinitions {
         [Then(@"i should see the user profile user control")]
         public void ThenIShouldSeeTheUserProfileUserControl() {
             var driver = GuiDriver.GetDriver();
-            var lblAddEvent = driver.FindElementByName("Update Event Details");
+            var lblAddEvent = driver.FindElementByName("User Profile");
             Assert.IsNotNull(lblAddEvent, "Add Event UserControl is not displayed");
         }
 

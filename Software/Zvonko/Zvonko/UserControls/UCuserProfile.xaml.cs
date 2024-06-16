@@ -23,7 +23,7 @@ namespace Zvonko.UserControls {
     /// </summary>
     public partial class UCuserProfile : UserControl {
         public Account _loggedUser;
-        private AccountRepository accountRepository;
+        private AccountRepository accountRepository = new AccountRepository();
         public UCuserProfile(Account loggedUser) {
             InitializeComponent();
             _loggedUser = loggedUser;

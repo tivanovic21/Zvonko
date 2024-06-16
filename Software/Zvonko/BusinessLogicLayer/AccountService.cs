@@ -33,11 +33,10 @@ namespace BusinessLogicLayer
         }
 
         public int UpdateAccount(Account account) {
-            if (account == null || account.username == null  || account.schoolName == null)
+            if (account == null || account.username == null || account.schoolName == null)
                 return 0;
 
-            int affectedRows = _accountRepository.Update(account, true);
-            return affectedRows;
+            return _accountRepository.Update(account, true);
         }
     }
 }
