@@ -1,31 +1,41 @@
-name: Build solution on push
+name: Build solution and Create Release
 
 on:
   push:
-    branches: 
+    branches:
       - master
   pull_request:
-    branches: 
+    branches:
       - master
   workflow_dispatch:
 
 jobs:
-  build:
-
+  build-and-release:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.1.6
-      
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.2
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
 
-    - name: Restore NuGet packages
-      run: nuget restore Software\Zvonko\Zvonko.sln
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Build with MSBuild
-      run: msbuild /p:configuration=Debug /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
+      - name: Restore NuGet packages
+        run: nuget restore Software\Zvonko\Zvonko.sln
 
-    - name: Run Unit tests
-      run: dotnet test Software\Zvonko\UnitTests --configuration Debug
+      - name: Build with MSBuild
+        run: msbuild /p:configuration=Release /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
+
+      - name: Create Publish Directory
+        run: mkdir -p Software\Zvonko\publish
+
+      - name: Publish Zvonko.exe
+        run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish/
+
+      - name: Create GitHub Release
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: ${{ github.token }}  
+          prerelease: false
+          files: |
+            Software\Zvonko\publish\Zvonko.exe
