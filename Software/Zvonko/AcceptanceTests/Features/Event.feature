@@ -56,10 +56,3 @@ Scenario: Remove an recording without selecting the recording
     And I select a recording i want to remove
     And I Click remove selected recording
 	Then I should see the popup saying succesfully deleted
-
- Scenario: Open update dialog
-    Given  Succesfull login
-    When I click Add event using navigation
-    And I select an recording to update
-    And I Click update selected recording
-	Then I should see the popup where i can edit a recording

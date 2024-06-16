@@ -49,18 +49,30 @@ namespace DatabaseLayer.Repositories {
 
 
         public override int Remove(Recording recordingToRemove, bool saveChanges = true) {
-            var foreignKeyEvents = Context.Events.Where(e => e.recordingId == recordingToRemove.id);
-            foreach(var foreignKeyEvent in foreignKeyEvents) {
+            // Fetch the recording from the context to ensure it's attached to the current context
+            var recording = Context.Recordings.SingleOrDefault(r => r.id == recordingToRemove.id);
+            if (recording == null) {
+                throw new InvalidOperationException("Recording not found in the context.");
+            }
+
+            // Fetch and update related events
+            var foreignKeyEvents = Context.Events.Where(e => e.recordingId == recording.id).ToList();
+            foreach (var foreignKeyEvent in foreignKeyEvents) {
                 foreignKeyEvent.recordingId = null;
             }
-            Entities.Attach(recordingToRemove);
-            Entities.Remove(recordingToRemove);
+
+            // Attach and remove the recording
+            Entities.Attach(recording);
+            Entities.Remove(recording);
+
+            // Save changes if required
             if (saveChanges) {
                 return SaveChanges();
             } else {
                 return 0;
             }
         }
+
 
         public override int Update(Recording selectedRecording, bool saveChanges = true)
         {
