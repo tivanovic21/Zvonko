@@ -27,6 +27,10 @@ namespace BusinessLogicLayer {
         public IEnumerable<Event> GetAllEvents() {
             return _eventRepository.Get().ToList();
         }
+        
+        public IEnumerable<Event> GetSelectedEvent(Event selectedEvent) {
+            return _eventRepository.GetEvent(selectedEvent).ToList();
+        }
 
         public IEnumerable<Event> GetAllEventsAndRecordings() {
             return _eventRepository.GetRecordingsAndEvents().ToList();
@@ -34,6 +38,12 @@ namespace BusinessLogicLayer {
         public bool RemoveEvent(Event eventToRemove) {
             if (eventToRemove == null) return false;
             int affectedRows = _eventRepository.Remove(eventToRemove, true);
+            return affectedRows > 0;
+        }
+
+        public bool UpdateEvent(Event selectedEvent) {
+            if (selectedEvent == null) return false;
+            int affectedRows = _eventRepository.Update(selectedEvent, true);
             return affectedRows > 0;
         }
 

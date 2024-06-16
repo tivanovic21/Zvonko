@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Zvonko.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="609.206" d:DesignWidth="837.565"
              Background="White">
 
     <StackPanel Orientation="Vertical" Margin="10px">
@@ -48,9 +48,9 @@
             </DataGrid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Update event" Background="White" Width="120" Height="40" HorizontalAlignment="Left" Margin="0,5,70,0" BorderThickness="0 0 0 0"/>
+            <Button Content="Update event" Background="White" Width="120" Height="40" HorizontalAlignment="Left" Margin="0,5,70,0" BorderThickness="0 0 0 0" x:Name="btnUpdate" Click="btnUpdate_Click"/>
             <Button x:Name="btnRemove" BorderThickness="0 0 0 0" Content="Remove event" Background="White" Width="120" Height="40" HorizontalAlignment="Right" Margin="70,5,0,0" Click="btnRemove_Click"/>
         </StackPanel>
     </StackPanel>
- 
+
 </UserControl>

@@ -207,8 +207,21 @@ namespace Zvonko.UserControls {
             }
             dgRecordings.ItemsSource = selectedDayEvents;
         }
-        
-        
-        
+
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e) {
+            var selected = GetSelectedEvent();
+            if(selected == null) {
+                MessageBox.Show("Please select an event you want to update");
+                return;
+            }
+            Window parentWindow = Window.GetWindow(this);
+            if (parentWindow != null && parentWindow is MainWindow) {
+                MainWindow mainWindow = (MainWindow)parentWindow;
+                mainWindow.LoadUpdateUC(selected);
+            }
+
+        }
+
     }
 }

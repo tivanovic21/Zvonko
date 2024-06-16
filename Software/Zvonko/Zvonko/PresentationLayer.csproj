@@ -114,6 +114,9 @@
     <Compile Include="UserControls\UCmainContent.xaml.cs">
       <DependentUpon>UCmainContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCupdateEvent.xaml.cs">
+      <DependentUpon>UCupdateEvent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCuserProfile.xaml.cs">
       <DependentUpon>UCuserProfile.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCmainContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCupdateEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

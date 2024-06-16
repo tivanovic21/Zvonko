@@ -44,6 +44,11 @@ namespace Zvonko
             contentPanel.Content = ucMainContent;
         }
 
+        public void LoadUpdateUC(Event selected) {
+            UCupdateEvent uCupdateEvent = new UCupdateEvent(selected);
+            contentPanel.Content = uCupdateEvent;
+        }
+
         private void btnNewSound_Click(object sender, RoutedEventArgs e)
         {
             UCaddSound ucAddSound = new UCaddSound();

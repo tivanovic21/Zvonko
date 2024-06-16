@@ -13,5 +13,6 @@ namespace DatabaseLayer.TestRepositories
         int Add(Event newEvent, bool saveChanges = true);
         int Remove(Event eventToRemove, bool saveChanges = true);
         int Update(Event entity, bool saveChanges = true);
+        IEnumerable<Event> GetEvent(Event selectedEvent);
     }
 }
