@@ -1,4 +1,4 @@
-name: Build solution and Create Release
+name: Build and Publish Zvonko
 
 on:
   push:
@@ -10,23 +10,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-release:
+  build-and-publish:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4.1.6
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.2.0
 
       - name: Restore NuGet packages
         run: nuget restore Software\Zvonko\Zvonko.sln
 
       - name: Create Publish Directory
-        run: mkdir -p Software\Zvonko\publish
+        run: mkdir Software\Zvonko\publish
 
-      - name: Navigate to Solution Directory
+      - name: Navigate to Project Directory
         run: cd Software\Zvonko
 
       - name: Publish Zvonko.exe
@@ -35,10 +35,13 @@ jobs:
       - name: Navigate back to working directory
         run: cd ..
 
+      - name: List publish directory contents
+        run: dir Software\Zvonko\publish  
+        
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          repo_token: ${{ github.token }} 
+          repo_token: ${{ github.token }}
           prerelease: false
           files: |
             Software\Zvonko\publish\Zvonko.exe
