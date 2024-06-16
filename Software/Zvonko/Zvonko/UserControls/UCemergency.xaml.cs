@@ -90,7 +90,7 @@ namespace Zvonko.UserControls
         {
             if(_waveOut != null)
             {
-                StopRecording();
+                StopRecording();//A
             }
 
             if (File.Exists(recording.storedFile))
