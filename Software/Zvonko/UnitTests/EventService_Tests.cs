@@ -68,6 +68,49 @@ namespace UnitTests
         }
 
         [Fact]
+        public void UpdateEvent_NullEvent_ReturnsFalse() {
+            var nullEvent = null as Event;
+            A.CallTo(() => _fakeRepo.Update(nullEvent, true)).Returns(0);
+
+            var result = _eventService.UpdateEvent(nullEvent);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void UpdateEvent_ValidEvent_ReturnsTrue() {
+            var newEvent = new Event {
+                id = 1,
+                name = "validEvent",
+                description = "validEvent",
+                starting_time = DateTime.Now.TimeOfDay,
+                date = DateTime.Now,
+                recordingId = 1
+            };
+            A.CallTo(() => _fakeRepo.Update(newEvent, true)).Returns(1);
+
+            var result = _eventService.UpdateEvent(newEvent);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void UpdateEvent_InvalidEvent_ReturnsFalse() {
+            var newInvalidEvent = new Event {
+                id = 1,
+                name = "invalidEvent",
+                description = "invalidEvent",
+                starting_time = DateTime.Now.TimeOfDay,
+                date = DateTime.Now,
+            };
+            A.CallTo(() => _fakeRepo.Update(newInvalidEvent, true)).Returns(0);
+
+            var result = _eventService.UpdateEvent(newInvalidEvent);
+
+            Assert.False(result);
+        }
+
+        [Fact]
         public void GetAllEvents_HasValidEvents_ReturnsListOfEvents()
         {
             var returnEvents = new List<Event>
