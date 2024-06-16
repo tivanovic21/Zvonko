@@ -26,3 +26,6 @@ jobs:
 
     - name: Build with MSBuild
       run: msbuild /p:configuration=Debug /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
+
+    - name: Run Unit tests
+      run: dotnet test Software\Zvonko\UnitTests --configuration Debug
