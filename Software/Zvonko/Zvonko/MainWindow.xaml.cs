@@ -72,5 +72,10 @@ namespace Zvonko
             UCmainContent ucMainContent = new UCmainContent();
             contentPanel.Content = ucMainContent;
         }
+
+        private void btnUserProfile_Click(object sender, RoutedEventArgs e) {
+            UCuserProfile ucUserProfile = new UCuserProfile(LoggedUser);
+            contentPanel.Content = ucUserProfile;
+        }
     }
 }

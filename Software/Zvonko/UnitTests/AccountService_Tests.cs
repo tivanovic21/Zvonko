@@ -55,5 +55,37 @@ namespace UnitTests {
 
             Assert.Null(result);
         }
+
+        
+        [Fact]
+        public void UpdateAccount_ValidAccount_ReturnsAffectedRows() {
+            var account = new Account { username = "userUpd", password = "userUpd", schoolName = "schoolUpd", macAddress = "00:00:00:00" };
+            A.CallTo(() => _fakeRepo.Update(account, true)).Returns(1);
+
+            var result = _accountService.UpdateAccount(account);
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void UpdateAccount_InvalidAccount_ReturnsZero() {
+            var account = new Account { username = "fakeAcc" };
+            A.CallTo(() => _fakeRepo.Update(account, true)).Returns(0);
+
+            var result = _accountService.UpdateAccount(account);
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void UpdateAccount_NullAccount_ReturnsZero() {
+            var account = null as Account;
+            A.CallTo(() => _fakeRepo.Update(account, true)).Returns(0);
+
+            var result = _accountService.UpdateAccount(account);
+
+            Assert.Equal(0, result);
+        }
+        
     }
 }

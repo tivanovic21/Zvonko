@@ -38,9 +38,19 @@ namespace DatabaseLayer.Repositories
             return query.FirstOrDefault();  
         }
 
-        public override int Update(Account entity, bool saveChanges = true)
-        {
-            throw new NotImplementedException();
+        public override int Update(Account entity, bool saveChanges = true) {
+            var account = Entities.SingleOrDefault(s => s.id == entity.id);
+            account.username = entity.username;
+            account.password = account.password;
+            account.schoolName = entity.schoolName;
+            account.macAddress = entity.macAddress;
+
+            if (saveChanges) {
+                return SaveChanges();
+            } else {
+                return 0;
+            }
         }
+
     }
 }

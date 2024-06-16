@@ -20,6 +20,7 @@
                 <Button Margin="5px" x:Name="btnAddEvent" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnAddEvent_Click">Add an event</Button>
                 <Button Margin="5px" x:Name="btnLiveBroadcast" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnLiveBroadcast_Click" AutomationProperties.AutomationId="btnLiveBroadcast">Live broadcast</Button>
                 <Button Margin="5px" x:Name="btnEmergency" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnEmergency_Click" AutomationProperties.AutomationId="btnEmergency">Emergency</Button>
+                <Button Margin="5px" x:Name="btnUserProfile" Width="200px" Height="40px" Background="White" BorderThickness="0px" Click="btnUserProfile_Click" AutomationProperties.AutomationId="btnUserProfile">User profile</Button>
             </StackPanel>
             <Button Margin="5px" x:Name="btnLogout" Width="200px" Height="40px" Background="White" BorderThickness="0px" VerticalAlignment="Bottom" Grid.Row="1" Click="btnLogout_Click">Logout</Button>
         </Grid>

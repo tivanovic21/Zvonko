@@ -4,6 +4,7 @@ using DatabaseLayer.TestRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,14 @@ namespace BusinessLogicLayer
         public Account GetAccount(string username)
         {
             return _accountRepository.Get(username);
+        }
+
+        public int UpdateAccount(Account account) {
+            if (account == null || account.username == null  || account.schoolName == null)
+                return 0;
+
+            int affectedRows = _accountRepository.Update(account, true);
+            return affectedRows;
         }
     }
 }
