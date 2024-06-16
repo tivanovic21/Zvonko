@@ -46,7 +46,7 @@ namespace Zvonko.UserControls {
             _loggedUser.schoolName = txtSchoolName.Text;
             _loggedUser.macAddress = txtMacAddress.Text;
 
-            accountService.UpdateSession(_loggedUser);
+            accountService.UpdateAccount(_loggedUser);
             MessageBox.Show("User profile succesfully updated");
         }
 
