@@ -333,8 +333,11 @@ namespace AcceptanceTests.StepDefinitions
 
             var messageBoxTextElement = driver.FindElement(By.XPath("//Text"));
             string actualMessage = messageBoxTextElement.Text.Trim();
-
             Assert.AreEqual(expectedMessage, actualMessage);
+
+            var okButton = driver.FindElement(By.XPath("//Button[contains(@Name, 'OK')]"));
+            okButton.Click();
+            driver.CloseApp();
         }
 
 
