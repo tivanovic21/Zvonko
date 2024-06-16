@@ -30,8 +30,8 @@ jobs:
     - name: Create publish directory
       run: mkdir -p Software\Zvonko\publish
 
-    - name: Create a setup
-      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish
+    - name: Publish to directory
+      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish\ Software\Zvonko\Zvonko.sln
 
     - name: Create zip archive
       uses: TheDoctor0/zip-release@0.7.1
