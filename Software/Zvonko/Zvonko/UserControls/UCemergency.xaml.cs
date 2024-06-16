@@ -99,10 +99,10 @@ namespace Zvonko.UserControls
                 var audioFileReader = new AudioFileReader(recording.storedFile);
                 _waveOut.Init(audioFileReader);
                 _waveOut.Play();
-                playingIndicator.Text = "Playing"; // for testing purposes
+                playingIndicator.Text = "Playing"; // for testing 
             } else
             {
-                playingIndicator.Text = ""; // for testing purposes
+                playingIndicator.Text = ""; // for testing 
                 //MessageBox.Show("File not found!");
             }
         }
