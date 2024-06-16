@@ -4,6 +4,8 @@ on:
   push:
     branches: 
       - master
+    tags:
+      - "v*"
   pull_request:
     branches: 
       - master
@@ -27,8 +29,11 @@ jobs:
     - name: Build with MSBuild
       run: msbuild /p:configuration=Release /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
 
-    - name: Create a setup
-      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=publish/
+    - name: Create publish directory
+      run: mkdir -p Software\Zvonko\publish
+
+    - name: Publish to directory
+      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish\ Software\Zvonko\Zvonko.sln
 
     - name: Create zip archive
       uses: TheDoctor0/zip-release@0.7.1
@@ -38,6 +43,7 @@ jobs:
         path: Software\Zvonko\publish
 
     - name: Create a release
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: marvinpinto/action-automatic-releases@v1.2.1
       with:
         repo_token: ${{secrets.GITHUB_TOKEN}}
