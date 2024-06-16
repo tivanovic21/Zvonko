@@ -1,45 +1,45 @@
-name: Build and Publish Zvonko
+name: Build solution on push
 
 on:
   push:
-    branches:
+    branches: 
       - master
   pull_request:
-    branches:
+    branches: 
       - master
   workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  build:
+
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4.1.6
+    - name: Checkout
+      uses: actions/checkout@v4.1.6
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.2.0
+    - name: Restore NuGet packages
+      run: nuget restore Software\Zvonko\Zvonko.sln
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.2
+    - name: Build with MSBuild
+      run: msbuild /p:configuration=Release /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
 
-      - name: Restore NuGet packages
-        run: nuget restore Software\Zvonko\Zvonko.sln
+    - name: Create a setup
+      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=publish/
 
-      - name: Create Publish Directory
-        run: mkdir Software\Zvonko\publish
+    - name: Create zip archive
+      uses: TheDoctor0/zip-release@0.7.1
+      with:
+        type: 'zip'
+        filename: 'setup.zip'
+        path: Software\Zvonko\publish
 
-      - name: Build Zvonko.exe
-        run: |
-          msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish Zvonko.sln
-
-      - name: List publish directory contents
-        run: dir Software\Zvonko\publish  
-        
-      - name: Create GitHub Release
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: ${{ github.token }}
-          prerelease: false
-          files: |
-            Software\Zvonko\publish\Zvonko.exe
+    - name: Create a release
+      uses: marvinpinto/action-automatic-releases@v1.2.1
+      with:
+        repo_token: ${{secrets.GITHUB_TOKEN}}
+        prerelease: false
+        files: setup.zip
