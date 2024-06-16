@@ -23,19 +23,22 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore Software\Zvonko\Zvonko.sln
 
-      - name: Build with MSBuild
-        run: msbuild /p:configuration=Release /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
-
       - name: Create Publish Directory
         run: mkdir -p Software\Zvonko\publish
 
+      - name: Navigate to Solution Directory
+        run: cd Software\Zvonko
+
       - name: Publish Zvonko.exe
-        run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish/
+        run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=publish Zvonko.sln
+
+      - name: Navigate back to working directory
+        run: cd ..
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          repo_token: ${{ github.token }}  
+          repo_token: ${{ github.token }} 
           prerelease: false
           files: |
             Software\Zvonko\publish\Zvonko.exe
