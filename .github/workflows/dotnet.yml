@@ -27,8 +27,11 @@ jobs:
     - name: Build with MSBuild
       run: msbuild /p:configuration=Release /p:platform="Any CPU" /p:outputpath="bin/" Software\Zvonko\Zvonko.sln
 
+    - name: Create publish directory
+      run: mkdir -p Software\Zvonko\publish
+
     - name: Create a setup
-      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=publish/
+      run: msbuild /t:Publish /p:Configuration=Release /p:PublishDir=Software\Zvonko\publish
 
     - name: Create zip archive
       uses: TheDoctor0/zip-release@0.7.1
